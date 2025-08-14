@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva de GitHub Classroom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application is structured into six main, navigable sections: 'Inicio' (a brief introduction), '¿Cómo Funciona?' (an interactive, step-by-step flowchart visualizing the entire process), 'Guía de Configuración' (a detailed, expandable accordion for the setup steps), 'Autocorrección' (a section explaining GitHub Actions), 'Codespaces' (a new section on IDE integration), and 'Ejemplo Práctico' (a side-by-side comparison of roles). This thematic structure was chosen to logically group related features, allowing users to jump directly to the specific topic they need—from foundational setup to advanced integrations—improving user experience and information recall. -->
+    <!-- Visualization & Content Choices: Report Info: Entire workflow -> Goal: Organize/Change -> Viz/Method: Interactive HTML/CSS flowchart with JS state management -> Interaction: User clicks through steps, highlighting the active stage and updating descriptive text -> Justification: More engaging and clearer for understanding a process than a static text list. Report Info: Setup steps -> Goal: Organize/Inform -> Viz/Method: HTML/CSS accordion -> Interaction: Click to expand/collapse -> Justification: Keeps the UI clean and prevents information overload. Report Info: Autograding/Codespaces -> Goal: Inform/Organize -> Viz/Method: Textual explanation with a code block (for Actions) and descriptive text (for Codespaces) -> Interaction: User can read the code and text -> Justification: Provides practical, copy-and-pasteable examples and clear descriptions for complex features. Report Info: Teacher/Student example -> Goal: Compare -> Viz/Method: Two-column HTML/CSS layout -> Interaction: Hover effects on cards -> Justification: Directly contrasts the two user journeys for better comprehension. Library/Method: All interactions are built with Vanilla JS, Tailwind CSS, and semantic HTML. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7;
+            color: #383838;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background-color: #EFEBE5;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+        .workflow-step {
+            transition: all 0.3s ease;
+            border-color: #D1D5DB;
+        }
+        .workflow-step.active {
+            background-color: #DBEAFE;
+            border-color: #2563eb;
+            transform: scale(1.05);
+        }
+        .workflow-step.completed {
+            background-color: #F0FDF4;
+            border-color: #22C55E;
+        }
+        .role-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .code-container {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">Guía Interactiva de GitHub Classroom</h1>
+            <p class="text-lg text-gray-600">Una forma moderna de gestionar tus clases de programación.</p>
+        </header>
+
+        <nav class="flex justify-center border-b border-gray-200 mb-12">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500">
+                <li class="mr-2">
+                    <a href="#inicio" class="nav-link inline-block p-4 active">
+                        <span class="text-xl mr-2">🏠</span> Inicio
+                    </a>
+                </li>
+                <li class="mr-2">
+                    <a href="#como-funciona" class="nav-link inline-block p-4">
+                        <span class="text-xl mr-2">⚙️</span> ¿Cómo Funciona?
+                    </a>
+                </li>
+                <li class="mr-2">
+                    <a href="#configuracion" class="nav-link inline-block p-4">
+                        <span class="text-xl mr-2">📋</span> Guía de Configuración
+                    </a>
+                </li>
+                 <li class="mr-2">
+                    <a href="#autograding" class="nav-link inline-block p-4">
+                        <span class="text-xl mr-2">🤖</span> Autocorrección
+                    </a>
+                </li>
+                <li class="mr-2">
+                    <a href="#codespaces" class="nav-link inline-block p-4">
+                        <span class="text-xl mr-2">💻</span> Codespaces
+                    </a>
+                </li>
+                <li>
+                    <a href="#ejemplo" class="nav-link inline-block p-4">
+                        <span class="text-xl mr-2">🧑‍🏫</span> Ejemplo Práctico
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="inicio" class="content-section active">
+                 <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">¿Qué es GitHub Classroom?</h2>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        GitHub Classroom es una herramienta gratuita que potencia **GitHub** para el entorno educativo. Su misión es simplificar drásticamente la gestión de tareas, la distribución de código y la retroalimentación entre profesores y estudiantes. Olvídate de los correos y las plataformas complejas; con Classroom, cada estudiante o grupo recibe su propio repositorio de código, permitiendo un seguimiento claro del progreso y un control de versiones impecable.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Los profesores pueden crear plantillas para cada tarea, asegurando que todos comiencen con la misma base. A partir de ahí, pueden observar el progreso en tiempo real, revisar el código y ofrecer feedback directamente donde importa. Esta aplicación interactiva te guiará a través de todo lo que necesitas saber para empezar.
+                    </p>
+                </div>
+            </section>
+
+            <section id="como-funciona" class="content-section">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">El Flujo de Trabajo Completo</h2>
+                    <p class="text-gray-600">Sigue los pasos para entender el ciclo de vida de una tarea en GitHub Classroom, desde la creación hasta la calificación.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                    <div id="workflow-info" class="mb-8 p-6 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                        <h3 id="workflow-title" class="text-xl font-bold text-blue-900 mb-2"></h3>
+                        <p id="workflow-description" class="text-blue-800"></p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div id="step-1" class="workflow-step border-2 rounded-lg p-4">
+                            <span class="text-3xl">🧑‍🏫</span>
+                            <h4 class="font-semibold mt-2">1. El Profesor Crea</h4>
+                        </div>
+                        <div id="step-2" class="workflow-step border-2 rounded-lg p-4">
+                            <span class="text-3xl">🔗</span>
+                            <h4 class="font-semibold mt-2">2. Comparte el Enlace</h4>
+                        </div>
+                        <div id="step-3" class="workflow-step border-2 rounded-lg p-4">
+                            <span class="text-3xl">🧑‍🎓</span>
+                            <h4 class="font-semibold mt-2">3. El Estudiante Acepta</h4>
+                        </div>
+                        <div id="step-4" class="workflow-step border-2 rounded-lg p-4">
+                            <span class="text-3xl">💻</span>
+                            <h4 class="font-semibold mt-2">4. El Estudiante Trabaja</h4>
+                        </div>
+                        <div id="step-5" class="workflow-step border-2 rounded-lg p-4">
+                            <span class="text-3xl">👀</span>
+                            <h4 class="font-semibold mt-2">5. El Profesor Revisa</h4>
+                        </div>
+                        <div id="step-6" class="workflow-step border-2 rounded-lg p-4">
+                            <span class="text-3xl">✅</span>
+                            <h4 class="font-semibold mt-2">6. Feedback y Cierre</h4>
+                        </div>
+                    </div>
+                    <div class="flex justify-center mt-8">
+                        <button id="workflow-prev" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l disabled:opacity-50">
+                            Anterior
+                        </button>
+                        <button id="workflow-next" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r">
+                            Siguiente
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="configuracion" class="content-section">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Guía de Configuración para Profesores</h2>
+                    <p class="text-gray-600">Sigue estos pasos para tener tu clase lista y funcionando en minutos.</p>
+                </div>
+                <div id="accordion" class="space-y-2">
+                    <div class="accordion-item bg-white rounded-lg border border-gray-200 shadow-sm">
+                        <div class="accordion-header p-5 flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Paso 1: Acceso y Autorización</h3>
+                            <span class="text-2xl transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="accordion-content px-5">
+                            <p class="text-gray-700 py-4">Primero, dirígete a la página de **GitHub Classroom** e inicia sesión con tu cuenta de GitHub. Deberás autorizar a la aplicación para que acceda a tu cuenta, lo que le permite gestionar repositorios y organizaciones en tu nombre.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-white rounded-lg border border-gray-200 shadow-sm">
+                        <div class="accordion-header p-5 flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Paso 2: Crear una Organización</h3>
+                            <span class="text-2xl transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="accordion-content px-5">
+                            <p class="text-gray-700 py-4">GitHub Classroom necesita una **Organización** para agrupar todos los repositorios de tu clase. Esto mantiene el trabajo de tus estudiantes separado de tus proyectos personales. Puedes crear una nueva organización directamente desde Classroom si aún no tienes una.</p>
+                        </div>
+                    </div>
+                     <div class="accordion-item bg-white rounded-lg border border-gray-200 shadow-sm">
+                        <div class="accordion-header p-5 flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Paso 3: Crear tu "Classroom"</h3>
+                            <span class="text-2xl transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="accordion-content px-5">
+                            <p class="text-gray-700 py-4">Un "Classroom" es el espacio de trabajo para un curso específico. Al crearlo, le darás un nombre (ej: "Desarrollo Web 2024") y lo asociarás a la organización que creaste en el paso anterior. Opcionalmente, puedes vincularlo a tu LMS (como Moodle o Canvas) para importar listas de estudiantes.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-white rounded-lg border border-gray-200 shadow-sm">
+                        <div class="accordion-header p-5 flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Paso 4: Crear una Asignación</h3>
+                            <span class="text-2xl transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="accordion-content px-5">
+                            <p class="text-gray-700 py-4">Este es el corazón de la herramienta. Una asignación es una tarea. Deberás definir:
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li>**Nombre:** "Tarea 1: Portfolio Personal".</li>
+                                    <li>**Tipo:** Individual o Grupal.</li>
+                                    <li>**Repositorio base:** Puedes empezar con un repositorio vacío o usar una plantilla con código de inicio, instrucciones y archivos de configuración.</li>
+                                    <li>**Fecha límite:** Opcional, pero recomendado.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                     <div class="accordion-item bg-white rounded-lg border border-gray-200 shadow-sm">
+                        <div class="accordion-header p-5 flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Paso 5: Distribuir y Monitorear</h3>
+                            <span class="text-2xl transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="accordion-content px-5">
+                            <p class="text-gray-700 py-4">Classroom genera un enlace de invitación único para cada asignación. Comparte este enlace con tus estudiantes. A medida que aceptan la tarea, podrás ver cómo se crean sus repositorios y seguir su progreso directamente desde el panel de la asignación.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+             <section id="autograding" class="content-section">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Autocorrección con GitHub Actions</h2>
+                    <p class="text-gray-600">Automatiza la revisión de tareas y el feedback instantáneo para tus estudiantes.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        Una de las funcionalidades más potentes de GitHub Classroom es la **autocorrección**. Esto se logra integrando **GitHub Actions**, un servicio de automatización que permite ejecutar flujos de trabajo (workflows) en tu repositorio. Cuando un estudiante sube su código (`git push`), una GitHub Action puede ejecutar scripts de prueba, verificar el estilo del código o incluso compilarlo, dando un feedback inmediato y automático.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        Para habilitar la autocorrección, debes añadir un archivo de configuración en tu repositorio de plantilla, dentro de la carpeta `.github/workflows/`. Este archivo tiene un formato **YAML** y define los pasos que se ejecutarán. A continuación, se muestra un ejemplo simple que comprueba si un archivo específico existe y que el código pasa un linter.
+                    </p>
+                     <div class="code-container">
+                        <pre><code>name: Autocorrección de Tarea
+on: [push]
+jobs:
+  check-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Check for 'index.html' file
+        run: |
+          if [ ! -f "index.html" ]; then
+            echo "Error: El archivo 'index.html' no se encontró."
+            exit 1
+          fi
+
+      - name: Check for 'style.css' file
+        run: |
+          if [ ! -f "style.css" ]; then
+            echo "Error: El archivo 'style.css' no se encontró."
+            exit 1
+          fi
+          
+      - name: Run a simple linting check
+        run: |
+          echo "Ejecutando un linter básico..."
+          # Aquí podrías instalar y ejecutar un linter real,
+          # por ejemplo, para JavaScript o Python.
+          # Ejemplo: npx eslint .
+          echo "Linter completado con éxito."</code></pre>
+                    </div>
+                     <p class="text-gray-700 leading-relaxed mt-6">
+                        Una vez que este archivo se incluye en tu repositorio de plantilla, cada vez que un estudiante haga un `push`, GitHub ejecutará automáticamente este flujo de trabajo. Los resultados (éxito o error) serán visibles en la pestaña de "Actions" del repositorio del estudiante, brindándoles una retroalimentación instantánea sobre su trabajo.
+                    </p>
+                </div>
+            </section>
+            <section id="codespaces" class="content-section">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Integración con GitHub Codespaces</h2>
+                    <p class="text-gray-600">Elimina la configuración local y permite a los estudiantes empezar a codificar al instante.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        **GitHub Codespaces** es un entorno de desarrollo en la nube que se ejecuta directamente desde tu navegador. Al integrarlo con GitHub Classroom, eliminas el mayor obstáculo para los estudiantes: la configuración de sus entornos locales. No más problemas de versiones, dependencias o sistemas operativos diferentes.
+                    </p>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Configuración por el Profesor</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Cuando creas una nueva asignación en GitHub Classroom, tienes la opción de "Habilitar un entorno de desarrollo integrado (IDE) en la nube". Al seleccionar esta opción y elegir **Codespaces**, puedes definir un archivo de configuración (`devcontainer.json`) en tu repositorio de plantilla que especifica las extensiones, librerías y configuraciones necesarias para la tarea.
+                    </p>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Experiencia del Estudiante</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Cuando un estudiante acepta la asignación con Codespaces habilitado, verá un botón para abrir su entorno de desarrollo. Con un solo clic, se lanza un entorno completo en el navegador que ya contiene el código base, todas las dependencias instaladas y las herramientas listas para usar. El estudiante puede empezar a trabajar de inmediato, sin necesidad de instalar nada en su máquina local.
+                    </p>
+                </div>
+            </section>
+            <section id="ejemplo" class="content-section">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Ejemplo Práctico: Sitio Web Personal</h2>
+                    <p class="text-gray-600">Observa el flujo de trabajo desde la perspectiva del profesor y del estudiante.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-center mb-4 text-gray-800">Rol del Profesor 🧑‍🏫</h3>
+                        <div class="space-y-4">
+                            <div class="role-card bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                                <p><strong>1. Prepara la plantilla:</strong> Crea un repositorio en GitHub (`plantilla-web-personal`) con un `index.html`, `style.css`, un archivo de autocorrección y un archivo de configuración para Codespaces (`devcontainer.json`).</p>
+                            </div>
+                            <div class="role-card bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                                <p><strong>2. Crea la asignación:</strong> En Classroom, crea la tarea "Sitio Web Personal", la configura como individual y selecciona el repositorio plantilla, habilitando la opción de Codespaces.</p>
+                            </div>
+                            <div class="role-card bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                                <p><strong>3. Comparte el enlace:</strong> Copia el enlace de invitación y lo publica en el canal de la clase.</p>
+                            </div>
+                            <div class="role-card bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                                <p><strong>4. Monitorea el progreso y la autocorrección:</strong> Desde el panel de Classroom, ve los repositorios de los estudiantes y revisa los resultados de las Actions para un feedback rápido.</p>
+                            </div>
+                            <div class="role-card bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                                <p><strong>5. Da feedback personalizado:</strong> Abre "Pull Requests" o deja comentarios en líneas de código específicas para guiar al estudiante, complementando la autocorrección.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-center mb-4 text-gray-800">Rol del Estudiante 🧑‍🎓</h3>
+                        <div class="space-y-4">
+                            <div class="role-card bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                                <p><strong>1. Acepta la tarea:</strong> Hace clic en el enlace de invitación y acepta la asignación en la página de GitHub Classroom.</p>
+                            </div>
+                            <div class="role-card bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                                <p><strong>2. Recibe su repositorio:</strong> Automáticamente, se crea su repositorio personal (`sitio-web-personal-username`), incluyendo la plantilla y los archivos de autocorrección.</p>
+                            </div>
+                            <div class="role-card bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                                <p><strong>3. Trabaja en el código:</strong> Abre el Codespace con un solo clic desde el navegador, donde ya tiene un entorno de desarrollo completo y listo para usar.</p>
+                            </div>
+                             <div class="role-card bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                                <p><strong>4. Sube los cambios y recibe feedback:</strong> Usa `git push` para enviar sus cambios al repositorio. GitHub Action se ejecuta automáticamente, y puede ver los resultados en la pestaña de "Actions".</p>
+                            </div>
+                             <div class="role-card bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                                <p><strong>5. Revisa el feedback:</strong> Ve los resultados de la autocorrección para saber qué debe corregir, y revisa los comentarios del profesor para un feedback más profundo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.content-section');
+
+            function updateActiveContent(hash) {
+                sections.forEach(section => {
+                    if ('#' + section.id === hash) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === hash) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetHash = this.getAttribute('href');
+                    history.pushState(null, null, targetHash);
+                    updateActiveContent(targetHash);
+                });
+            });
+            
+            const initialHash = window.location.hash || '#inicio';
+            updateActiveContent(initialHash);
+
+            window.addEventListener('popstate', function() {
+                updateActiveContent(window.location.hash || '#inicio');
+            });
+
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = item.querySelector('.accordion-content');
+                const icon = header.querySelector('span');
+
+                header.addEventListener('click', () => {
+                    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+                    
+                    accordionItems.forEach(i => {
+                        i.querySelector('.accordion-content').style.maxHeight = '0px';
+                        i.querySelector('.accordion-content').style.paddingTop = '0';
+                        i.querySelector('.accordion-content').style.paddingBottom = '0';
+                        i.querySelector('.accordion-header span').style.transform = 'rotate(0deg)';
+                    });
+
+                    if (!isOpen) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.style.paddingTop = '1rem';
+                        content.style.paddingBottom = '1rem';
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+
+            const workflowStepsData = [
+                {
+                    title: "Paso 1: El Profesor Crea la Asignación",
+                    description: "Todo comienza cuando el profesor diseña una tarea. Puede ser desde cero o usando un repositorio de plantilla con código de inicio, instrucciones y pruebas automatizadas."
+                },
+                {
+                    title: "Paso 2: Se Comparte el Enlace de Invitación",
+                    description: "GitHub Classroom genera un enlace único para la asignación. El profesor comparte este enlace con los estudiantes a través de cualquier medio: email, LMS, chat, etc."
+                },
+                {
+                    title: "Paso 3: El Estudiante Acepta la Tarea",
+                    description: "El estudiante hace clic en el enlace, inicia sesión en GitHub y acepta la tarea. En este momento, Classroom crea automáticamente un repositorio privado para el estudiante."
+                },
+                {
+                    title: "Paso 4: El Estudiante Trabaja y Sube su Progreso",
+                    description: "El estudiante clona su nuevo repositorio, trabaja en el código localmente y usa `git commit` y `git push` para guardar y subir su progreso a GitHub de forma regular."
+                },
+                {
+                    title: "Paso 5: El Profesor Monitorea y Revisa",
+                    description: "El profesor tiene una vista general de todos los repositorios de los estudiantes. Puede entrar en cualquiera de ellos para ver los commits, revisar el código y entender el progreso de cada estudiante."
+                },
+                {
+                    title: "Paso 6: Feedback y Calificación",
+                    description: "El profesor puede dar feedback directamente en el código, abrir 'Issues' para sugerir cambios o crear un 'Pull Request' de retroalimentación. Este ciclo puede repetirse hasta la entrega final."
+                }
+            ];
+
+            let currentStep = 1;
+            const totalSteps = 6;
+            const workflowTitle = document.getElementById('workflow-title');
+            const workflowDescription = document.getElementById('workflow-description');
+            const workflowNextBtn = document.getElementById('workflow-next');
+            const workflowPrevBtn = document.getElementById('workflow-prev');
+
+            function updateWorkflowView() {
+                for (let i = 1; i <= totalSteps; i++) {
+                    const stepEl = document.getElementById(`step-${i}`);
+                    stepEl.classList.remove('active', 'completed');
+                    if (i < currentStep) {
+                        stepEl.classList.add('completed');
+                    } else if (i === currentStep) {
+                        stepEl.classList.add('active');
+                    }
+                }
+                
+                const stepData = workflowStepsData[currentStep - 1];
+                workflowTitle.textContent = stepData.title;
+                workflowDescription.textContent = stepData.description;
+
+                workflowPrevBtn.disabled = currentStep === 1;
+                workflowNextBtn.disabled = currentStep === totalSteps;
+            }
+
+            workflowNextBtn.addEventListener('click', () => {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateWorkflowView();
+                }
+            });
+
+            workflowPrevBtn.addEventListener('click', () => {
+                if (currentStep > 1) {
+                    currentStep--;
+                    updateWorkflowView();
+                }
+            });
+
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).addEventListener('click', () => {
+                    currentStep = i;
+                    updateWorkflowView();
+                });
+            }
+            
+            updateWorkflowView();
+        });
+    </script>
+</body>
+</html>

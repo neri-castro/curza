@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva de Visual Studio Code</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Calm Code -->
+    <!-- Application Structure Plan: Se ha diseñado una SPA con navegación superior fija que se desplaza a secciones de contenido. Esta estructura es superior a un documento lineal porque permite a los usuarios acceder directamente a la información que necesitan (p. ej., saltar a la instalación de Linux). La interacción clave es la selección de sistema operativo en la sección de instalación, que oculta el contenido irrelevante y mejora drásticamente la usabilidad. Una sección de "Interfaz" interactiva reemplaza la lista de texto para un aprendizaje más visual y atractivo. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Lista de componentes de la interfaz -> Goal: Organizar/Informar -> Viz/Method: Diagrama de interfaz interactivo (HTML/CSS) -> Interaction: Hover para resaltar y mostrar descripción -> Justification: Mucho más intuitivo y educativo que una lista de texto.
+        - Report Info: Pasos de instalación para Windows y Linux -> Goal: Organizar/Comparar -> Viz/Method: Pestañas de contenido conmutables -> Interaction: Clic en botones de SO para mostrar/ocultar instrucciones -> Justification: Evita que el usuario tenga que desplazarse por información irrelevante para su sistema, haciendo la guía más eficiente.
+        - Report Info: Lista de extensiones recomendadas -> Goal: Informar -> Viz/Method: Diseño de tarjetas -> Interaction: Efectos visuales al pasar el cursor -> Justification: Estructura la información de forma más clara y visualmente agradable que una simple lista.
+        - Library/Method: Vanilla JS para toda la interactividad. No se necesitan librerías de gráficos. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            background-color: #f5f5f4; /* stone-100 */
+            color: #292524; /* stone-800 */
+        }
+        .nav-button {
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .nav-button:hover, .nav-button.active {
+            color: #059669; /* emerald-600 */
+            border-bottom-color: #059669;
+        }
+        .os-button {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .os-button.active {
+            background-color: #059669; /* emerald-600 */
+            color: white;
+        }
+        .interface-hotspot {
+            transition: background-color 0.2s, border-color 0.2s;
+            border: 2px dashed transparent;
+        }
+        .interface-hotspot:hover {
+            background-color: rgba(5, 150, 105, 0.1);
+            border-color: #059669;
+        }
+        .accordion-button {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            background-color: #f5f5f4;
+            border-bottom: 1px solid #e7e5e4;
+        }
+        .accordion-button:hover {
+            background-color: #ede9e9;
+        }
+        .accordion-content {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1rem;
+        }
+        .accordion-content.open {
+            max-height: 500px; /* Suficiente para expandir el contenido */
+            padding: 1rem;
+        }
+        .arrow-icon {
+            transition: transform 0.3s ease-out;
+        }
+        .accordion-button[aria-expanded="true"] .arrow-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <h1 class="text-xl font-bold text-emerald-700">Guía de VS Code</h1>
+                <div class="hidden sm:flex sm:space-x-8">
+                    <a href="#inicio" class="nav-button border-b-2 border-transparent py-2 text-sm font-medium">Inicio</a>
+                    <a href="#interfaz" class="nav-button border-b-2 border-transparent py-2 text-sm font-medium">Interfaz</a>
+                    <a href="#instalacion" class="nav-button border-b-2 border-transparent py-2 text-sm font-medium">Instalación</a>
+                    <a href="#primeros-pasos" class="nav-button border-b-2 border-transparent py-2 text-sm font-medium">Primeros Pasos</a>
+                </div>
+                <div class="sm:hidden">
+                    <select id="mobile-nav" class="bg-stone-200 border border-stone-300 rounded-md p-2 text-sm">
+                        <option value="#inicio">Inicio</option>
+                        <option value="#interfaz">Interfaz</option>
+                        <option value="#instalacion">Instalación</option>
+                        <option value="#primeros-pasos">Primeros Pasos</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <section id="inicio" class="mb-16 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Bienvenido a Visual Studio Code</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-stone-600">Tu aventura en el mundo del código empieza aquí. Descubre por qué VS Code es la herramienta preferida por millones de desarrolladores.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="prose prose-stone max-w-none">
+                    <h3>¿Qué es Visual Studio Code?</h3>
+                    <p>Visual Studio Code (o VS Code) es un editor de código fuente desarrollado por Microsoft. No hay que confundirlo con su "hermano mayor", Visual Studio, que es un Entorno de Desarrollo Integrado (IDE) completo. VS Code se centra en ser un editor de texto súper vitaminado, rápido y altamente personalizable.</p>
+                    <p>Lo que realmente lo hace especial es su increíble flexibilidad. Gracias a un vasto ecosistema de <strong>extensiones</strong>, puedes adaptarlo para trabajar con casi cualquier lenguaje de programación, desde desarrollo web (HTML, CSS, JavaScript) hasta Python, Java, C++, y muchos más.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <span class="text-4xl">🚀</span>
+                        <h4 class="font-bold mt-2">Ligero y Potente</h4>
+                        <p class="text-sm text-stone-600">Arranca rápido y funciona de manera fluida, incluso en proyectos grandes.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <span class="text-4xl">💰</span>
+                        <h4 class="font-bold mt-2">Gratuito</h4>
+                        <p class="text-sm text-stone-600">Todas sus funcionalidades principales son completamente gratis.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <span class="text-4xl">🧩</span>
+                        <h4 class="font-bold mt-2">Extensible</h4>
+                        <p class="text-sm text-stone-600">Personalízalo con miles de extensiones para añadir nuevas funciones.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <span class="text-4xl">🌐</span>
+                        <h4 class="font-bold mt-2">Multiplataforma</h4>
+                        <p class="text-sm text-stone-600">Funciona en Windows, macOS y Linux sin problemas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-stone-200 my-16">
+
+        <section id="interfaz" class="mb-16 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Explora la Interfaz</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-stone-600">Familiarízate con el entorno de trabajo. Pasa el cursor sobre las áreas resaltadas del diagrama para aprender sobre cada componente.</p>
+            </div>
+            <div class="lg:flex lg:gap-8">
+                <div class="lg:w-2/3 bg-white rounded-lg shadow-lg p-2 border border-stone-200">
+                    <div class="flex h-[450px] text-sm">
+                        <div id="hotspot-1" data-target="desc-1" class="interface-hotspot w-16 bg-stone-200 p-3 flex flex-col items-center justify-start space-y-6 rounded-l-md">
+                            <span title="Explorador">📄</span>
+                            <span title="Buscar">🔍</span>
+                            <span title="Git">🌿</span>
+                            <span title="Extensiones">🧩</span>
+                        </div>
+                        <div id="hotspot-2" data-target="desc-2" class="interface-hotspot w-48 bg-stone-100 p-3">
+                            <p class="font-mono font-bold">PROYECTO</p>
+                            <ul class="font-mono text-xs mt-2 space-y-1">
+                                <li>📁 pages</li>
+                                <li>📁 components</li>
+                                <li>📄 index.html</li>
+                                <li>📄 styles.css</li>
+                            </ul>
+                        </div>
+                        <div class="flex-1 flex flex-col">
+                            <div id="hotspot-3" data-target="desc-3" class="interface-hotspot flex-1 bg-white p-4">
+                                <pre class="text-stone-400"><code>&lt;h1&gt;Hola Mundo&lt;/h1&gt;</code></pre>
+                            </div>
+                            <div id="hotspot-4" data-target="desc-4" class="interface-hotspot h-24 bg-stone-100 p-3 border-t-2 border-stone-200">
+                                <p class="font-mono text-xs">> Terminal lista.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hotspot-5" data-target="desc-5" class="interface-hotspot h-8 bg-emerald-700 text-white flex items-center justify-between px-3 text-xs font-mono rounded-b-md">
+                        <p>Línea 1, Col 1</p>
+                        <p>main</p>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 mt-8 lg:mt-0">
+                    <div id="interface-descriptions" class="space-y-4">
+                        <div id="desc-default" class="bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold">Componentes Principales</h4>
+                            <p class="text-sm text-stone-600">Pasa el cursor sobre el diagrama para ver la descripción de cada parte.</p>
+                        </div>
+                        <div id="desc-1" class="hidden bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold">1. Barra de Actividades</h4>
+                            <p class="text-sm text-stone-600">Contiene iconos para cambiar entre vistas: explorador de archivos, búsqueda, control de código fuente (Git), extensiones, etc.</p>
+                        </div>
+                        <div id="desc-2" class="hidden bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold">2. Barra Lateral</h4>
+                            <p class="text-sm text-stone-600">Muestra la vista seleccionada. Aquí ves tus archivos, resultados de búsqueda o las opciones de una extensión.</p>
+                        </div>
+                        <div id="desc-3" class="hidden bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold">3. Editor</h4>
+                            <p class="text-sm text-stone-600">El área principal donde escribes y editas tu código. Puedes abrir múltiples archivos en pestañas.</p>
+                        </div>
+                        <div id="desc-4" class="hidden bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold">4. Panel</h4>
+                            <p class="text-sm text-stone-600">Muestra la terminal integrada, la consola de depuración, problemas detectados y la salida de tareas.</p>
+                        </div>
+                        <div id="desc-5" class="hidden bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold">5. Barra de Estado</h4>
+                            <p class="text-sm text-stone-600">Ofrece información sobre el archivo abierto, la rama de Git actual y otros estados importantes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-stone-200 my-16">
+
+        <section id="instalacion" class="mb-16 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Instalación Paso a Paso</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-stone-600">Elige tu sistema operativo. Te guiaremos en el proceso para que tengas VS Code funcionando en minutos.</p>
+            </div>
+            <div class="flex justify-center space-x-4 mb-8">
+                <button id="btn-windows" class="os-button active px-6 py-2 font-semibold rounded-md bg-stone-200">Windows</button>
+                <button id="btn-linux" class="os-button px-6 py-2 font-semibold rounded-md bg-stone-200">Linux (Debian/Ubuntu)</button>
+            </div>
+
+            <div id="content-windows" class="prose prose-stone max-w-4xl mx-auto">
+                <p>La forma más sencilla de instalar VS Code en Windows es usando el instalador. Sigue estos pasos:</p>
+                <ol>
+                    <li><strong>Descargar el instalador:</strong> Ve al <a href="https://code.visualstudio.com/Download" target="_blank" class="text-emerald-600 hover:underline">sitio web oficial</a> y descarga el instalador de usuario para Windows.</li>
+                    <li><strong>Ejecutar el instalador:</strong> Abre el archivo <code>VSCodeUserSetup-x64.exe</code> que acabas de descargar.</li>
+                    <li><strong>Acuerdo de licencia:</strong> Lee y acepta el acuerdo de licencia para continuar con la instalación.</li>
+                    <li><strong>Opciones de instalación:</strong> Se recomienda dejar las opciones por defecto, que incluyen agregar VS Code al menú contextual del explorador y al PATH del sistema, lo que facilita su uso desde la terminal.</li>
+                    <li><strong>Finalizar la instalación:</strong> Haz clic en "Instalar" y, una vez completado, haz clic en "Finalizar". VS Code se iniciará automáticamente.</li>
+                </ol>
+            </div>
+
+            <div id="content-linux" class="hidden prose prose-stone max-w-4xl mx-auto">
+                <p>Para sistemas basados en Debian (como Ubuntu), la forma más sencilla es usar el repositorio de paquetes de Microsoft. Esto te asegura que siempre tendrás la última versión y actualizaciones automáticas. Abre una terminal y ejecuta estos comandos:</p>
+                <ol>
+                    <li><strong>Descargar e instalar la clave GPG de Microsoft:</strong>
+                        <pre><code class="language-bash">sudo apt-get install wget gpg
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+rm packages.microsoft.gpg</code></pre>
+                    </li>
+                    <li><strong>Agregar el repositorio de VS Code:</strong>
+                        <pre><code class="language-bash">sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'</code></pre>
+                    </li>
+                    <li><strong>Actualizar el índice de paquetes e instalar:</strong>
+                        <pre><code class="language-bash">sudo apt-get update
+sudo apt-get install code</code></pre>
+                    </li>
+                    <li><strong>Iniciar VS Code:</strong> Puedes iniciar el editor desde el menú de aplicaciones o escribiendo <code>code</code> en la terminal.</li>
+                </ol>
+            </div>
+        </section>
+
+        <hr class="border-stone-200 my-16">
+
+        <section id="primeros-pasos" class="scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Primeros Pasos y Extensiones</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-stone-600">Ya tienes VS Code. Ahora, vamos a potenciarlo con algunas de las extensiones más populares y útiles.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto prose prose-stone">
+                <h3>Atajos y Funciones Clave</h3>
+                <ul>
+                    <li><strong>Paleta de Comandos (<code>Ctrl+Shift+P</code>):</strong> Tu centro de control. Busca y ejecuta cualquier comando sin necesidad de usar el ratón.</li>
+                    <li><strong>Terminal Integrada (<code>Ctrl+`</code>):</strong> Abre una terminal directamente en VS Code. Súper útil para ejecutar comandos de Git, npm, etc.</li>
+                    <li><strong>Buscador de Archivos (<code>Ctrl+P</code>):</strong> Encuentra y abre cualquier archivo en tu proyecto de forma instantánea.</li>
+                </ul>
+            </div>
+
+            <div class="mt-12 max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold text-center mb-8">Extensiones Esenciales</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h4 class="font-bold">Spanish Language Pack</h4>
+                        <p class="text-sm text-stone-600 mt-2">Traduce la interfaz de VS Code al español para una experiencia más cómoda.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h4 class="font-bold">Live Server</h4>
+                        <p class="text-sm text-stone-600 mt-2">Lanza un servidor de desarrollo local con recarga en vivo para páginas estáticas y dinámicas.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h4 class="font-bold">GitLens</h4>
+                        <p class="text-sm text-stone-600 mt-2">Potencia las capacidades de Git integradas, mostrando quién modificó cada línea de código y cuándo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="configuracion-extensiones" class="mt-16 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold p-6 border-b border-stone-200">Configuración de Extensiones Esenciales</h3>
+                <div class="prose prose-stone max-w-none">
+                    <p class="p-6">Aquí te mostramos cómo configurar las extensiones que mencionamos para un flujo de trabajo óptimo en HTML, CSS, JavaScript y Python.</p>
+                    <div class="border-b border-stone-200">
+                        <button class="accordion-button" aria-expanded="false" aria-controls="content-spanish">
+                            <span>Spanish Language Pack</span>
+                            <span class="arrow-icon">▼</span>
+                        </button>
+                        <div id="content-spanish" class="accordion-content">
+                            <p>Esta extensión se activa automáticamente al instalarla. Si la interfaz no cambia al español, usa la Paleta de Comandos (<code>Ctrl+Shift+P</code>), busca "Configure Display Language" y selecciona "es".</p>
+                        </div>
+                    </div>
+                    <div class="border-b border-stone-200">
+                        <button class="accordion-button" aria-expanded="false" aria-controls="content-live-server">
+                            <span>Live Server</span>
+                            <span class="arrow-icon">▼</span>
+                        </button>
+                        <div id="content-live-server" class="accordion-content">
+                            <p>No requiere configuración adicional. Una vez instalada, simplemente haz clic derecho en un archivo HTML en el explorador de archivos y selecciona <strong>"Open with Live Server"</strong> para ver tu proyecto en el navegador con recarga automática.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="accordion-button" aria-expanded="false" aria-controls="content-gitlens">
+                            <span>GitLens</span>
+                            <span class="arrow-icon">▼</span>
+                        </button>
+                        <div id="content-gitlens" class="accordion-content">
+                            <p>Esta extensión no requiere configuración inicial. Proporciona una visualización del historial de Git directamente en el editor de forma intuitiva. Puedes explorar sus opciones avanzadas en las configuraciones de la extensión para personalizar la forma en que se muestra la información de autoría (Git Blame).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm">
+            <p>Guía interactiva creada VS Code.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnWindows = document.getElementById('btn-windows');
+            const btnLinux = document.getElementById('btn-linux');
+            const contentWindows = document.getElementById('content-windows');
+            const contentLinux = document.getElementById('content-linux');
+            const mobileNav = document.getElementById('mobile-nav');
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-button');
+            const hotspots = document.querySelectorAll('.interface-hotspot');
+            const descriptions = document.querySelectorAll('#interface-descriptions > div');
+            const defaultDesc = document.getElementById('desc-default');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            // Toggle OS content
+            btnWindows.addEventListener('click', () => {
+                contentWindows.classList.remove('hidden');
+                contentLinux.classList.add('hidden');
+                btnWindows.classList.add('active');
+                btnLinux.classList.remove('active');
+            });
+
+            btnLinux.addEventListener('click', () => {
+                contentLinux.classList.remove('hidden');
+                contentWindows.classList.add('hidden');
+                btnLinux.classList.add('active');
+                btnWindows.classList.remove('active');
+            });
+
+            // Interface hotspots hover effect
+            hotspots.forEach(hotspot => {
+                hotspot.addEventListener('mouseenter', () => {
+                    const targetId = hotspot.getAttribute('data-target');
+                    descriptions.forEach(desc => {
+                        desc.classList.toggle('hidden', desc.id !== targetId);
+                    });
+                });
+
+                hotspot.addEventListener('mouseleave', () => {
+                    descriptions.forEach(desc => desc.classList.add('hidden'));
+                    defaultDesc.classList.remove('hidden');
+                });
+            });
+
+            // Mobile navigation
+            mobileNav.addEventListener('change', (e) => {
+                window.location.hash = e.target.value;
+            });
+            
+            // Highlight nav link on scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
+                        });
+                    }
+                });
+            }, observerOptions);
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Accordion functionality
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true' || false;
+                    button.setAttribute('aria-expanded', !expanded);
+                    const content = button.nextElementSibling;
+                    if (content.classList.contains('open')) {
+                        content.classList.remove('open');
+                    } else {
+                        content.classList.add('open');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

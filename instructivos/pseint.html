@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva de PSeInt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Slate, Sky, Stone) -->
+    <!-- Application Structure Plan: A single-page design with a top navigation bar for quick scrolling to three main sections: 'Qué es', 'Uso Básico', and 'Instalación'. This structure logically guides the user from concept to practice to setup. The 'Uso Básico' section is the interactive core, simulating code execution to actively engage the user, which is more effective for learning than static text. The 'Instalación' section uses toggles to prevent information overload. -->
+    <!-- Visualization & Content Choices: 1. Features: Report's bullet list -> Goal: Inform -> Interactive cards (HTML/CSS/JS) -> Interaction: Click/hover to reveal details. Justification: More engaging and modern than a static list. 2. Code Example: Report's code block -> Goal: Demonstrate -> Simulated execution environment (JS) -> Interaction: 'Ejecutar' and 'Paso a Paso' buttons control the simulation. Justification: Actively teaches the execution flow, mimicking the actual software. 3. Flowchart: Report's mention of a diagram -> Goal: Organize -> Simplified diagram using styled HTML divs -> Interaction: Revealed by a button click. Justification: Provides a visual representation without external libraries or complex rendering. 4. Installation: Report's separate sections -> Goal: Guide -> Toggled content panes (JS) -> Interaction: User selects their OS. Justification: Hides irrelevant information, improving clarity. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .code-line {
+            transition: background-color 0.3s ease-in-out;
+        }
+        .code-line.highlight {
+            background-color: #dbeafe; /* bg-blue-100 */
+        }
+        .flowchart-node {
+            border: 2px solid #6b7280; /* border-gray-500 */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            background-color: #f9fafb; /* bg-gray-50 */
+            text-align: center;
+            min-width: 150px;
+        }
+        .flowchart-arrow {
+            position: relative;
+            height: 40px;
+            width: 2px;
+            background-color: #6b7280; /* bg-gray-500 */
+            margin: 0 auto;
+        }
+        .flowchart-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #6b7280; /* border-gray-500 */
+        }
+        .flowchart-io {
+            border: 2px solid #6b7280;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            background-color: #f9fafb;
+            text-align: center;
+            transform: skew(-20deg);
+        }
+        .flowchart-io span {
+            display: inline-block;
+            transform: skew(20deg);
+        }
+        .nav-link-active {
+            color: #0284c7; /* text-sky-600 */
+            font-weight: 500;
+        }
+        .accordion-item {
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-slate-800">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-sky-700">Guía de PSeInt</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#que-es" class="nav-link text-slate-600 hover:text-sky-600 transition-colors">¿Qué es?</a>
+                <a href="#uso-basico" class="nav-link text-slate-600 hover:text-sky-600 transition-colors">Uso Básico</a>
+                <a href="#conceptos-fundamentales" class="nav-link text-slate-600 hover:text-sky-600 transition-colors">Conceptos</a>
+                <a href="#ejemplos-practicos" class="nav-link text-slate-600 hover:text-sky-600 transition-colors">Ejemplos</a>
+                <a href="#instalacion" class="nav-link text-slate-600 hover:text-sky-600 transition-colors">Instalación</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="que-es" class="mb-24 text-center">
+            <h2 class="text-4xl font-bold mb-4 text-sky-800">Comprende la Lógica de Programación</h2>
+            <p class="max-w-3xl mx-auto text-lg text-slate-600 mb-12">
+                PSeInt es una herramienta educativa diseñada para ser tu primer paso en el mundo de la programación. Aprende los conceptos fundamentales escribiendo algoritmos en un lenguaje simple y en español, antes de pasar a lenguajes más complejos.
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-xl font-semibold mb-2 text-sky-700">Editor de Pseudocódigo</h3>
+                    <p class="text-slate-600">Un entorno amigable con resaltado de sintaxis y autocompletado para escribir tus algoritmos sin errores.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-xl font-semibold mb-2 text-sky-700">Intérprete y Depurador</h3>
+                    <p class="text-slate-600">Ejecuta tu código paso a paso para visualizar el flujo del programa e identificar errores de lógica fácilmente.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-xl font-semibold mb-2 text-sky-700">Diagramador de Flujo</h3>
+                    <p class="text-slate-600">Genera automáticamente una representación gráfica de tu algoritmo para una comprensión visual completa.</p>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-xl font-semibold mb-2 text-sky-700">Ayuda Integrada</h3>
+                    <p class="text-slate-600">Accede a descripciones de comandos y ejemplos directamente en la herramienta para resolver tus dudas al instante.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-xl font-semibold mb-2 text-sky-700">Perfiles Flexibles</h3>
+                    <p class="text-slate-600">Adapta la sintaxis del pseudocódigo a las reglas específicas de tu institución educativa o profesor.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-xl font-semibold mb-2 text-sky-700">Multiplataforma</h3>
+                    <p class="text-slate-600">Usa PSeInt sin problemas en sistemas operativos Windows y Linux.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-stone-200 my-16">
+
+        <section id="uso-basico" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-sky-800">Simulador Interactivo</h2>
+                <p class="max-w-3xl mx-auto text-lg text-slate-600">
+                    Experimenta cómo PSeInt ejecuta un algoritmo. Utiliza los botones para correr el programa completo o para analizarlo línea por línea y entender su lógica interna.
+                </p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-8 items-start">
+                <div class="bg-slate-900 text-white rounded-lg p-6 font-mono text-sm shadow-2xl">
+                    <div id="code-line-1" class="code-line">Proceso Suma</div>
+                    <div id="code-line-2" class="code-line pl-4">Definir num1, num2, resultado Como Entero;</div>
+                    <div id="code-line-3" class="code-line pl-4">Escribir "Ingrese el primer número: ";</div>
+                    <div id="code-line-4" class="code-line pl-4">Leer num1;</div>
+                    <div id="code-line-5" class="code-line pl-4">Escribir "Ingrese el segundo número: ";</div>
+                    <div id="code-line-6" class="code-line pl-4">Leer num2;</div>
+                    <div id="code-line-7" class="code-line pl-4">resultado &lt;- num1 + num2;</div>
+                    <div id="code-line-8" class="code-line pl-4">Escribir "El resultado de la suma es: ", resultado;</div>
+                    <div id="code-line-9" class="code-line">FinProceso</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <div class="flex space-x-4 mb-4">
+                        <button id="run-btn" class="w-full bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-sky-700 transition-colors">▶ Ejecutar</button>
+                        <button id="step-btn" class="w-full bg-slate-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-slate-700 transition-colors">👣 Paso a Paso</button>
+                        <button id="reset-btn" class="w-full bg-stone-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-stone-600 transition-colors">↺ Reiniciar</button>
+                    </div>
+                    <div id="simulation-output" class="bg-stone-100 p-4 rounded-md min-h-[150px] text-slate-600 border border-stone-200">
+                        <p class="font-semibold text-slate-700">Consola de Ejecución:</p>
+                        <div id="console" class="mt-2 font-mono text-sm"></div>
+                    </div>
+                    <div id="explanation" class="mt-4 text-slate-600 bg-blue-50 p-4 rounded-md border border-blue-200 hidden"></div>
+                     <button id="flowchart-btn" class="w-full mt-4 bg-white text-sky-600 border border-sky-600 font-semibold py-2 px-4 rounded-lg hover:bg-sky-50 transition-colors">Ver Diagrama de Flujo</button>
+                </div>
+            </div>
+            <div id="flowchart-container" class="hidden mt-12 bg-white p-8 rounded-lg shadow-md border border-stone-200 flex flex-col items-center">
+                 <h3 class="text-2xl font-bold mb-6 text-sky-800">Diagrama de Flujo del Algoritmo 'Suma'</h3>
+                 <div class="flowchart-node"><span>Inicio</span></div>
+                 <div class="flowchart-arrow"></div>
+                 <div class="flowchart-node"><span>Definir num1, num2, resultado</span></div>
+                 <div class="flowchart-arrow"></div>
+                 <div class="flowchart-io"><span>Escribir "Ingrese..."</span></div>
+                 <div class="flowchart-arrow"></div>
+                 <div class="flowchart-io"><span>Leer num1</span></div>
+                 <div class="flowchart-arrow"></div>
+                 <div class="flowchart-io"><span>Escribir "Ingrese..."</span></div>
+                 <div class="flowchart-arrow"></div>
+                 <div class="flowchart-io"><span>Leer num2</span></div>
+                 <div class="flowchart-arrow"></div>
+                 <div class="flowchart-node"><span>resultado = num1 + num2</span></div>
+                 <div class="flowchart-arrow"></div>
+                 <div class="flowchart-io"><span>Escribir "El resultado..."</span></div>
+                 <div class="flowchart-arrow"></div>
+                 <div class="flowchart-node"><span>Fin</span></div>
+            </div>
+        </section>
+        
+        <hr class="border-stone-200 my-16">
+
+        <section id="conceptos-fundamentales" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-sky-800">Conceptos Fundamentales</h2>
+                <p class="max-w-3xl mx-auto text-lg text-slate-600">
+                    Aprende los elementos clave de la programación con PSeInt. Haz clic en cada tema para ver su descripción y un ejemplo práctico.
+                </p>
+            </div>
+            <div class="max-w-4xl mx-auto space-y-4">
+                <!-- Accordion Item: Pseudocodigo -->
+                <div class="bg-white rounded-lg shadow-md border border-stone-200">
+                    <button class="accordion-header w-full flex justify-between items-center p-6 text-xl font-semibold text-sky-700 hover:bg-stone-50 transition-colors">
+                        <span>¿Qué es el Pseudocódigo?</span>
+                        <span class="transform transition-transform rotate-0">▼</span>
+                    </button>
+                    <div class="accordion-item" style="max-height: 0;">
+                        <div class="p-6 pt-0 text-slate-700 space-y-4">
+                            <p>El **pseudocódigo** es un lenguaje de programación simplificado y en español que se utiliza para diseñar algoritmos. No es un lenguaje real, sino una herramienta para que los principiantes puedan enfocarse en la lógica sin preocuparse por la sintaxis estricta de un lenguaje de programación.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item: Variables -->
+                <div class="bg-white rounded-lg shadow-md border border-stone-200">
+                    <button class="accordion-header w-full flex justify-between items-center p-6 text-xl font-semibold text-sky-700 hover:bg-stone-50 transition-colors">
+                        <span>Variables</span>
+                        <span class="transform transition-transform rotate-0">▼</span>
+                    </button>
+                    <div class="accordion-item" style="max-height: 0;">
+                        <div class="p-6 pt-0 text-slate-700 space-y-4">
+                            <p>Una **variable** es un espacio en la memoria de la computadora donde se guarda un valor. En PSeInt, debes **definir** el tipo de dato que contendrá (entero, real, carácter, lógico) antes de usarla.</p>
+                            <div class="bg-slate-900 text-white p-4 rounded-md font-mono text-sm">
+                                <p>Proceso EjemploVariables</p>
+                                <p class="pl-4">Definir nombre Como Caracter;</p>
+                                <p class="pl-4">Definir edad Como Entero;</p>
+                                <p class="pl-4">nombre &lt;- "Juan";</p>
+                                <p class="pl-4">edad &lt;- 30;</p>
+                                <p class="pl-4">Escribir nombre, " tiene ", edad, " años."</p>
+                                <p>FinProceso</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item: Condicionales -->
+                <div class="bg-white rounded-lg shadow-md border border-stone-200">
+                    <button class="accordion-header w-full flex justify-between items-center p-6 text-xl font-semibold text-sky-700 hover:bg-stone-50 transition-colors">
+                        <span>Estructuras Condicionales (Si-Entonces)</span>
+                        <span class="transform transition-transform rotate-0">▼</span>
+                    </button>
+                    <div class="accordion-item" style="max-height: 0;">
+                        <div class="p-6 pt-0 text-slate-700 space-y-4">
+                            <p>Las **condicionales** permiten que tu programa tome decisiones. El comando `Si-Entonces` ejecuta un bloque de código solo si una condición es verdadera. Si la condición es falsa, se puede ejecutar otro bloque de código opcional con la cláusula `Sino`.</p>
+                            <div class="bg-slate-900 text-white p-4 rounded-md font-mono text-sm">
+                                <p>Proceso ValidarEdad</p>
+                                <p class="pl-4">Definir edad Como Entero;</p>
+                                <p class="pl-4">Escribir "Ingrese su edad: ";</p>
+                                <p class="pl-4">Leer edad;</p>
+                                <p class="pl-4">Si edad >= 18 Entonces</p>
+                                <p class="pl-8">Escribir "Eres mayor de edad."</p>
+                                <p class="pl-4">Sino</p>
+                                <p class="pl-8">Escribir "Eres menor de edad."</p>
+                                <p class="pl-4">FinSi</p>
+                                <p>FinProceso</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion Item: Bucles -->
+                <div class="bg-white rounded-lg shadow-md border border-stone-200">
+                    <button class="accordion-header w-full flex justify-between items-center p-6 text-xl font-semibold text-sky-700 hover:bg-stone-50 transition-colors">
+                        <span>Estructuras Repetitivas (Bucles)</span>
+                        <span class="transform transition-transform rotate-0">▼</span>
+                    </button>
+                    <div class="accordion-item" style="max-height: 0;">
+                        <div class="p-6 pt-0 text-slate-700 space-y-4">
+                            <p>Los **bucles** se utilizan para repetir un bloque de código varias veces. PSeInt ofrece varios tipos, como `Para` (cuando sabes cuántas veces se repite), `Mientras` (mientras una condición sea verdadera) y `Repetir` (al menos una vez hasta que se cumpla una condición).</p>
+                            <div class="bg-slate-900 text-white p-4 rounded-md font-mono text-sm">
+                                <p>Proceso Contador</p>
+                                <p class="pl-4">Definir i Como Entero;</p>
+                                <p class="pl-4">Para i <- 1 Hasta 5 Con Paso 1 Hacer</p>
+                                <p class="pl-8">Escribir "El número es: ", i</p>
+                                <p class="pl-4">FinPara</p>
+                                <p>FinProceso</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item: Funciones -->
+                <div class="bg-white rounded-lg shadow-md border border-stone-200">
+                    <button class="accordion-header w-full flex justify-between items-center p-6 text-xl font-semibold text-sky-700 hover:bg-stone-50 transition-colors">
+                        <span>Funciones y Subprocesos</span>
+                        <span class="transform transition-transform rotate-0">▼</span>
+                    </button>
+                    <div class="accordion-item" style="max-height: 0;">
+                        <div class="p-6 pt-0 text-slate-700 space-y-4">
+                            <p>Las **funciones** o **subprocesos** permiten agrupar un conjunto de instrucciones que realizan una tarea específica. Esto ayuda a organizar el código, hacerlo más legible y reutilizable.</p>
+                            <div class="bg-slate-900 text-white p-4 rounded-md font-mono text-sm">
+                                <p>Proceso Principal</p>
+                                <p class="pl-4">Definir num1, num2 Como Entero;</p>
+                                <p class="pl-4">num1 <- 5;</p>
+                                <p class="pl-4">num2 <- 10;</p>
+                                <p class="pl-4">SumarNumeros(num1, num2);</p>
+                                <p>FinProceso</p>
+                                <p></p>
+                                <p>SubProceso SumarNumeros(a, b)</p>
+                                <p class="pl-4">Definir resultado Como Entero;</p>
+                                <p class="pl-4">resultado <- a + b;</p>
+                                <p class="pl-4">Escribir "La suma es: ", resultado;</p>
+                                <p>FinSubProceso</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Accordion Item: Operadores -->
+                <div class="bg-white rounded-lg shadow-md border border-stone-200">
+                    <button class="accordion-header w-full flex justify-between items-center p-6 text-xl font-semibold text-sky-700 hover:bg-stone-50 transition-colors">
+                        <span>Operadores</span>
+                        <span class="transform transition-transform rotate-0">▼</span>
+                    </button>
+                    <div class="accordion-item" style="max-height: 0;">
+                        <div class="p-6 pt-0 text-slate-700 space-y-4">
+                            <p>Los **operadores** son símbolos que se utilizan para realizar operaciones matemáticas, comparaciones o lógicas. Por ejemplo, `+` es un operador aritmético para sumar, `>` es un operador relacional para comparar y `y` es un operador lógico.</p>
+                            <div class="bg-slate-900 text-white p-4 rounded-md font-mono text-sm">
+                                <p>Proceso Operaciones</p>
+                                <p class="pl-4">Definir a, b, c Como Entero;</p>
+                                <p class="pl-4">a <- 10;</p>
+                                <p class="pl-4">b <- 5;</p>
+                                <p class="pl-4">c <- a + b;  // Operador Aritmético</p>
+                                <p class="pl-4">Si a > b Entonces // Operador Relacional</p>
+                                <p class="pl-8">Escribir "a es mayor que b";</p>
+                                <p class="pl-4">FinSi</p>
+                                <p>FinProceso</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <hr class="border-stone-200 my-16">
+
+        <section id="ejemplos-practicos" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-sky-800">Ejemplos Prácticos</h2>
+                <p class="max-w-3xl mx-auto text-lg text-slate-600">
+                    Aquí tienes algunos ejemplos de algoritmos comunes en PSeInt para que te inspires y practiques.
+                </p>
+            </div>
+            <div class="max-w-4xl mx-auto space-y-8">
+
+                <!-- Ejemplo 1: Suma, Resta, Multiplicacion y Division -->
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-2xl font-bold mb-4 text-sky-800">Suma, Resta, Multiplicación y División</h3>
+                    <p class="text-slate-700 mb-4">
+                        Este programa básico lee dos números y muestra en pantalla el resultado de las cuatro operaciones aritméticas fundamentales.
+                    </p>
+                    <div class="bg-slate-900 text-white p-4 rounded-md font-mono text-sm">
+                        <pre><code>Proceso OperacionesBasicas
+    Definir num1, num2 Como Real;
+    Escribir "Ingresa el primer numero: ";
+    Leer num1;
+    Escribir "Ingresa el segundo numero: ";
+    Leer num2;
+
+    Escribir "Suma: ", num1 + num2;
+    Escribir "Resta: ", num1 - num2;
+    Escribir "Multiplicacion: ", num1 * num2;
+    Escribir "Division: ", num1 / num2;
+FinProceso</code></pre>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 2: Adivina el Numero -->
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-2xl font-bold mb-4 text-sky-800">Adivina el Número</h3>
+                    <p class="text-slate-700 mb-4">
+                        Un juego simple donde el programa genera un número aleatorio y el usuario debe adivinarlo. Utiliza un bucle `Mientras` y condicionales.
+                    </p>
+                    <div class="bg-slate-900 text-white p-4 rounded-md font-mono text-sm">
+                        <pre><code>Proceso AdivinaNumero
+    Definir numero_a_adivinar, numero_ingresado Como Entero;
+    Aleatorio(1, 100);
+    
+    Escribir "Adivina el numero entre 1 y 100.";
+    Escribir "Ingresa un numero: ";
+    Leer numero_ingresado;
+
+    Mientras numero_ingresado <> numero_a_adivinar Hacer
+        Si numero_ingresado < numero_a_adivinar Entonces
+            Escribir "El numero es mayor.";
+        Sino
+            Escribir "El numero es menor.";
+        FinSi
+        Escribir "Ingresa otro numero: ";
+        Leer numero_ingresado;
+    FinMientras
+
+    Escribir "¡Felicidades, adivinaste el numero!";
+FinProceso</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Ejemplo 3: Area de un Triangulo -->
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-2xl font-bold mb-4 text-sky-800">Área de un Triángulo</h3>
+                    <p class="text-slate-700 mb-4">
+                        Este programa calcula el área de un triángulo pidiendo la base y la altura.
+                    </p>
+                    <div class="bg-slate-900 text-white p-4 rounded-md font-mono text-sm">
+                        <pre><code>Proceso AreaTriangulo
+    Definir base, altura, area Como Real;
+    Escribir "Ingresa la base del triangulo: ";
+    Leer base;
+    Escribir "Ingresa la altura del triangulo: ";
+    Leer altura;
+
+    area <- (base * altura) / 2;
+    Escribir "El area del triangulo es: ", area;
+FinProceso</code></pre>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 4: Tabla de Multiplicar -->
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-2xl font-bold mb-4 text-sky-800">Tabla de Multiplicar</h3>
+                    <p class="text-slate-700 mb-4">
+                        Utiliza un bucle `Para` para generar y mostrar la tabla de multiplicar de un número ingresado por el usuario.
+                    </p>
+                    <div class="bg-slate-900 text-white p-4 rounded-md font-mono text-sm">
+                        <pre><code>Proceso TablaDeMultiplicar
+    Definir numero, i Como Entero;
+    Escribir "Ingresa un numero para ver su tabla de multiplicar: ";
+    Leer numero;
+
+    Para i <- 1 Hasta 10 Con Paso 1 Hacer
+        Escribir numero, " x ", i, " = ", numero * i;
+    FinPara
+FinProceso</code></pre>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 5: Conversor de Grados a Radianes -->
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-2xl font-bold mb-4 text-sky-800">Conversor de Grados a Radianes</h3>
+                    <p class="text-slate-700 mb-4">
+                        Un ejemplo que utiliza una constante (`pi`) para convertir un ángulo de grados a radianes.
+                    </p>
+                    <div class="bg-slate-900 text-white p-4 rounded-md font-mono text-sm">
+                        <pre><code>Proceso GradosARadianes
+    Definir grados, radianes Como Real;
+    Definir pi Como Real;
+    pi <- 3.1415926535;
+
+    Escribir "Ingresa los grados a convertir: ";
+    Leer grados;
+
+    radianes <- grados * (pi / 180);
+
+    Escribir grados, " grados equivalen a ", radianes, " radianes.";
+FinProceso</code></pre>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <hr class="border-stone-200 my-16">
+
+        <section id="instalacion" class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-sky-800">Guía de Instalación</h2>
+                <p class="max-w-3xl mx-auto text-lg text-slate-600">
+                    Instalar PSeInt es muy sencillo. Selecciona tu sistema operativo para ver las instrucciones detalladas.
+                </p>
+            </div>
+            <div class="flex justify-center mb-8">
+                <div class="bg-stone-200 p-1 rounded-lg flex space-x-1">
+                    <button id="win-btn" class="os-btn bg-white text-sky-700 py-2 px-6 rounded-md font-semibold">Windows</button>
+                    <button id="linux-btn" class="os-btn bg-transparent text-slate-600 py-2 px-6 rounded-md font-semibold">Linux</button>
+                </div>
+            </div>
+
+            <div id="windows-instructions" class="os-instructions">
+                <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-2xl font-bold mb-6 text-sky-800">Instalación en Windows</h3>
+                    <ol class="list-decimal list-inside space-y-4 text-slate-700">
+                        <li>
+                            <span class="font-semibold">Descargar el instalador:</span>
+                            Visita la <a href="https://pseint.sourceforge.net/" target="_blank" class="text-sky-600 underline hover:text-sky-800">página oficial de PSeInt</a> y descarga el archivo ejecutable (`.exe`) para Windows.
+                        </li>
+                        <li>
+                            <span class="font-semibold">Ejecutar el archivo:</span>
+                            Una vez descargado, haz doble clic sobre el archivo para iniciar el asistente de instalación.
+                        </li>
+                        <li>
+                            <span class="font-semibold">Seguir el asistente:</span>
+                            Acepta los términos, elige una carpeta de instalación (puedes dejar la que viene por defecto) y finaliza el proceso. ¡Ya está listo para usar!
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="linux-instructions" class="os-instructions hidden">
+                <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md border border-stone-200">
+                     <h3 class="text-2xl font-bold mb-6 text-sky-800">Instalación en GNU/Linux</h3>
+                    <ol class="list-decimal list-inside space-y-4 text-slate-700">
+                        <li>
+                            <span class="font-semibold">Descargar el archivo comprimido:</span>
+                            Visita la <a href="https://pseint.sourceforge.net/" target="_blank" class="text-sky-600 underline hover:text-sky-800">página oficial de PSeInt</a> y descarga el archivo `.tgz` correspondiente a la arquitectura de tu sistema (64 o 32 bits).
+                        </li>
+                        <li>
+                            <span class="font-semibold">Descomprimir:</span>
+                            Abre una terminal, navega a la carpeta de descargas y ejecuta un comando similar a:
+                            <code class="block bg-slate-800 text-white p-2 rounded-md mt-2 font-mono text-sm">tar -xzvf pseint-l64-20250314.tgz</code>
+                        </li>
+                        <li>
+                            <span class="font-semibold">Ejecutar PSeInt:</span>
+                            Entra en la carpeta descomprimida con `cd pseint` y ejecuta el programa con `./pseint`. La primera vez, se te ofrecerá crear accesos directos.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-stone-300 py-6 text-center">
+        <p>Guía Interactiva creada de PSeInt.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const runBtn = document.getElementById('run-btn');
+            const stepBtn = document.getElementById('step-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const consoleDiv = document.getElementById('console');
+            const explanationDiv = document.getElementById('explanation');
+            const codeLines = document.querySelectorAll('.code-line');
+            const flowchartBtn = document.getElementById('flowchart-btn');
+            const flowchartContainer = document.getElementById('flowchart-container');
+
+            let currentStep = 0;
+            const steps = [
+                { line: 1, explanation: "Inicia el proceso del algoritmo llamado 'Suma'." },
+                { line: 2, explanation: "Se declaran tres variables (num1, num2, resultado) que almacenarán números enteros." },
+                { line: 3, explanation: "Se muestra un mensaje en pantalla pidiendo el primer número." },
+                { line: 4, explanation: "El programa espera a que el usuario ingrese un valor, que se guardará en la variable 'num1'." },
+                { line: 5, explanation: "Se muestra un mensaje en pantalla pidiendo el segundo número." },
+                { line: 6, explanation: "El programa espera a que el usuario ingrese un valor, que se guardará en la variable 'num2'." },
+                { line: 7, explanation: "Se suman los valores de 'num1' y 'num2', y el total se asigna a la variable 'resultado'." },
+                { line: 8, explanation: "Se muestra el mensaje final con el valor de la variable 'resultado'." },
+                { line: 9, explanation: "Finaliza la ejecución del algoritmo." }
+            ];
+
+            function resetSimulation() {
+                currentStep = 0;
+                consoleDiv.innerHTML = '';
+                explanationDiv.classList.add('hidden');
+                explanationDiv.textContent = '';
+                codeLines.forEach(line => line.classList.remove('highlight'));
+                runBtn.disabled = false;
+                stepBtn.disabled = false;
+                stepBtn.textContent = '👣 Paso a Paso';
+            }
+
+            function highlightLine(lineNumber) {
+                codeLines.forEach(line => line.classList.remove('highlight'));
+                if (lineNumber > 0) {
+                    document.getElementById(`code-line-${lineNumber}`).classList.add('highlight');
+                }
+            }
+
+            runBtn.addEventListener('click', () => {
+                resetSimulation();
+                consoleDiv.innerHTML = `
+                    <p>Ingrese el primer número: <span class="text-sky-600 font-bold">10</span></p>
+                    <p>Ingrese el segundo número: <span class="text-sky-600 font-bold">20</span></p>
+                    <p class="mt-2">El resultado de la suma es: <span class="text-green-600 font-bold">30</span></p>
+                `;
+                explanationDiv.textContent = "El programa se ha ejecutado completamente.";
+                explanationDiv.classList.remove('hidden');
+                runBtn.disabled = true;
+                stepBtn.disabled = true;
+            });
+
+            stepBtn.addEventListener('click', () => {
+                if (currentStep < steps.length) {
+                    const step = steps[currentStep];
+                    highlightLine(step.line);
+                    explanationDiv.classList.remove('hidden');
+                    explanationDiv.textContent = step.explanation;
+                    
+                    if(step.line === 4) {
+                        consoleDiv.innerHTML += '<p>Ingrese el primer número: <span class="text-sky-600 font-bold">10</span></p>';
+                    }
+                    if(step.line === 6) {
+                        consoleDiv.innerHTML += '<p>Ingrese el segundo número: <span class="text-sky-600 font-bold">20</span></p>';
+                    }
+                    if(step.line === 8) {
+                        consoleDiv.innerHTML += '<p class="mt-2">El resultado de la suma es: <span class="text-green-600 font-bold">30</span></p>';
+                    }
+
+                    currentStep++;
+                    runBtn.disabled = true;
+                    if (currentStep === steps.length) {
+                        stepBtn.textContent = 'Finalizado';
+                        stepBtn.disabled = true;
+                    }
+                }
+            });
+            
+            resetBtn.addEventListener('click', resetSimulation);
+            
+            flowchartBtn.addEventListener('click', () => {
+                flowchartContainer.classList.toggle('hidden');
+            });
+
+            const winBtn = document.getElementById('win-btn');
+            const linuxBtn = document.getElementById('linux-btn');
+            const winInstructions = document.getElementById('windows-instructions');
+            const linuxInstructions = document.getElementById('linux-instructions');
+            
+            winBtn.addEventListener('click', () => {
+                winInstructions.classList.remove('hidden');
+                linuxInstructions.classList.add('hidden');
+                winBtn.classList.add('bg-white', 'text-sky-700');
+                linuxBtn.classList.remove('bg-white', 'text-sky-700');
+                linuxBtn.classList.add('bg-transparent', 'text-slate-600');
+            });
+
+            linuxBtn.addEventListener('click', () => {
+                linuxInstructions.classList.remove('hidden');
+                winInstructions.classList.add('hidden');
+                linuxBtn.classList.add('bg-white', 'text-sky-700');
+                winBtn.classList.remove('bg-white', 'text-sky-700');
+                winBtn.classList.add('bg-transparent', 'text-slate-600');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('nav-link-active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('nav-link-active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.nextElementSibling;
+                    const icon = header.querySelector('span:last-child');
+                    
+                    if (item.style.maxHeight === '0px' || item.style.maxHeight === '') {
+                        item.style.maxHeight = item.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        item.style.maxHeight = '0';
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
