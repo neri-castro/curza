@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructivos - Centro de Guías de Curza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'light-blue': '#7C93C3',
+                        'medium-blue': '#55679C',
+                        'dark-blue': '#1E2A5E',
+                        'light-beige': '#E1D7B7'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="min-h-screen" style="background: linear-gradient(135deg, #7C93C3 0%, #55679C 100%);">
+    
+    <!-- Header -->
+    <header class="py-8">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
+                Centro de Instructivos
+            </h1>
+            <p class="text-xl text-light-beige font-light max-w-2xl mx-auto">
+                Explora nuestras guías interactivas y aprende paso a paso las herramientas más importantes para tu desarrollo académico y profesional.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            
+            <!-- GitHub Classroom Card -->
+            <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-dark-blue rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-2xl">🎓</span>
+                        </div>
+                        <h2 class="text-2xl font-semibold text-dark-blue">GitHub Classroom</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Aprende a gestionar tus clases de programación con GitHub Classroom. Una guía completa desde la configuración hasta la implementación de autocorrección.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Git</span>
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Educación</span>
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Gestión</span>
+                    </div>
+                    <a href="classroom.html" 
+                       class="inline-flex items-center px-6 py-3 bg-dark-blue text-white font-medium rounded-lg hover:bg-medium-blue transition-colors duration-200">
+                        Ver Guía
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- PSeInt Card -->
+            <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-dark-blue rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-2xl">🔧</span>
+                        </div>
+                        <h2 class="text-2xl font-semibold text-dark-blue">PSeInt</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Domina los fundamentos de la programación con PSeInt. Aprende pseudocódigo, estructuras de control y desarrolla tu lógica de programación.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Pseudocódigo</span>
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Algoritmos</span>
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Lógica</span>
+                    </div>
+                    <a href="pseint.html" 
+                       class="inline-flex items-center px-6 py-3 bg-dark-blue text-white font-medium rounded-lg hover:bg-medium-blue transition-colors duration-200">
+                        Ver Guía
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Python Card -->
+            <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-dark-blue rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-2xl">🐍</span>
+                        </div>
+                        <h2 class="text-2xl font-semibold text-dark-blue">Python</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Inicia tu viaje en la programación con Python. Desde la instalación hasta tus primeros programas, todo explicado paso a paso.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Python</span>
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Programación</span>
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Principiante</span>
+                    </div>
+                    <a href="python.html" 
+                       class="inline-flex items-center px-6 py-3 bg-dark-blue text-white font-medium rounded-lg hover:bg-medium-blue transition-colors duration-200">
+                        Ver Guía
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- VS Code Card -->
+            <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-dark-blue rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-2xl">💻</span>
+                        </div>
+                        <h2 class="text-2xl font-semibold text-dark-blue">Visual Studio Code</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Configura y optimiza tu editor de código favorito. Conoce las mejores extensiones y atajos para maximizar tu productividad.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Editor</span>
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Productividad</span>
+                        <span class="px-3 py-1 bg-light-blue/20 text-dark-blue text-sm rounded-full">Desarrollo</span>
+                    </div>
+                    <a href="vscode.html" 
+                       class="inline-flex items-center px-6 py-3 bg-dark-blue text-white font-medium rounded-lg hover:bg-medium-blue transition-colors duration-200">
+                        Ver Guía
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <div class="bg-white/10 rounded-lg p-8 backdrop-blur-sm">
+                <h3 class="text-2xl font-semibold text-white mb-4">¿Necesitas más ayuda?</h3>
+                <p class="text-light-beige mb-6 max-w-2xl mx-auto">
+                    Estas guías están en constante mejora. Si encuentras algún problema o tienes sugerencias, 
+                    no dudes en contactarnos para seguir mejorando la experiencia de aprendizaje.
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <span class="text-light-beige text-sm">📧 Contacto</span>
+                    <span class="text-light-beige text-sm">•</span>
+                    <span class="text-light-beige text-sm">📚 Recursos adicionales</span>
+                    <span class="text-light-beige text-sm">•</span>
+                    <span class="text-light-beige text-sm">🎯 Sugerencias</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

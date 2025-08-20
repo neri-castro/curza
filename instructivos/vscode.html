@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guía Interactiva de Visual Studio Code</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'light-blue': '#7C93C3',
+                        'medium-blue': '#55679C',
+                        'dark-blue': '#1E2A5E',
+                        'light-beige': '#E1D7B7'
+                    }
+                }
+            }
+        }
+    </script>
     <!-- Chosen Palette: Calm Code -->
     <!-- Application Structure Plan: Se ha diseñado una SPA con navegación superior fija que se desplaza a secciones de contenido. Esta estructura es superior a un documento lineal porque permite a los usuarios acceder directamente a la información que necesitan (p. ej., saltar a la instalación de Linux). La interacción clave es la selección de sistema operativo en la sección de instalación, que oculta el contenido irrelevante y mejora drásticamente la usabilidad. Una sección de "Interfaz" interactiva reemplaza la lista de texto para un aprendizaje más visual y atractivo. -->
     <!-- Visualization & Content Choices: 
@@ -15,21 +29,21 @@
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
-            background-color: #f5f5f4; /* stone-100 */
-            color: #292524; /* stone-800 */
+            background-color: #E1D7B7;
+            color: #1E2A5E;
         }
         .nav-button {
             transition: color 0.3s, border-color 0.3s;
         }
         .nav-button:hover, .nav-button.active {
-            color: #059669; /* emerald-600 */
-            border-bottom-color: #059669;
+            color: #55679C;
+            border-bottom-color: #55679C;
         }
         .os-button {
             transition: background-color 0.3s, color 0.3s;
         }
         .os-button.active {
-            background-color: #059669; /* emerald-600 */
+            background-color: #55679C;
             color: white;
         }
         .interface-hotspot {
@@ -37,8 +51,8 @@
             border: 2px dashed transparent;
         }
         .interface-hotspot:hover {
-            background-color: rgba(5, 150, 105, 0.1);
-            border-color: #059669;
+            background-color: rgba(124, 147, 195, 0.1);
+            border-color: #7C93C3;
         }
         .accordion-button {
             display: flex;
@@ -74,10 +88,20 @@
 </head>
 <body class="font-sans">
 
+    <!-- Botón flotante de regreso -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="index.html" 
+           class="flex items-center justify-center w-14 h-14 bg-dark-blue text-white rounded-full shadow-lg hover:bg-medium-blue transition-all duration-300 hover:scale-110 group">
+            <svg class="w-6 h-6 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+        </a>
+    </div>
+
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <h1 class="text-xl font-bold text-emerald-700">Guía de VS Code</h1>
+                <h1 class="text-xl font-bold text-dark-blue">Guía de VS Code</h1>
                 <div class="hidden sm:flex sm:space-x-8">
                     <a href="#inicio" class="nav-button border-b-2 border-transparent py-2 text-sm font-medium">Inicio</a>
                     <a href="#interfaz" class="nav-button border-b-2 border-transparent py-2 text-sm font-medium">Interfaz</a>
@@ -141,7 +165,7 @@
                 <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Explora la Interfaz</h2>
                 <p class="mt-4 max-w-2xl mx-auto text-lg text-stone-600">Familiarízate con el entorno de trabajo. Pasa el cursor sobre las áreas resaltadas del diagrama para aprender sobre cada componente.</p>
             </div>
-            <div class="lg:flex lg:gap-8">
+            <div class="lg:flex lg:gap-8 no-touch">
                 <div class="lg:w-2/3 bg-white rounded-lg shadow-lg p-2 border border-stone-200">
                     <div class="flex h-[450px] text-sm">
                         <div id="hotspot-1" data-target="desc-1" class="interface-hotspot w-16 bg-stone-200 p-3 flex flex-col items-center justify-start space-y-6 rounded-l-md">

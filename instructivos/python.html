@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva de Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'light-blue': '#7C93C3',
+                        'medium-blue': '#55679C',
+                        'dark-blue': '#1E2A5E',
+                        'light-beige': '#E1D7B7'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom styles for non-Tailwind elements, primarily for state changes -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #E1D7B7;
+            color: #1E2A5E;
+        }
+        .active-tab {
+            background-color: #55679C;
+            color: #ffffff;
+        }
+        .inactive-tab {
+            background-color: #E1D7B7;
+            color: #55679C;
+        }
+        .active-os {
+            border-color: #55679C;
+            background-color: #7C93C3;
+            color: white;
+        }
+        .inactive-os {
+            border-color: #e0e0e0;
+            background-color: #ffffff;
+            color: #757575;
+        }
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Botón flotante de regreso -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="index.html" 
+           class="flex items-center justify-center w-14 h-14 bg-dark-blue text-white rounded-full shadow-lg hover:bg-medium-blue transition-all duration-300 hover:scale-110 group">
+            <svg class="w-6 h-6 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+        </a>
+    </div>
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl text-dark-blue">🐍 Guía de Python</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#intro" class="text-dark-blue hover:bg-light-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">Introducción</a>
+                        <a href="#basics" class="text-dark-blue hover:bg-light-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">Conceptos Básicos</a>
+                        <a href="#data-structures" class="text-dark-blue hover:bg-light-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">Estructuras de Datos</a>
+                        <a href="#virtual-envs" class="text-dark-blue hover:bg-light-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">Entornos Virtuales</a>
+                        <a href="#install" class="text-dark-blue hover:bg-light-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instalación</a>
+                        <a href="#vscode-setup" class="text-dark-blue hover:bg-light-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">Configurar VS Code</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+
+        <section id="intro" class="py-16 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Bienvenido a la Guía Interactiva de Python</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Python es un lenguaje de programación versátil y fácil de aprender, ideal para principiantes y expertos. Esta guía te ayudará a dar tus primeros pasos, desde los conceptos fundamentales hasta la instalación en tu propio sistema.
+            </p>
+        </section>
+
+        <section id="basics" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Conceptos Básicos Interactivos</h2>
+                <p class="text-md text-gray-500 mt-2">Selecciona un tema para explorar el código y ver cómo funciona.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8" id="concept-tabs">
+                <button data-concept="variables" class="concept-tab active-tab px-4 py-2 text-sm font-semibold rounded-full shadow-sm transition-colors duration-200">Variables y Tipos</button>
+                <button data-concept="operadores" class="concept-tab inactive-tab px-4 py-2 text-sm font-semibold rounded-full shadow-sm transition-colors duration-200">Operadores</button>
+                <button data-concept="control" class="concept-tab inactive-tab px-4 py-2 text-sm font-semibold rounded-full shadow-sm transition-colors duration-200">Estructuras de Control</button>
+                <button data-concept="funciones" class="concept-tab inactive-tab px-4 py-2 text-sm font-semibold rounded-full shadow-sm transition-colors duration-200">Funciones</button>
+            </div>
+
+            <div id="concept-content" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-100 min-h-[300px]">
+            </div>
+        </section>
+
+        <section id="data-structures" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Estructuras de Datos Fundamentales</h2>
+                <p class="text-md text-gray-500 mt-2">Aprende a organizar y manipular datos con listas y diccionarios, dos pilares de Python.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8" id="data-tabs">
+                <button data-data-struct="listas" class="data-struct-tab active-tab px-4 py-2 text-sm font-semibold rounded-full shadow-sm transition-colors duration-200">Listas</button>
+                <button data-data-struct="diccionarios" class="data-struct-tab inactive-tab px-4 py-2 text-sm font-semibold rounded-full shadow-sm transition-colors duration-200">Diccionarios</button>
+            </div>
+            <div id="data-struct-content" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-100 min-h-[300px]">
+            </div>
+        </section>
+
+        <section id="virtual-envs" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Uso de Entornos Virtuales</h2>
+                <p class="text-md text-gray-500 mt-2">Los entornos virtuales te ayudan a gestionar las dependencias de tus proyectos. Es una de las mejores prácticas de desarrollo con Python.</p>
+            </div>
+             <div class="flex justify-center gap-4 mb-8">
+                <button id="venv-win-btn" class="venv-os-btn active-os flex-1 max-w-xs text-center border-2 font-semibold py-3 px-6 rounded-lg transition-all duration-200">
+                    Windows
+                </button>
+                <button id="venv-linux-btn" class="venv-os-btn inactive-os flex-1 max-w-xs text-center border-2 font-semibold py-3 px-6 rounded-lg transition-all duration-200">
+                    Linux / macOS
+                </button>
+            </div>
+
+            <div id="venv-content">
+                 <div id="venv-windows-guide">
+                    <ol class="space-y-6">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">1</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Crear el Entorno</h3>
+                                <p class="text-gray-600">Abre tu terminal (PowerShell o CMD) en la carpeta de tu proyecto y ejecuta el siguiente comando. Esto creará una carpeta llamada <code>.venv</code>.</p>
+                                <div class="code-block mt-2 text-sm">python -m venv .venv</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">2</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Activar el Entorno</h3>
+                                <p class="text-gray-600">Para activar el entorno y usar sus paquetes, ejecuta el script de activación. Verás el nombre del entorno en tu prompt, lo que indica que está activo.</p>
+                                <div class="code-block mt-2 text-sm">.venv\Scripts\activate</div>
+                            </div>
+                        </li>
+                         <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">3</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Instalar Paquetes</h3>
+                                <p class="text-gray-600">Con el entorno activo, puedes instalar bibliotecas con <code>pip</code>. Se instalarán solo en este entorno y no afectarán a otros proyectos.</p>
+                                <div class="code-block mt-2 text-sm">pip install requests</div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div id="venv-linux-guide" class="hidden">
+                     <ol class="space-y-6">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">1</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Crear el Entorno</h3>
+                                <p class="text-gray-600">Abre tu terminal en la carpeta de tu proyecto y ejecuta el siguiente comando. Esto creará una carpeta llamada <code>.venv</code>.</p>
+                                <div class="code-block mt-2 text-sm">python3 -m venv .venv</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">2</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Activar el Entorno</h3>
+                                <p class="text-gray-600">Para activar el entorno y usar sus paquetes, ejecuta el script de activación. Verás el nombre del entorno en tu prompt, lo que indica que está activo.</p>
+                                <div class="code-block mt-2 text-sm">source .venv/bin/activate</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">3</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Instalar Paquetes</h3>
+                                <p class="text-gray-600">Con el entorno activo, puedes instalar bibliotecas con <code>pip</code>. Se instalarán solo en este entorno y no afectarán a otros proyectos.</p>
+                                <div class="code-block mt-2 text-sm">pip install requests</div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="install" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Guía de Instalación</h2>
+                <p class="text-md text-gray-500 mt-2">Elige tu sistema operativo para ver las instrucciones paso a paso.</p>
+            </div>
+
+            <div class="flex justify-center gap-4 mb-8">
+                <button id="win-btn" class="os-btn active-os flex-1 max-w-xs text-center border-2 font-semibold py-3 px-6 rounded-lg transition-all duration-200">
+                    Windows
+                </button>
+                <button id="linux-btn" class="os-btn inactive-os flex-1 max-w-xs text-center border-2 font-semibold py-3 px-6 rounded-lg transition-all duration-200">
+                    Linux
+                </button>
+            </div>
+
+            <div id="install-content">
+                <div id="windows-guide">
+                    <ol class="space-y-6">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">1</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Descarga</h3>
+                                <p class="text-gray-600">Ve al <a href="https://python.org/downloads/windows/" target="_blank" class="text-cyan-600 hover:underline font-medium">sitio oficial de Python</a> y descarga la última versión estable.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">2</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Ejecuta el Instalador</h3>
+                                <p class="text-gray-600">Abre el archivo <code>.exe</code> que descargaste. En la primera ventana, asegúrate de marcar la casilla <strong class="text-red-600">"Add Python to PATH"</strong>. Luego, haz clic en "Install Now".</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">3</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Verificación</h3>
+                                <p class="text-gray-600">Abre el Símbolo del sistema (CMD) o PowerShell y escribe el siguiente comando. Deberías ver la versión de Python instalada.</p>
+                                <div class="code-block mt-2 text-sm">python --version</div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div id="linux-guide" class="hidden">
+                     <ol class="space-y-6">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">1</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Verificación</h3>
+                                <p class="text-gray-600">La mayoría de distribuciones Linux ya incluyen Python. Abre una terminal y verifica la versión con:</p>
+                                <div class="code-block mt-2 text-sm">python3 --version</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">2</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Actualiza Paquetes (Recomendado)</h3>
+                                <p class="text-gray-600">Antes de instalar, es buena práctica actualizar el índice de paquetes de tu sistema.</p>
+                                <div class="code-block mt-2 text-sm">sudo apt update</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">3</span>
+                            <div>
+                                <h3 class="text-lg font-semibold">Instalación (si es necesario)</h3>
+                                <p class="text-gray-600">Si no tienes Python o quieres la última versión, instálalo con el gestor de paquetes. Asegúrate de usar <code>python3</code>.</p>
+                                <div class="code-block mt-2 text-sm">sudo apt install python3</div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="vscode-setup" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Configuración de Python en VS Code</h2>
+                <p class="text-md text-gray-500 mt-2">Visual Studio Code (VS Code) es uno de los editores de código más populares para desarrolladores. Aquí te mostramos cómo configurarlo para trabajar con Python.</p>
+            </div>
+            <ol class="space-y-6">
+                <li class="flex items-start">
+                    <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">1</span>
+                    <div>
+                        <h3 class="text-lg font-semibold">Instalar Visual Studio Code</h3>
+                        <p class="text-gray-600">Descarga e instala VS Code desde su <a href="https://code.visualstudio.com/" target="_blank" class="text-cyan-600 hover:underline font-medium">sitio web oficial</a>.</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">2</span>
+                    <div>
+                        <h3 class="text-lg font-semibold">Instalar la Extensión de Python</h3>
+                        <p class="text-gray-600">Abre VS Code, ve a la vista de Extensiones (icono de bloques) y busca "Python". Instala la extensión oficial de Microsoft.</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-cyan-600 text-white font-bold mr-4">3</span>
+                    <div>
+                        <h3 class="text-lg font-semibold">Crear y Ejecutar tu Código</h3>
+                        <p class="text-gray-600">Crea un nuevo archivo con la extensión <code>.py</code>, como <code>hello.py</code>. VS Code detectará el lenguaje y te sugerirá el intérprete de Python. Escribe un código simple y haz clic en el icono de "Play" en la esquina superior derecha o usa el menú "Run" para ejecutarlo.</p>
+                        <div class="code-block mt-2 text-sm">print("¡Hola desde VS Code!")</div>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-4 mt-16">
+        <p>&copy; 2024 Guía Interactiva de Python. Creada para facilitar el aprendizaje.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const conceptData = {
+                variables: {
+                    title: 'Variables y Tipos de Datos',
+                    description: 'Las variables almacenan datos. En Python, no necesitas declarar su tipo; se infiere automáticamente. Puedes guardar números, texto (strings), booleanos (True/False) y más.',
+                    code: `nombre = "Ana"
+edad = 30
+es_mayor_de_edad = True
+
+print(f"Nombre: {nombre}")
+print(f"Edad: {edad}")`,
+                    interactive: false
+                },
+                operadores: {
+                    title: 'Operadores Aritméticos',
+                    description: 'Python te permite realizar operaciones matemáticas comunes directamente en tu código. Prueba cambiando los números para ver cómo cambia el resultado.',
+                    code: `a = 10
+b = 5
+
+suma = a + b
+resta = a - b
+producto = a * b
+
+print(f"{a} + {b} = {suma}")
+print(f"{a} - {b} = {resta}")
+print(f"{a} * {b} = {producto}")`,
+                    interactive: false
+                },
+                control: {
+                    title: 'Estructuras de Control (if/else)',
+                    description: 'Las estructuras de control te permiten tomar decisiones en tu código. El bloque `if` se ejecuta si una condición es verdadera, y `else` si es falsa. La indentación (espacios al inicio) es crucial.',
+                    code: `calificacion = 85
+
+if calificacion >= 70:
+    print("¡Aprobado!")
+else:
+    print("Necesita mejorar.")`,
+                    interactive: false
+                },
+                funciones: {
+                    title: 'Funciones',
+                    description: 'Las funciones son bloques de código reutilizables que realizan una tarea específica. Se definen con `def` y pueden recibir parámetros. ¡Prueba a cambiar el nombre en el campo de abajo!',
+                    code: `def saludar(nombre):
+    return f"¡Hola, {nombre}! Bienvenido a Python."
+
+# Prueba la función abajo
+`,
+                    interactive: true
+                }
+            };
+            
+            const dataStructData = {
+                listas: {
+                    title: 'Listas',
+                    description: 'Las listas son colecciones ordenadas y mutables de elementos. Puedes acceder a los elementos por su índice (el primer elemento tiene el índice 0).',
+                    code: `frutas = ["manzana", "banana", "cereza"]
+print(f"Lista original: {frutas}")
+print(f"Segundo elemento: {frutas[1]}")`,
+                    interactive: true
+                },
+                diccionarios: {
+                    title: 'Diccionarios',
+                    description: 'Los diccionarios son colecciones de pares clave-valor. No están ordenados, pero puedes acceder a los valores a través de sus claves.',
+                    code: `usuario = {
+    "nombre": "Ana",
+    "edad": 28,
+    "ciudad": "Madrid"
+}
+print(f"Diccionario: {usuario}")
+print(f"Nombre del usuario: {usuario["nombre"]}")`,
+                    interactive: true
+                }
+            };
+
+            const conceptContent = document.getElementById('concept-content');
+            const dataStructContent = document.getElementById('data-struct-content');
+
+            const conceptTabs = document.querySelectorAll('.concept-tab');
+            const dataStructTabs = document.querySelectorAll('.data-struct-tab');
+            const venvOsTabs = document.querySelectorAll('.venv-os-btn');
+            const venvWinGuide = document.getElementById('venv-windows-guide');
+            const venvLinuxGuide = document.getElementById('venv-linux-guide');
+            const venvWinBtn = document.getElementById('venv-win-btn');
+            const venvLinuxBtn = document.getElementById('venv-linux-btn');
+
+            function renderConcept(conceptKey) {
+                const data = conceptData[conceptKey];
+                let html = `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">${data.title}</h3>
+                    <p class="text-gray-600 mb-6">${data.description}</p>
+                    <div class="code-block text-sm">${data.code}</div>
+                `;
+
+                if (data.interactive) {
+                    html += `
+                        <div class="mt-6">
+                            <label for="interactive-input" class="block text-sm font-medium text-gray-700 mb-1">Ingresa un nombre:</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="interactive-input" class="flex-grow block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" value="Mundo">
+                                <button id="run-btn" class="bg-cyan-600 text-white px-4 py-2 rounded-md hover:bg-cyan-700 font-semibold">Ejecutar</button>
+                            </div>
+                            <div class="mt-4">
+                                <p class="text-sm font-medium text-gray-700">Resultado:</p>
+                                <div id="interactive-output" class="code-block text-sm mt-1 min-h-[40px]"></div>
+                            </div>
+                        </div>
+                    `;
+                }
+                conceptContent.innerHTML = html;
+                
+                if (data.interactive) {
+                    const runBtn = document.getElementById('run-btn');
+                    const input = document.getElementById('interactive-input');
+                    const output = document.getElementById('interactive-output');
+
+                    const execute = () => {
+                        const name = input.value || "Invitado";
+                        output.textContent = `¡Hola, ${name}! Bienvenido a Python.`;
+                    };
+                    
+                    runBtn.addEventListener('click', execute);
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') {
+                            execute();
+                        }
+                    });
+                    execute(); 
+                }
+            }
+            
+            function renderDataStruct(structKey) {
+                const data = dataStructData[structKey];
+                let html = `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">${data.title}</h3>
+                    <p class="text-gray-600 mb-6">${data.description}</p>
+                    <div class="code-block text-sm">${data.code}</div>
+                `;
+                
+                if (structKey === 'listas') {
+                    html += `
+                        <div class="mt-6">
+                            <label for="list-input" class="block text-sm font-medium text-gray-700 mb-1">Agregar un nuevo elemento a la lista:</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="list-input" class="flex-grow block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" placeholder="Ej: 'mango'">
+                                <button id="list-add-btn" class="bg-cyan-600 text-white px-4 py-2 rounded-md hover:bg-cyan-700 font-semibold">Agregar</button>
+                            </div>
+                            <div class="mt-4">
+                                <p class="text-sm font-medium text-gray-700">Lista actualizada:</p>
+                                <div id="list-output" class="code-block text-sm mt-1 min-h-[40px]"></div>
+                            </div>
+                        </div>
+                    `;
+                } else if (structKey === 'diccionarios') {
+                    html += `
+                        <div class="mt-6">
+                            <label for="dict-input" class="block text-sm font-medium text-gray-700 mb-1">Buscar un valor por clave (Ej: 'nombre', 'edad'):</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="dict-input" class="flex-grow block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" placeholder="Ej: 'ciudad'">
+                                <button id="dict-lookup-btn" class="bg-cyan-600 text-white px-4 py-2 rounded-md hover:bg-cyan-700 font-semibold">Buscar</button>
+                            </div>
+                            <div class="mt-4">
+                                <p class="text-sm font-medium text-gray-700">Resultado:</p>
+                                <div id="dict-output" class="code-block text-sm mt-1 min-h-[40px]"></div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                dataStructContent.innerHTML = html;
+
+                if (structKey === 'listas') {
+                    let frutas = ["manzana", "banana", "cereza"];
+                    const listAddBtn = document.getElementById('list-add-btn');
+                    const listInput = document.getElementById('list-input');
+                    const listOutput = document.getElementById('list-output');
+                    listOutput.textContent = JSON.stringify(frutas);
+
+                    listAddBtn.addEventListener('click', () => {
+                        const newItem = listInput.value.trim();
+                        if (newItem) {
+                            frutas.push(newItem);
+                            listOutput.textContent = JSON.stringify(frutas);
+                            listInput.value = '';
+                        }
+                    });
+                } else if (structKey === 'diccionarios') {
+                    const usuario = {
+                        "nombre": "Ana",
+                        "edad": 28,
+                        "ciudad": "Madrid"
+                    };
+                    const dictLookupBtn = document.getElementById('dict-lookup-btn');
+                    const dictInput = document.getElementById('dict-input');
+                    const dictOutput = document.getElementById('dict-output');
+
+                    dictLookupBtn.addEventListener('click', () => {
+                        const key = dictInput.value.trim();
+                        if (usuario.hasOwnProperty(key)) {
+                            dictOutput.textContent = `Valor para '${key}': ${usuario[key]}`;
+                        } else {
+                            dictOutput.textContent = `Clave '${key}' no encontrada.`;
+                        }
+                    });
+                }
+            }
+
+            conceptTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    conceptTabs.forEach(t => {
+                        t.classList.remove('active-tab');
+                        t.classList.add('inactive-tab');
+                    });
+                    tab.classList.add('active-tab');
+                    tab.classList.remove('inactive-tab');
+                    renderConcept(tab.dataset.concept);
+                });
+            });
+
+            dataStructTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    dataStructTabs.forEach(t => {
+                        t.classList.remove('active-tab');
+                        t.classList.add('inactive-tab');
+                    });
+                    tab.classList.add('active-tab');
+                    tab.classList.remove('inactive-tab');
+                    renderDataStruct(tab.dataset.dataStruct);
+                });
+            });
+
+            venvOsTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    venvOsTabs.forEach(t => {
+                        t.classList.remove('active-os');
+                        t.classList.add('inactive-os');
+                    });
+                    tab.classList.add('active-os');
+                    tab.classList.remove('inactive-os');
+                });
+            });
+            venvWinBtn.addEventListener('click', () => {
+                venvWinGuide.classList.remove('hidden');
+                venvLinuxGuide.classList.add('hidden');
+            });
+            venvLinuxBtn.addEventListener('click', () => {
+                venvWinGuide.classList.add('hidden');
+                venvLinuxGuide.classList.remove('hidden');
+            });
+
+            renderConcept('variables');
+            renderDataStruct('listas');
+
+            const winBtn = document.getElementById('win-btn');
+            const linuxBtn = document.getElementById('linux-btn');
+            const windowsGuide = document.getElementById('windows-guide');
+            const linuxGuide = document.getElementById('linux-guide');
+
+            winBtn.addEventListener('click', () => {
+                winBtn.classList.add('active-os');
+                winBtn.classList.remove('inactive-os');
+                linuxBtn.classList.add('inactive-os');
+                linuxBtn.classList.remove('active-os');
+                windowsGuide.classList.remove('hidden');
+                linuxGuide.classList.add('hidden');
+            });
+
+            linuxBtn.addEventListener('click', () => {
+                linuxBtn.classList.add('active-os');
+                linuxBtn.classList.remove('inactive-os');
+                winBtn.classList.add('inactive-os');
+                winBtn.classList.remove('active-os');
+                linuxGuide.classList.remove('hidden');
+                windowsGuide.classList.add('hidden');
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
