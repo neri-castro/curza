@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva de Git y GitHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Calm Harmony (Stone neutrals with Teal accent) -->
+    <!-- Application Structure Plan: A task-oriented, interactive simulation of the Git workflow. The app is divided into sequential sections: Intro, Local Workflow with branching, Remote Connection, Collaborative Forking/Pull Requests, and a Command Cheat Sheet. This structure was chosen to transform passive learning into an active, hands-on experience, helping users build a strong mental model of Git's core concepts through direct interaction. A sticky navigation allows for easy movement between modules. The new sections on branching and forking expand the local and remote collaboration workflows, respectively, to better reflect real-world scenarios. -->
+    <!-- Visualization & Content Choices: Git concepts are visualized using interactive panels. 'Local Workflow' uses three panels (Files, Staging, History) to simulate 'git add' and 'git commit'. A new branch visualization panel is added to demonstrate parallel development lines. 'Remote Connection' animates commits moving from a 'local' to a 'remote' panel to explain 'git push'. The new 'Collaboration' section visually represents a fork and simulates the pull request process. All interactions are handled with vanilla JS updating the DOM. This method was chosen to make abstract processes tangible. The final section is an interactive grid-based 'Cheat Sheet' for quick reference. CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap');
+        .font-fira {
+            font-family: 'Fira Code', monospace;
+        }
+        .nav-link.active {
+            color: #0d9488;
+            font-weight: 700;
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .file-item, .commit-item {
+            transition: all 0.5s ease-in-out;
+        }
+        .branch-line {
+            position: absolute;
+            background-color: #525252;
+        }
+        .branch-main {
+            height: 100%;
+            width: 2px;
+            left: 50%;
+            top: 0;
+        }
+        .branch-feature {
+            height: 2px;
+            width: 50px;
+            top: 50%;
+            left: 50%;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-teal-700">Guía Interactiva de Git</h1>
+            <ul class="hidden md:flex space-x-8 text-stone-600 font-medium">
+                <li><a href="#intro" class="nav-link hover:text-teal-600 transition-colors">Introducción</a></li>
+                <li><a href="#local" class="nav-link hover:text-teal-600 transition-colors">Flujo Local</a></li>
+                <li><a href="#remote" class="nav-link hover:text-teal-600 transition-colors">Flujo Remoto</a></li>
+                <li><a href="#collab" class="nav-link hover:text-teal-600 transition-colors">Colaboración</a></li>
+                <li><a href="#cheatsheet" class="nav-link hover:text-teal-600 transition-colors">Resumen</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="intro" class="min-h-[60vh] flex items-center section-fade-in">
+            <div class="w-full">
+                <h2 class="text-4xl font-bold text-center mb-4">Entendiendo las Herramientas</h2>
+                <p class="text-center text-lg text-stone-600 max-w-3xl mx-auto mb-12">Git y GitHub son la base del desarrollo de software moderno. Descubre qué son y por qué son tan importantes.</p>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-stone-200">
+                        <h3 class="text-2xl font-bold mb-4 text-teal-700">¿Qué es Git?</h3>
+                        <p class="text-stone-600 leading-relaxed"><strong>Git</strong> es un <strong>sistema de control de versiones</strong>. Imagínalo como una máquina del tiempo para tu código. Guarda "instantáneas" (commits) de tu proyecto, permitiéndote volver a cualquier punto, experimentar sin miedo y entender la evolución de tu trabajo.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-stone-200">
+                        <h3 class="text-2xl font-bold mb-4 text-teal-700">¿Qué es GitHub?</h3>
+                        <p class="text-stone-600 leading-relaxed"><strong>GitHub</strong> es una <strong>plataforma en la nube</strong> para tus repositorios Git. Es el lugar donde "estacionas" tu proyecto para compartirlo, colaborar con otros y mantener una copia de seguridad. Es la red social del código.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="local" class="py-20 section-fade-in">
+            <h2 class="text-3xl font-bold text-center mb-4">Tu Flujo de Trabajo Local</h2>
+            <p class="text-center text-lg text-stone-600 max-w-3xl mx-auto mb-12">Aprende el ciclo básico de Git en tu propia computadora. Sigue los pasos para inicializar un repositorio, añadir archivos y guardar tus cambios.</p>
+            
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-stone-200">
+                <div class="flex flex-col md:flex-row gap-4 mb-6">
+                    <button id="initBtn" class="flex-1 bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed">1. git init</button>
+                    <button id="addBtn" class="flex-1 bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed" disabled>2. git add .</button>
+                    <div class="flex-1 flex gap-2">
+                        <input type="text" id="commitMsg" placeholder="Mensaje del commit..." class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 disabled:bg-stone-100" disabled>
+                        <button id="commitBtn" class="bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed" disabled>3. git commit</button>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-stone-100 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Archivos sin seguimiento</h4>
+                        <div id="untracked" class="min-h-[100px] bg-white rounded p-2 border border-dashed border-stone-300"></div>
+                    </div>
+                    <div class="bg-stone-100 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Área de Staging</h4>
+                        <div id="staged" class="min-h-[100px] bg-white rounded p-2 border border-dashed border-stone-300"></div>
+                    </div>
+                    <div class="bg-stone-100 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Historial de Commits</h4>
+                        <div id="commits" class="min-h-[100px] bg-white rounded p-2 border border-dashed border-stone-300 text-left"></div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-stone-800 text-white font-fira p-4 rounded-lg">
+                    <p class="font-bold text-teal-400">$ git status</p>
+                    <pre id="status" class="text-stone-300 whitespace-pre-wrap"></pre>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-white p-8 rounded-xl shadow-lg border border-stone-200">
+                <h3 class="text-2xl font-bold text-center mb-4">Gestión de Ramas (Branches)</h3>
+                <p class="text-center text-stone-600 max-w-2xl mx-auto mb-6">Las ramas te permiten trabajar en nuevas funcionalidades sin afectar la línea principal de desarrollo. Simula el flujo de `git branch` y `git merge`.</p>
+                <div class="flex flex-col md:flex-row gap-4 mb-6 justify-center">
+                    <button id="branchBtn" class="bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed" disabled>1. git branch feature</button>
+                    <button id="checkoutBtn" class="bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed" disabled>2. git checkout feature</button>
+                    <button id="commitFeatureBtn" class="bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed" disabled>3. git commit (en feature)</button>
+                    <button id="mergeBtn" class="bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed" disabled>4. git merge feature</button>
+                </div>
+                <div class="relative bg-stone-100 p-6 rounded-lg min-h-[250px] overflow-hidden">
+                    <div id="branchTimeline" class="flex flex-col items-center pt-8">
+                        <div id="mainBranch" class="relative">
+                            <h4 class="absolute -top-6 text-sm font-bold text-stone-600">main</h4>
+                        </div>
+                        <div id="featureBranch" class="relative mt-12 hidden">
+                            <h4 class="absolute -top-6 text-sm font-bold text-stone-600">feature</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="remote" class="py-20 section-fade-in">
+            <h2 class="text-3xl font-bold text-center mb-4">Conectando con el Mundo</h2>
+            <p class="text-center text-lg text-stone-600 max-w-3xl mx-auto mb-12">Es hora de subir tu trabajo a la nube. Aprende a conectar tu repositorio local con GitHub y a publicar tus cambios.</p>
+            
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-stone-200">
+                <div class="flex flex-col md:flex-row gap-4 mb-6">
+                    <button id="remoteBtn" class="flex-1 bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed">1. git remote add origin</button>
+                    <button id="pushBtn" class="flex-1 bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md disabled:bg-stone-400 disabled:cursor-not-allowed" disabled>2. git push</button>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center">
+                        <h4 class="font-bold text-lg mb-2">Repositorio Local</h4>
+                        <div id="localRepo" class="bg-stone-100 p-4 rounded-lg min-h-[200px] border border-stone-200"></div>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="font-bold text-lg mb-2">Repositorio Remoto (GitHub)</h4>
+                        <div id="remoteRepo" class="bg-stone-100 p-4 rounded-lg min-h-[200px] border border-stone-200">
+                            <span id="remoteStatus" class="text-stone-500">No conectado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="collab" class="py-20 section-fade-in">
+            <h2 class="text-3xl font-bold text-center mb-4">Trabajando en Equipo</h2>
+            <p class="text-center text-lg text-stone-600 max-w-3xl mx-auto mb-12">La magia de Git y GitHub está en la colaboración. Simula cómo clonar un proyecto y actualizarlo con los cambios de tus compañeros, o cómo contribuir con un `fork`.</p>
+
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-stone-200 mb-12">
+                <h3 class="text-2xl font-bold text-center mb-4">Clonar y Sincronizar</h3>
+                <p class="text-center text-stone-600 max-w-2xl mx-auto mb-6">Para empezar a trabajar en un proyecto ya existente, lo `clonas`. Luego usas `pull` para mantenerte actualizado con los cambios de otros.</p>
+                <div class="flex flex-col md:flex-row gap-4 mb-6 justify-center">
+                    <button id="cloneBtn" class="flex-1 bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md">1. git clone</button>
+                    <button id="addRemoteCommitBtn" class="flex-1 bg-yellow-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-yellow-600 transition-colors shadow-md disabled:bg-stone-400" disabled>Simular commit de compañero</button>
+                    <button id="pullBtn" class="flex-1 bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md disabled:bg-stone-400" disabled>2. git pull</button>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center">
+                        <h4 class="font-bold text-lg mb-2">Tu Repositorio Local</h4>
+                        <div id="localClonedRepo" class="bg-stone-100 p-4 rounded-lg min-h-[200px] border border-stone-200">
+                            <span id="localClonedStatus" class="text-stone-500">Aún no has clonado un repositorio.</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="font-bold text-lg mb-2">Repositorio Remoto (GitHub)</h4>
+                        <div id="remoteSharedRepo" class="bg-stone-100 p-4 rounded-lg min-h-[200px] border border-stone-200"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-stone-200">
+                <h3 class="text-2xl font-bold text-center mb-4">Fork y Pull Request</h3>
+                <p class="text-center text-stone-600 max-w-2xl mx-auto mb-6">Para proyectos públicos, lo más común es `forkear` el repositorio, hacer tus cambios en tu copia y luego enviar un `pull request` al autor original.</p>
+                <div class="flex flex-col md:flex-row gap-4 mb-6 justify-center">
+                    <button id="forkBtn" class="flex-1 bg-yellow-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-yellow-600 transition-colors shadow-md">1. git fork</button>
+                    <button id="makePrBtn" class="flex-1 bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors shadow-md disabled:bg-stone-400" disabled>2. Enviar Pull Request</button>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 items-center text-center">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Repo Original</h4>
+                        <div id="originalRepo" class="bg-stone-100 p-4 rounded-lg min-h-[150px] border border-stone-200"></div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Tu Fork</h4>
+                        <div id="userFork" class="bg-stone-100 p-4 rounded-lg min-h-[150px] border border-stone-200"></div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Estado del PR</h4>
+                        <div id="prStatus" class="bg-stone-100 p-4 rounded-lg min-h-[150px] border border-stone-200 flex items-center justify-center">
+                            <span class="text-stone-500">Esperando fork</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- New section for PR and Merge explanation -->
+                <div class="mt-8 grid md:grid-cols-2 gap-8 text-left">
+                    <div>
+                        <h4 class="font-bold text-xl mb-2 text-teal-700">¿Qué es un Fork?</h4>
+                        <p class="text-stone-600 leading-relaxed">Un <strong>`fork`</strong> o bifurcación es, en esencia, una copia personal de un repositorio. Cuando haces `fork` de un proyecto en GitHub, creas una copia exacta en tu propia cuenta. Esto te permite hacer cambios libremente sin afectar el proyecto original. Es el punto de partida para cualquier contribución a un proyecto público. Puedes crear y borrar ramas, hacer commits y experimentar sin restricciones.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl mb-2 text-teal-700">¿Qué es un Pull Request (PR)?</h4>
+                        <p class="text-stone-600 leading-relaxed">Un <strong>Pull Request (PR)</strong> es una forma de notificarle a los demás que has completado el trabajo en una rama y quieres que tus cambios sean revisados y fusionados con la rama principal (o cualquier otra rama). Es el mecanismo central de colaboración en plataformas como GitHub, permitiendo una revisión de código antes de la integración final.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl mb-2 text-teal-700">¿Qué es un Merge?</h4>
+                        <p class="text-stone-600 leading-relaxed">El comando <strong>`git merge`</strong> es la acción de integrar los cambios de una rama a otra. Cuando el autor de un repositorio acepta un Pull Request, realiza un `merge` para fusionar tu trabajo en su proyecto, haciendo que tus cambios formen parte de la línea de desarrollo principal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cheatsheet" class="py-20 section-fade-in">
+            <h2 class="text-3xl font-bold text-center mb-4">Resumen de Comandos</h2>
+            <p class="text-center text-lg text-stone-600 max-w-3xl mx-auto mb-12">Una referencia rápida de los comandos básicos que has aprendido. ¡Guárdala para tus futuros proyectos!</p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <p class="font-fira font-medium text-teal-700">git init</p>
+                    <p class="text-stone-600">Inicializa un nuevo repositorio Git en la carpeta actual.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <p class="font-fira font-medium text-teal-700">git status</p>
+                    <p class="text-stone-600">Muestra el estado de los archivos en el repositorio.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <p class="font-fira font-medium text-teal-700">git add &lt;archivo&gt;</p>
+                    <p class="text-stone-600">Agrega un archivo al área de staging.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <p class="font-fira font-medium text-teal-700">git commit -m "msg"</p>
+                    <p class="text-stone-600">Guarda los cambios del staging en el historial.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <p class="font-fira font-medium text-teal-700">git push</p>
+                    <p class="text-stone-600">Sube los commits locales al repositorio remoto.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <p class="font-fira font-medium text-teal-700">git pull</p>
+                    <p class="text-stone-600">Descarga y fusiona cambios del repositorio remoto.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <p class="font-fira font-medium text-teal-700">git clone &lt;url&gt;</p>
+                    <p class="text-stone-600">Crea una copia local de un repositorio remoto.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <p class="font-fira font-medium text-teal-700">git remote add ...</p>
+                    <p class="text-stone-600">Conecta tu repositorio local con uno remoto.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <p class="font-fira font-medium text-teal-700">git branch &lt;nombre&gt;</p>
+                    <p class="text-stone-600">Crea una nueva rama en el repositorio local.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <p class="font-fira font-medium text-teal-700">git checkout &lt;rama&gt;</p>
+                    <p class="text-stone-600">Cambia entre ramas para trabajar en una específica.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <p class="font-fira font-medium text-teal-700">git merge &lt;rama&gt;</p>
+                    <p class="text-stone-600">Integra los cambios de una rama a la actual.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>Creado como una herramienta de aprendizaje interactiva.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const state = {
+                initialized: false,
+                untrackedFiles: [],
+                stagedFiles: [],
+                commits: [],
+                remoteConnected: false,
+                remoteCommits: [],
+                cloned: false,
+                clonedCommits: [],
+                remoteSharedCommits: [
+                    { id: 'c1', msg: 'feat: Estructura inicial del proyecto' },
+                    { id: 'c2', msg: 'fix: Corrige error en el login' }
+                ],
+                branching: {
+                    currentBranch: 'main',
+                    branches: {
+                        'main': [],
+                        'feature': []
+                    },
+                    isBranched: false,
+                    isMerged: false
+                }
+            };
+
+            const untrackedEl = document.getElementById('untracked');
+            const stagedEl = document.getElementById('staged');
+            const commitsEl = document.getElementById('commits');
+            const statusEl = document.getElementById('status');
+
+            const initBtn = document.getElementById('initBtn');
+            const addBtn = document.getElementById('addBtn');
+            const commitMsgInput = document.getElementById('commitMsg');
+            const commitBtn = document.getElementById('commitBtn');
+
+            const remoteBtn = document.getElementById('remoteBtn');
+            const pushBtn = document.getElementById('pushBtn');
+            const localRepoEl = document.getElementById('localRepo');
+            const remoteRepoEl = document.getElementById('remoteRepo');
+            const remoteStatusEl = document.getElementById('remoteStatus');
+
+            const cloneBtn = document.getElementById('cloneBtn');
+            const addRemoteCommitBtn = document.getElementById('addRemoteCommitBtn');
+            const pullBtn = document.getElementById('pullBtn');
+            const localClonedRepoEl = document.getElementById('localClonedRepo');
+            const remoteSharedRepoEl = document.getElementById('remoteSharedRepo');
+            const localClonedStatusEl = document.getElementById('localClonedStatus');
+
+            const branchBtn = document.getElementById('branchBtn');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const commitFeatureBtn = document.getElementById('commitFeatureBtn');
+            const mergeBtn = document.getElementById('mergeBtn');
+            const mainBranchEl = document.getElementById('mainBranch');
+            const featureBranchEl = document.getElementById('featureBranch');
+
+            const forkBtn = document.getElementById('forkBtn');
+            const makePrBtn = document.getElementById('makePrBtn');
+            const originalRepoEl = document.getElementById('originalRepo');
+            const userForkEl = document.getElementById('userFork');
+            const prStatusEl = document.getElementById('prStatus');
+
+            function createFileElement(name) {
+                const div = document.createElement('div');
+                div.className = 'file-item bg-teal-100 text-teal-800 p-2 rounded text-sm mb-2 shadow-sm';
+                div.textContent = name;
+                return div;
+            }
+
+            function createCommitElement(commit) {
+                const div = document.createElement('div');
+                div.className = 'bg-stone-200 p-2 rounded text-sm mb-2 commit-item';
+                const shortId = commit.id.substring(0, 7);
+                div.innerHTML = `<span class="font-fira text-teal-700">${shortId}</span> - ${commit.msg}`;
+                return div;
+            }
+
+            function renderLocalWorkflow() {
+                untrackedEl.innerHTML = '';
+                stagedEl.innerHTML = '';
+                commitsEl.innerHTML = '';
+
+                state.untrackedFiles.forEach(file => untrackedEl.appendChild(createFileElement(file)));
+                state.stagedFiles.forEach(file => stagedEl.appendChild(createFileElement(file)));
+                state.commits.forEach(commit => commitsEl.appendChild(createCommitElement(commit)));
+
+                let statusText = '';
+                if (!state.initialized) {
+                    statusText = 'Repositorio no inicializado.\nUsa `git init` para empezar.';
+                } else {
+                    if (state.stagedFiles.length > 0) {
+                        statusText += 'Cambios a ser commiteados:\n';
+                        state.stagedFiles.forEach(f => statusText += `  <span class="text-green-400">nuevo archivo: ${f}</span>\n`);
+                    }
+                    if (state.untrackedFiles.length > 0) {
+                        statusText += 'Archivos sin seguimiento:\n';
+                        state.untrackedFiles.forEach(f => statusText += `  <span class="text-red-400">${f}</span>\n`);
+                    }
+                    if (state.stagedFiles.length === 0 && state.untrackedFiles.length === 0) {
+                        statusText = 'Nada que commitear, el árbol de trabajo está limpio.';
+                    }
+                }
+                statusEl.innerHTML = statusText;
+            }
+            
+            function renderRemoteWorkflow() {
+                localRepoEl.innerHTML = '';
+                state.commits.forEach(commit => localRepoEl.appendChild(createCommitElement(commit)));
+
+                if (state.remoteConnected) {
+                    remoteStatusEl.style.display = 'none';
+                    remoteRepoEl.innerHTML = '';
+                    state.remoteCommits.forEach(commit => remoteRepoEl.appendChild(createCommitElement(commit)));
+                } else {
+                    remoteRepoEl.innerHTML = '';
+                    remoteRepoEl.appendChild(remoteStatusEl);
+                    remoteStatusEl.style.display = 'block';
+                }
+            }
+
+            function renderCollabWorkflow() {
+                remoteSharedRepoEl.innerHTML = '';
+                state.remoteSharedCommits.forEach(c => remoteSharedRepoEl.appendChild(createCommitElement(c)));
+                
+                if (state.cloned) {
+                    localClonedStatusEl.style.display = 'none';
+                    localClonedRepoEl.innerHTML = '';
+                    state.clonedCommits.forEach(c => localClonedRepoEl.appendChild(createCommitElement(c)));
+                } else {
+                    localClonedRepoEl.innerHTML = '';
+                    localClonedRepoEl.appendChild(localClonedStatusEl);
+                    localClonedStatusEl.style.display = 'block';
+                }
+            }
+            
+            function renderBranching() {
+                mainBranchEl.innerHTML = '';
+                featureBranchEl.innerHTML = '';
+                state.branching.branches['main'].forEach(c => mainBranchEl.appendChild(createCommitElement(c)));
+                state.branching.branches['feature'].forEach(c => featureBranchEl.appendChild(createCommitElement(c)));
+            }
+
+            function renderForking() {
+                originalRepoEl.innerHTML = '';
+                const c1 = createCommitElement({id: 'c123', msg: 'Initial commit'});
+                const c2 = createCommitElement({id: 'c456', msg: 'feat: added new feature'});
+                originalRepoEl.appendChild(c1);
+                originalRepoEl.appendChild(c2);
+
+                if (state.forking.isForked) {
+                    userForkEl.innerHTML = '';
+                    state.forking.userCommits.forEach(c => userForkEl.appendChild(createCommitElement(c)));
+                } else {
+                    userForkEl.innerHTML = '<span class="text-stone-500">Haz clic en Fork para copiar.</span>';
+                }
+                
+                let prStatusText = '';
+                if (state.forking.isMerged) {
+                    prStatusText = '✅ PR Aceptado!';
+                } else if (state.forking.isPrSent) {
+                    prStatusText = '⏳ PR en Revisión...';
+                } else {
+                    prStatusText = 'Esperando fork';
+                }
+                prStatusEl.innerHTML = `<span>${prStatusText}</span>`;
+            }
+
+            function updateAll() {
+                renderLocalWorkflow();
+                renderRemoteWorkflow();
+                renderCollabWorkflow();
+                renderBranching();
+                renderForking();
+            }
+
+            initBtn.addEventListener('click', () => {
+                state.initialized = true;
+                state.untrackedFiles = ['index.html', 'styles.css'];
+                initBtn.disabled = true;
+                addBtn.disabled = false;
+                branchBtn.disabled = false;
+                updateAll();
+            });
+
+            addBtn.addEventListener('click', () => {
+                state.stagedFiles = [...state.stagedFiles, ...state.untrackedFiles];
+                state.untrackedFiles = [];
+                addBtn.disabled = true;
+                commitMsgInput.disabled = false;
+                commitBtn.disabled = false;
+                updateAll();
+            });
+
+            commitBtn.addEventListener('click', () => {
+                const msg = commitMsgInput.value.trim();
+                if (msg === '') {
+                    // Replaced alert with a message box in a real application
+                    alert('Por favor, escribe un mensaje para el commit.');
+                    return;
+                }
+                if (state.stagedFiles.length === 0) {
+                    alert('No hay nada en el área de staging para commitear.');
+                    return;
+                }
+                
+                const newCommit = {
+                    id: 'id' + Math.random().toString(16).slice(2),
+                    msg: msg
+                };
+                
+                state.commits.push(newCommit);
+                if (state.branching.currentBranch === 'main') {
+                    state.branching.branches['main'].push(newCommit);
+                } else {
+                    state.branching.branches['feature'].push(newCommit);
+                }
+                
+                state.stagedFiles = [];
+                commitMsgInput.value = '';
+                commitMsgInput.disabled = true;
+                commitBtn.disabled = true;
+
+                setTimeout(() => {
+                    state.untrackedFiles = ['script.js'];
+                    addBtn.disabled = false;
+                    updateAll();
+                }, 1500);
+                
+                updateAll();
+            });
+
+            remoteBtn.addEventListener('click', () => {
+                if (state.commits.length === 0) {
+                    alert('Realiza al menos un commit antes de conectar un remoto.');
+                    return;
+                }
+                state.remoteConnected = true;
+                remoteBtn.disabled = true;
+                pushBtn.disabled = false;
+                updateAll();
+            });
+
+            pushBtn.addEventListener('click', () => {
+                if (!state.remoteConnected) {
+                    alert('Primero conecta un repositorio remoto.');
+                    return;
+                }
+                state.remoteCommits = [...state.commits];
+                pushBtn.disabled = true;
+                updateAll();
+            });
+
+            cloneBtn.addEventListener('click', () => {
+                state.cloned = true;
+                state.clonedCommits = [...state.remoteSharedCommits];
+                cloneBtn.disabled = true;
+                addRemoteCommitBtn.disabled = false;
+                pullBtn.disabled = false;
+                updateAll();
+            });
+
+            addRemoteCommitBtn.addEventListener('click', () => {
+                const newRemoteCommit = {
+                    id: 'id' + Math.random().toString(16).slice(2),
+                    msg: 'refactor: Mejora la legibilidad del código'
+                };
+                state.remoteSharedCommits.push(newRemoteCommit);
+                addRemoteCommitBtn.disabled = true;
+                updateAll();
+            });
+
+            pullBtn.addEventListener('click', () => {
+                if (!state.cloned) {
+                    alert('Primero clona un repositorio.');
+                    return;
+                }
+                state.clonedCommits = [...state.remoteSharedCommits];
+                pullBtn.disabled = true;
+                updateAll();
+            });
+            
+            branchBtn.addEventListener('click', () => {
+                if (state.commits.length === 0) {
+                    alert('Necesitas commits en la rama principal para crear una rama.');
+                    return;
+                }
+                state.branching.isBranched = true;
+                featureBranchEl.style.display = 'block';
+                branchBtn.disabled = true;
+                checkoutBtn.disabled = false;
+                updateAll();
+            });
+            
+            checkoutBtn.addEventListener('click', () => {
+                state.branching.currentBranch = 'feature';
+                checkoutBtn.disabled = true;
+                commitFeatureBtn.disabled = false;
+                mergeBtn.disabled = false;
+                updateAll();
+            });
+
+            commitFeatureBtn.addEventListener('click', () => {
+                if (state.commits.length === state.branching.branches['main'].length) {
+                    const newCommit = {
+                        id: 'id' + Math.random().toString(16).slice(2),
+                        msg: 'feat: nueva funcionalidad en rama "feature"'
+                    };
+                    state.commits.push(newCommit);
+                    state.branching.branches['feature'].push(newCommit);
+                }
+                commitFeatureBtn.disabled = true;
+                updateAll();
+            });
+
+            mergeBtn.addEventListener('click', () => {
+                if (state.branching.branches['feature'].length === 0) {
+                    alert('Necesitas commits en la rama "feature" para poder fusionar.');
+                    return;
+                }
+                state.branching.isMerged = true;
+                state.branching.currentBranch = 'main';
+                mergeBtn.disabled = true;
+                checkoutBtn.disabled = true;
+                commitFeatureBtn.disabled = true;
+                const newCommit = {
+                    id: 'id' + Math.random().toString(16).slice(2),
+                    msg: 'merge: fusiona "feature" en "main"'
+                };
+                state.commits.push(newCommit);
+                state.branching.branches['main'].push(newCommit);
+                updateAll();
+            });
+
+            const originalCommits = [
+                { id: 'orig1', msg: 'feat: funcionalidad principal' },
+                { id: 'orig2', msg: 'docs: actualiza README' }
+            ];
+            const userCommits = [
+                { id: 'user1', msg: 'feat: nueva característica en mi fork' }
+            ];
+
+            const forkingState = {
+                isForked: false,
+                isPrSent: false,
+                isMerged: false,
+                originalRepo: originalCommits,
+                userFork: [],
+            };
+
+            function renderForkingSection() {
+                originalRepoEl.innerHTML = '';
+                forkingState.originalRepo.forEach(c => originalRepoEl.appendChild(createCommitElement(c)));
+                
+                userForkEl.innerHTML = '';
+                if (forkingState.isForked) {
+                    forkingState.userFork.forEach(c => userForkEl.appendChild(createCommitElement(c)));
+                } else {
+                    userForkEl.innerHTML = `<span class="text-stone-500">Haz clic en Fork para copiar.</span>`;
+                }
+                
+                let prStatusText = '';
+                if (forkingState.isMerged) {
+                    prStatusText = '✅ PR Aceptado!';
+                } else if (forkingState.isPrSent) {
+                    prStatusText = '⏳ PR en Revisión...';
+                } else {
+                    prStatusText = 'Esperando fork';
+                }
+                prStatusEl.innerHTML = `<span>${prStatusText}</span>`;
+            }
+
+            forkBtn.addEventListener('click', () => {
+                forkingState.isForked = true;
+                forkingState.userFork = [...forkingState.originalRepo];
+                
+                setTimeout(() => {
+                    forkingState.userFork.push(userCommits[0]);
+                    makePrBtn.disabled = false;
+                    renderForkingSection();
+                }, 1000);
+                
+                forkBtn.disabled = true;
+                renderForkingSection();
+            });
+            
+            makePrBtn.addEventListener('click', () => {
+                forkingState.isPrSent = true;
+                makePrBtn.disabled = true;
+                renderForkingSection();
+                setTimeout(() => {
+                    forkingState.isMerged = true;
+                    forkingState.originalRepo.push(userCommits[0]);
+                    renderForkingSection();
+                }, 2000);
+            });
+
+
+            const sections = document.querySelectorAll('.section-fade-in');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+
+            document.querySelectorAll('section').forEach(section => {
+                scrollObserver.observe(section);
+            });
+
+            updateAll();
+            renderForkingSection();
+        });
+    </script>
+</body>
+</html>
