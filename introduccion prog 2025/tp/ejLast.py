@@ -19,7 +19,7 @@ resultado2 = A + B
 print("La suma es:", resultado2)
 
 A = int(input("Ingrese el valor de A: "))
-print(A)
+print(A)asdasdasda
 
 B = int(input("Ingrese el valor de B: "))
 print(B)
