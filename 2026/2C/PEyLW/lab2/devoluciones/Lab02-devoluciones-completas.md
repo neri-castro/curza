@@ -14,6 +14,15 @@
 | vela-9972-35 | Sandra Vela | 92 |
 | apelahnz-2743-10 | Santiago Valentín Apelahnz | 72 |
 | hidalgo-4589-59 | Alexis Hidalgo | 68 |
+| chavarria-7037-55 | Javier Chavarria | 98 |
+| boisselier-8339-91 | Sara Celeste Boisselier | 90 |
+| reyes-6775-42 | Isaías Reyes Arzamendia | 94 |
+| reynoso-4260-07 | Ramiro Javier Reynoso Bascary | 77 |
+| cobis-5580-89 | Rolando Cobis | 100 |
+| garciadiaz-9325-19 | Luciano García Díaz | 71 |
+| camandulle-5746-93 | Fernanda Camandulle | 98.5 |
+| tiradomoreira-5676-19 | Carla Tirado Moreira | 98 |
+| cambarieri-8763-78 | Matías Cambarieri Gentile | 75.5 |
 
 ---
 
@@ -675,3 +684,549 @@ penaliza en los ítems correspondientes.
 | GitHub Pages | 5 | 5 |
 | Reflexión | 10 | 5 |
 | **TOTAL** | **100** | **68** |
+
+---
+
+# Devolución Lab 2 — Javier Chavarria
+
+## Datos identificatorios
+
+- **Nombre:** Javier Chavarria
+- **Legajo:** CURZA-6755
+- **Token:** chavarria-7037-55
+- **Repositorio:** https://github.com/javi-jav/peylw-2026-practicos-chavarria-7037-55
+- **GitHub Pages:** https://javi-jav.github.io/peylw-2026-practicos-chavarria-7037-55/
+
+## Checklist por ítem
+
+| Ítem | Estado | Observación |
+|---|---|---|
+| README / carátula completa | ✅ | Los seis campos requeridos están completos y correctos. |
+| Personalización — Token en comentario (ambos archivos) | ✅ | `<!-- TOKEN-ALUMNO: chavarria-7037-55 -->` exacto e idéntico en ambos archivos. |
+| Personalización — `<h1>` exacto (ambos archivos) | ✅ | `Portal de Javier Chavarria - chavarria-7037-55` idéntico en ambas páginas. |
+| Tarea 1 — `index.html`: plantilla HTML5 + head | ✅ | `lang="es"`, charset UTF-8 y `<title>` descriptivo correctos. |
+| Tarea 1 — `index.html`: `<header>` | ✅ | Correcto. |
+| Tarea 1 — `index.html`: `<nav>` con enlaces relativos | ✅ | `<ul>` con "Inicio" y "Acerca de", rutas relativas exactas. |
+| Tarea 1 — `index.html`: `<main>` bienvenida | ✅ | `<h2>Bienvenidos a mi espacio</h2>` exacto, dos párrafos reales que explican el sitio. |
+| Tarea 1 — `index.html`: `<footer>` | ✅ | Copyright, dirección del nodo y token en texto simple, los tres presentes. |
+| Tarea 2 — `acercade.html`: header/nav/footer consistentes | ✅ | Idénticos a `index.html`. |
+| Tarea 2 — `acercade.html`: biografía real en `<article>`/`<section>` | ✅ | Real y personal, dividida en dos `<section>`, menciona explícitamente el motivo de elegir la Tecnicatura en Desarrollo Web. |
+| Tarea 2 — `acercade.html`: `<figure>`/`<figcaption>`/`alt` | ✅ | Ruta relativa `img/foto_javier.jpg`, imagen válida (200 en producción). `alt` y `figcaption` incluyen el nombre, aunque son algo escuetos. |
+| Tarea 2 — `acercade.html`: lista de tecnologías | ✅ | `<ul>` con 3 tecnologías, ubicada en `<aside>` (uso semántico válido para contenido lateral). |
+| Tarea 3 — `styles.css` presente y vinculado en ambas páginas | ✅ | En la raíz, con la regla básica de `body`, vinculado correctamente en ambos `<head>`. |
+| Tarea 3 — Commit con mensaje exacto | ✅ | `TP2: Estructuras HTML y vinculacion de estilos` — coincide letra por letra e incluye todos los archivos del TP2. |
+| Estructura de archivos correcta | ✅ | Coincide exactamente con el árbol pedido; la carpeta `capturas/` residual del Lab 1 fue eliminada en el mismo commit. |
+| GitHub Pages desplegado y respondiendo 200 | ✅ | `index.html`, `acercade.html`, `styles.css` e `img/foto_javier.jpg` responden 200 en producción. |
+| Reflexión — 3 preguntas respondidas | ✅ | Las tres respuestas son correctas, coinciden con el repo real y están bien justificadas. |
+
+## Observaciones puntuales
+
+- El `alt` y el `figcaption` de la foto son correctos pero genéricos (solo el nombre); podrían describir mejor la imagen en sí.
+- La imagen `img/foto_javier.jpg` pesa ~10 MB sin optimizar; no es un ítem de la rúbrica pero afecta el tiempo de carga real del sitio.
+- Todo lo demás (estructura semántica, navegación, CSS, commit, Pages, reflexión) está bien resuelto y sin errores técnicos. Es una de las entregas más prolijas de esta tanda.
+
+## Nota final
+
+| Ítem | Pts posibles | Pts obtenidos |
+|---|---|---|
+| README / carátula | 5 | 5 |
+| Personalización (token + `<h1>`) | 10 | 10 |
+| Tarea 1 — `index.html` | 25 | 25 |
+| Tarea 2 — `acercade.html` | 30 | 28 |
+| Tarea 3 — `styles.css` y commit | 10 | 10 |
+| Estructura de archivos | 5 | 5 |
+| GitHub Pages | 5 | 5 |
+| Reflexión | 10 | 10 |
+| **TOTAL** | **100** | **98** |
+
+---
+
+# Devolución Lab 2 — Sara Celeste Boisselier
+
+## Datos identificatorios
+
+- **Nombre:** Sara Celeste Boisselier
+- **Legajo:** N° CURZA 8691
+- **Token:** boisselier-8339-91
+- **Repositorio:** https://github.com/SaraBoisselier/peylw-2026-practicos-boisselier-8339-91
+- **GitHub Pages:** https://saraboisselier.github.io/peylw-2026-practicos-boisselier-8339-91/
+
+## ⚠️ Hallazgo crítico: el TP2 no está en la rama `main` y el enlace entregado no lo declara
+
+Todo el trabajo del Lab 2 (`acercade.html`, `styles.css`, `img/mi_personaje.png`, y las
+versiones nuevas de `index.html`, `README.md` y `REFLEXION.md`) está commiteado
+únicamente en la rama `lab2`. La rama `main` (rama por defecto) sigue teniendo solo el
+`index.html` viejo del Lab 1, `README.md`, `REFLEXION.md` y una carpeta `capturas/`
+residual.
+
+El enlace entregado en `entregas.md` no declara ninguna rama. Cualquiera que abra ese
+enlace o clone el repositorio sin buscar en otras ramas ve únicamente la entrega del Lab
+1. GitHub Pages sí está configurado para desplegar desde `lab2` (el sitio publicado
+funciona correctamente y responde 200 en todos sus archivos). Se penaliza en
+"Estructura de archivos".
+
+La corrección de contenido a continuación se hizo sobre el trabajo real (rama `lab2`,
+que es lo que está publicado).
+
+## Checklist por ítem
+
+| Ítem | Estado | Observación |
+|---|---|---|
+| README / carátula completa | ✅ | Los seis campos están completos y correctos. |
+| Personalización — Token en comentario (ambos archivos) | ✅ | `<!-- TOKEN-ALUMNO: boisselier-8339-91 -->` exacto e idéntico en `index.html` y `acercade.html`. |
+| Personalización — `<h1>` exacto (ambos archivos) | ✅ | `Portal de Sara Celeste Boisselier - boisselier-8339-91` idéntico en ambas páginas. |
+| Tarea 1 — `index.html`: plantilla HTML5 + head | ✅ | `lang="es"`, charset UTF-8 y `<title>` descriptivo y personalizado. |
+| Tarea 1 — `index.html`: `<header>` | ✅ | Correcto. |
+| Tarea 1 — `index.html`: `<nav>` con enlaces relativos | ✅ | `<ul>` con "Inicio" y "Acerca de", rutas relativas correctas. |
+| Tarea 1 — `index.html`: `<main>` bienvenida | ⚠️ | `<h2>Bienvenidos a mi espacio</h2>` exacto, dos `<p>`, pero ninguno explica realmente el sitio: uno dice que es su primera página y el otro es una broma ("Nota importante: No juzgar🐱"). No cumple con "párrafos explicativos del sitio". |
+| Tarea 1 — `index.html`: `<footer>` | ✅ | Copyright, dirección del nodo y token en texto simple, los tres presentes. |
+| Tarea 2 — `acercade.html`: header/nav/footer consistentes | ✅ | Idénticos a `index.html`. |
+| Tarea 2 — `acercade.html`: biografía real en `<article>`/`<section>` | ⚠️ | Un solo párrafo, real y específico (menciona que complementa la Licenciatura en Nutrición con Desarrollo Web), pero el enunciado pide mínimo dos párrafos divididos en dos `<section>` de biografía; acá la segunda `<section>` del artículo es la lista de tecnologías, no continuación de la biografía. |
+| Tarea 2 — `acercade.html`: `<figure>`/`<figcaption>`/`alt` | ✅ | Ruta relativa `img/mi_personaje.png` válida (200 en producción), `alt="Mi keko de Hartico/Habbo"` específico y personalizado, `figcaption` coherente. |
+| Tarea 2 — `acercade.html`: lista de tecnologías | ✅ | `<ul>` con 3 tecnologías, en su propia `<section>`. |
+| Tarea 3 — `styles.css` presente y vinculado en ambas páginas | ✅ | En la raíz, con la regla básica de `body` (font-family y background-color), vinculado en ambos `<head>`. |
+| Tarea 3 — Commit con mensaje exacto | ✅ | `TP2: Estructuras HTML y vinculacion de estilos` — coincide letra por letra e incluye todos los archivos del TP2. |
+| Estructura de archivos correcta | ❌ | El TP2 completo vive únicamente en la rama `lab2`, no declarada en el enlace entregado (ver hallazgo crítico arriba). El árbol de esa rama sí coincide con lo pedido (sin residuos de `capturas/`). |
+| GitHub Pages desplegado y respondiendo 200 | ✅ | `index.html`, `acercade.html`, `styles.css` e `img/mi_personaje.png` responden 200 en producción; la navegación funciona en ambos sentidos. |
+| Reflexión — 3 preguntas respondidas | ✅ | Las tres respuestas son correctas, coinciden con el repo real (nombre de imagen y `alt` exactos) y están bien justificadas. |
+
+## Observaciones puntuales
+
+- **Rama sin declarar (crítico):** el enlace entregado no especifica rama; la vista por defecto (`main`) no tiene el TP2, solo la entrega vieja del Lab 1.
+- Los dos párrafos de bienvenida en `index.html` no cumplen la función pedida (explicar el sitio); uno es una broma sin contenido informativo.
+- La biografía de `acercade.html` es real y específica pero de un solo párrafo, sin dividirse en dos secciones de biografía como exige el enunciado.
+- El resto (personalización, CSS, commit, imagen, lista de tecnologías, Pages, reflexión) está resuelto correctamente.
+
+## Nota final
+
+| Ítem | Pts posibles | Pts obtenidos |
+|---|---|---|
+| README / carátula | 5 | 5 |
+| Personalización (token + `<h1>`) | 10 | 10 |
+| Tarea 1 — `index.html` | 25 | 23 |
+| Tarea 2 — `acercade.html` | 30 | 26 |
+| Tarea 3 — `styles.css` y commit | 10 | 10 |
+| Estructura de archivos | 5 | 1 |
+| GitHub Pages | 5 | 5 |
+| Reflexión | 10 | 10 |
+| **TOTAL** | **100** | **90** |
+
+---
+
+# Devolución Lab 2 — Isaías Reyes Arzamendia
+
+## Datos identificatorios
+
+- **Nombre:** Isaías Reyes Arzamendia
+- **Legajo:** 8542
+- **Token:** reyes-6775-42
+- **Repositorio:** https://github.com/isaiasreyesbjj16-ux/peylw-2026-practicos-reyes-6775-42
+- **GitHub Pages:** https://isaiasreyesbjj16-ux.github.io/peylw-2026-practicos-reyes-6775-42/
+
+## Checklist por ítem
+
+| Ítem | Estado | Observación |
+|---|---|---|
+| README / carátula completa | ✅ | Los seis campos están presentes y correctos. Detalle menor: falta el cierre `**` en la línea de "Últimos 4 dígitos del DNI" (queda en negrita el resto del documento hasta el siguiente `**`), un error de formato Markdown sin impacto en el contenido. |
+| Personalización — Token en comentario (ambos archivos) | ✅ | `<!-- TOKEN-ALUMNO: reyes-6775-42 -->` exacto e idéntico en `index.html` y `acercade.html`. |
+| Personalización — `<h1>` exacto (ambos archivos) | ✅ | `Portal de Isaías Reyes Arzamendia - reyes-6775-42` idéntico en ambas páginas. |
+| Tarea 1 — `index.html`: plantilla HTML5 + head | ✅ | `lang="es"`, charset UTF-8 y `<title>` descriptivo ("Inicio \| Portal de..."). |
+| Tarea 1 — `index.html`: `<header>` | ✅ | Correcto. |
+| Tarea 1 — `index.html`: `<nav>` con enlaces relativos | ✅ | `<ul>` con "Inicio" y "Acerca de", rutas relativas exactas. |
+| Tarea 1 — `index.html`: `<main>` bienvenida | ✅ | `<h2>Bienvenidos a mi espacio</h2>` exacto, dos párrafos reales que explican el sitio (el primero tiene un error de tipeo: doble espacio y un punto suelto sobrante al final, sin impacto en el contenido). |
+| Tarea 1 — `index.html`: `<footer>` | ✅ | Copyright, dirección del nodo exacta y token en texto simple, los tres presentes. |
+| Tarea 2 — `acercade.html`: header/nav/footer consistentes | ✅ | Idénticos a `index.html`. |
+| Tarea 2 — `acercade.html`: biografía real en `<article>`/`<section>` | ⚠️ | Biografía real, personal y con dos párrafos que mencionan explícitamente el interés por la Tecnicatura en Desarrollo Web, pero todo el texto está en una sola `<section>` ("Mi biografía"); la segunda `<section>` del artículo es la lista de tecnologías, no continuación de la biografía como pide el enunciado. |
+| Tarea 2 — `acercade.html`: `<figure>`/`<figcaption>`/`alt` | ✅ | Imagen `img/img.png` carga correctamente (ruta relativa, 200 en producción), `alt` y `figcaption` personalizados con el nombre del alumno. |
+| Tarea 2 — `acercade.html`: lista de tecnologías | ✅ | `<ul>` con 5 tecnologías, correcto. |
+| Tarea 3 — `styles.css` presente y vinculado en ambas páginas | ✅ | En la raíz, con la regla básica de `body` (font-family y background-color), vinculado en ambos `<head>`. |
+| Tarea 3 — Commit con mensaje exacto | ✅ | `TP2: Estructuras HTML y vinculacion de estilos` — coincide letra por letra e incluye `index.html`, `acercade.html`, `styles.css`, `img/mi_foto.png` y `README.md`/`REFLEXION.md` en el mismo commit. |
+| Estructura de archivos correcta | ⚠️ | Además de los archivos pedidos, quedan tres residuos sueltos en la raíz del repo: `config_git.png` (captura del Lab 1), `images (2).jfif` (archivo con espacio y paréntesis en el nombre) y `laboratorio1` (archivo sin extensión, de contenido mínimo, de un commit temprano). Ninguno de los tres corresponde a la estructura pedida por el enunciado. |
+| GitHub Pages desplegado y respondiendo 200 | ✅ | `index.html`, `acercade.html`, `styles.css` e `img/img.png` responden 200 en producción; la navegación entre "Inicio" y "Acerca de" funciona en ambos sentidos. |
+| Reflexión — 3 preguntas respondidas | ✅ | Pregunta 1 coincide con el estado real del repo (`img/img.png` y el `alt` declarado). Pregunta 2 bien justificada (accesibilidad, SEO, mantenibilidad). Pregunta 3 describe una verificación concreta en local y tras el despliegue, aunque menciona de forma desactualizada el nombre de archivo anterior de la imagen (`img/mi_foto.png`, ya renombrada a `img.png` en un commit posterior). |
+
+## Observaciones puntuales
+
+- La biografía de `acercade.html` no está dividida en dos secciones propias: la segunda `<section>` del `<article>` es la lista de tecnologías, no una continuación de la biografía.
+- Quedan tres archivos residuales en la raíz del repositorio (`config_git.png`, `images (2).jfif`, `laboratorio1`) que no forman parte de la estructura pedida y deberían eliminarse.
+- El README tiene un error menor de formato Markdown (negrita sin cerrar) en el campo del DNI.
+- La pregunta 3 de `REFLEXION.md` referencia un nombre de archivo de imagen (`mi_foto.png`) que ya no coincide con el actual (`img.png`); no afecta la respuesta a la Pregunta 1, que sí está actualizada.
+- Todo lo demás (personalización, estructura semántica, navegación, CSS, commit, Pages) está resuelto correctamente.
+
+## Nota final
+
+| Ítem | Pts posibles | Pts obtenidos |
+|---|---|---|
+| README / carátula | 5 | 5 |
+| Personalización (token + `<h1>`) | 10 | 10 |
+| Tarea 1 — `index.html` | 25 | 25 |
+| Tarea 2 — `acercade.html` | 30 | 27 |
+| Tarea 3 — `styles.css` y commit | 10 | 10 |
+| Estructura de archivos | 5 | 2 |
+| GitHub Pages | 5 | 5 |
+| Reflexión | 10 | 10 |
+| **TOTAL** | **100** | **94** |
+
+---
+
+# Devolución Lab 2 — Ramiro Javier Reynoso Bascary
+
+## Datos identificatorios
+
+- **Nombre:** Ramiro Javier Reynoso Bascary (README de este TP solo consigna "Ramiro Reynoso", igual que en Lab 1)
+- **Legajo:** 8907
+- **Token:** reynoso-4260-07
+- **Repositorio:** https://github.com/Ramireybas/peylw-2026-practicos-reynoso-4260-07
+- **GitHub Pages:** https://ramireybas.github.io/peylw-2026-practicos-reynoso-4260-07/index.html
+
+## Checklist por ítem
+
+| Ítem | Estado | Observación |
+|---|---|---|
+| README / carátula completa | ⚠️ | Falta el campo "Enlace a la Página en GitHub Pages". El campo "Últimos 4 dígitos del DNI" tiene el valor `37504260` (8 dígitos), no los últimos 4 como pide la consigna. |
+| Personalización — Token en comentario (ambos archivos) | ✅ | `<!-- TOKEN-ALUMNO: reynoso-4260-07-->` presente e idéntico en ambos archivos (espaciado interno irregular, no afecta el cumplimiento). |
+| Personalización — `<h1>` exacto (ambos archivos) | ⚠️ | `Portal de Ramiro Reynoso - reynoso-4260-07` idéntico en ambas páginas, pero usa el nombre corto declarado en su propio README, no el nombre completo (Ramiro Javier Reynoso Bascary, según Lab 1). |
+| Tarea 1 — `index.html`: plantilla HTML5 + head | ⚠️ | `lang="es"` y charset correctos, pero `<title>Practico 2</title>` es genérico, no descriptivo del sitio. |
+| Tarea 1 — `index.html`: `<header>` | ✅ | Presente con el `<h1>` personalizado. |
+| Tarea 1 — `index.html`: `<nav>` con enlaces relativos | ⚠️ | Rutas relativas correctas, pero el texto de los enlaces es "Acerca de" / "Index" en vez de "Inicio" / "Acerca de" que pide el enunciado. |
+| Tarea 1 — `index.html`: `<main>` bienvenida | ⚠️ | `<h2>Bienvenido a mi espacio</h2>` (singular, falta la "s"). Los dos párrafos hablan del propio trabajo práctico ("Esta pagina es el segundo trabajo practico de la materia...") en vez de dar la bienvenida al visitante o explicar el sitio. |
+| Tarea 1 — `index.html`: `<footer>` | ⚠️ | Copyright y token presentes, pero la dirección del nodo dice "Nodo General Conesa" en vez de "Viedma, Río Negro" (CURZAS - UNCo) como pide el enunciado. |
+| Tarea 2 — `acercade.html`: header/nav/footer consistentes | ⚠️ | El `<footer>` es idéntico. El `<nav>` tiene los mismos dos enlaces pero en **orden invertido** respecto de `index.html` (acá "Index" va primero, en `index.html` va segundo), por lo que no son estrictamente idénticos. |
+| Tarea 2 — `acercade.html`: biografía real en `<article>`/`<section>` | ⚠️ | La biografía (dos párrafos, reales y personales, menciona explícitamente la Tecnicatura en Desarrollo Web) está toda en **una sola** `<section>`; la otra `<section>` del artículo contiene la lista de tecnologías, no es continuación de la biografía. |
+| Tarea 2 — `acercade.html`: `<figure>`/`<figcaption>`/`alt` | ✅ | Ruta relativa `img/Foto_mia.jpeg` correcta, imagen carga en producción. `alt="foto del autor"` y `figcaption` son válidos pero genéricos, podrían ser más específicos. |
+| Tarea 2 — `acercade.html`: lista de tecnologías | ⚠️ | `<ul>` con 5 tecnologías, contenido correcto, pero ubicada dentro de una `<section>` del `<article>` en vez de tener su propio espacio separado de la biografía. |
+| Tarea 3 — `styles.css` presente y vinculado en ambas páginas | ✅ | En la raíz, con la regla básica de `body` (font-family y background-color), vinculado correctamente en ambos `<head>`. |
+| Tarea 3 — Commit con mensaje exacto | ⚠️ | `TP2 Estructuras HTML y vinculaciones de estilos` — falta el `:` después de "TP2" y dice "vinculaciones" (plural) en vez de "vinculacion". El commit sí incluye todos los archivos del TP2. |
+| Estructura de archivos correcta | ⚠️ | Quedó un archivo residual en la raíz, `httpsgithub.comRamireybaspeylw-2026.png` (captura del Lab 1 sin limpiar); el resto del árbol coincide con lo pedido. |
+| GitHub Pages desplegado y respondiendo 200 | ✅ | `index.html`, `acercade.html`, `styles.css` e `img/Foto_mia.jpeg` responden 200 en producción; la navegación entre páginas funciona en ambos sentidos. |
+| Reflexión — 3 preguntas respondidas | ⚠️ | Preguntas 1 y 3 correctas y concretas (coinciden con el repo real, describe cómo verificó las rutas en local y por qué usar rutas relativas para Pages). Pregunta 2 es vaga y poco desarrollada, no explica con claridad la ventaja de la semántica sobre `<div>` (accesibilidad, SEO, mantenibilidad). |
+
+## Observaciones puntuales
+
+- Falta el campo de enlace a GitHub Pages en el README, y el campo de DNI tiene un valor de 8 dígitos en vez de los últimos 4.
+- El `<h2>` de bienvenida dice "Bienvenido" (singular) en vez de "Bienvenidos".
+- Los textos del `<nav>` son "Acerca de" / "Index" en vez de "Inicio" / "Acerca de", y además el orden de los enlaces está invertido entre `index.html` y `acercade.html`.
+- La dirección del nodo en el `<footer>` no coincide con la pedida en el enunciado (Viedma, Río Negro).
+- La biografía no está dividida en dos secciones propias: una de las dos `<section>` del `<article>` es en realidad la lista de tecnologías.
+- El mensaje de commit del TP2 difiere del exacto pedido (falta el `:` y cambia "vinculacion" por "vinculaciones").
+- Queda un archivo de captura del Lab 1 sin limpiar en la raíz del repo.
+- Todo lo demás (CSS, imagen, GitHub Pages, estructura semántica general) está resuelto correctamente.
+
+## Nota final
+
+| Ítem | Pts posibles | Pts obtenidos |
+|---|---|---|
+| README / carátula | 5 | 3 |
+| Personalización (token + `<h1>`) | 10 | 9 |
+| Tarea 1 — `index.html` | 25 | 19 |
+| Tarea 2 — `acercade.html` | 30 | 20 |
+| Tarea 3 — `styles.css` y commit | 10 | 9 |
+| Estructura de archivos | 5 | 4 |
+| GitHub Pages | 5 | 5 |
+| Reflexión | 10 | 8 |
+| **TOTAL** | **100** | **77** |
+
+---
+
+# Devolución Lab 2 — Rolando Cobis
+
+## Datos identificatorios
+
+- **Nombre:** Rolando Cobis
+- **Legajo:** CURZA-9389
+- **Token:** cobis-5580-89
+- **Repositorio:** https://github.com/cRolandoJr/peylw-2026-practicos-cobis-5580-89
+- **GitHub Pages:** https://crolandojr.github.io/peylw-2026-practicos-cobis-5580-89/
+
+## Checklist por ítem
+
+| Ítem | Estado | Observación |
+|---|---|---|
+| README / carátula completa | ✅ | Los seis campos requeridos están completos y correctos. |
+| Personalización — Token en comentario (ambos archivos) | ✅ | `<!-- TOKEN-ALUMNO: cobis-5580-89 -->` exacto e idéntico en ambos archivos. |
+| Personalización — `<h1>` exacto (ambos archivos) | ✅ | `Portal de Rolando Cobis - cobis-5580-89` idéntico en ambas páginas. |
+| Tarea 1 — `index.html`: plantilla HTML5 + head | ✅ | `lang="es"`, charset UTF-8 y `<title>` descriptivo correctos. |
+| Tarea 1 — `index.html`: `<header>` | ✅ | Correcto. |
+| Tarea 1 — `index.html`: `<nav>` con enlaces relativos | ✅ | `<ul>` con "Inicio" y "Acerca de", rutas relativas exactas. |
+| Tarea 1 — `index.html`: `<main>` bienvenida | ✅ | `<h2>Bienvenidos a mi espacio</h2>` exacto, dos párrafos reales que explican el sitio. |
+| Tarea 1 — `index.html`: `<footer>` | ✅ | Copyright, dirección del nodo y token en texto simple, los tres presentes. |
+| Tarea 2 — `acercade.html`: header/nav/footer consistentes | ✅ | Idénticos a `index.html`. |
+| Tarea 2 — `acercade.html`: biografía real en `<article>`/`<section>` | ✅ | Real y personal, dividida en dos `<section>` ("Quién soy" y "Por qué elegí la Tecnicatura en Desarrollo Web"), mencionando explícitamente la carrera. La tercera `<section>` del artículo es la lista de tecnologías. |
+| Tarea 2 — `acercade.html`: `<figure>`/`<figcaption>`/`alt` | ✅ | Ruta relativa `img/rolando-cobis.png`, `alt` específico y descriptivo, `figcaption` presente. |
+| Tarea 2 — `acercade.html`: lista de tecnologías | ✅ | `<ul>` con 6 tecnologías, en su propia `<section>`. |
+| Tarea 3 — `styles.css` presente y vinculado en ambas páginas | ✅ | En la raíz, con la regla básica de `body` (font-family y background-color), vinculado en ambos `<head>`. |
+| Tarea 3 — Commit con mensaje exacto | ✅ | `TP2: Estructuras HTML y vinculacion de estilos` — coincide letra por letra e incluye todos los archivos del TP2. |
+| Estructura de archivos correcta | ✅ | Coincide con el árbol pedido. Queda una carpeta `capturas/` residual del Lab 1 (no forma parte de lo pedido en este TP, pero tampoco está fuera de lugar: es contenido legítimo del Lab 1 que el mismo repo arrastra). |
+| GitHub Pages desplegado y respondiendo 200 | ✅ | `index.html`, `acercade.html`, `styles.css` e `img/rolando-cobis.png` responden 200 en producción. |
+| Reflexión — 3 preguntas respondidas | ✅ | Las tres respuestas son correctas, coinciden con el repo real y están bien justificadas (la pregunta 3 detalla verificación con `curl` en producción, no solo visual). |
+
+## Observaciones puntuales
+
+- Sin errores de contenido ni de markup. Entrega prolija y completa en todos los ítems.
+- Único punto a mencionar: la carpeta `capturas/` del Lab 1 sigue en el repo; no afecta la calificación de este TP.
+
+## Nota final
+
+| Ítem | Pts posibles | Pts obtenidos |
+|---|---|---|
+| README / carátula | 5 | 5 |
+| Personalización (token + `<h1>`) | 10 | 10 |
+| Tarea 1 — `index.html` | 25 | 25 |
+| Tarea 2 — `acercade.html` | 30 | 30 |
+| Tarea 3 — `styles.css` y commit | 10 | 10 |
+| Estructura de archivos | 5 | 5 |
+| GitHub Pages | 5 | 5 |
+| Reflexión | 10 | 10 |
+| **TOTAL** | **100** | **100** |
+
+---
+
+# Devolución Lab 2 — Luciano García Díaz
+
+## Datos identificatorios
+
+- **Nombre:** Luciano García Díaz (confirmado en `readme.md`, `index.html`, `acercade.html` y `REFLEXION.md` del repo)
+- **Legajo:** CURZA-10019
+- **Token:** garciadiaz-9325-19
+- **Repositorio:** https://github.com/Lucho-GD/TP2-Estructuras-HTML-y-vinculacion-de-estilos
+- **GitHub Pages:** https://lucho-gd.github.io/TP2-Estructuras-HTML-y-vinculacion-de-estilos/
+
+## ⚠️ Hallazgo: repositorio nuevo que no sigue la convención de nombre pedida
+
+En `entregas.md` esta entrega figura sin nombre ni token, solo con los dos enlaces de
+arriba. El repositorio se llama `TP2-Estructuras-HTML-y-vinculacion-de-estilos`, **no**
+`peylw-2026-practicos-garciadiaz-9325-19` como exige el enunciado y como se usó en el
+Lab 1 (con la misma cuenta `Lucho-GD`). El repo `peylw-2026-practicos-garciadiaz-9325-19`
+del Lab 1 sigue existiendo y es público, pero el alumno no continuó ahí: creó un
+repositorio nuevo y completamente separado para este TP2.
+
+El contenido en sí es identificable sin ambigüedad (nombre, token y datos coinciden en
+`readme.md`, `REFLEXION.md` y ambos HTML), así que se corrige igual, pero se penaliza el
+incumplimiento de la convención de nombres en el ítem "Estructura de archivos".
+
+## Checklist por ítem
+
+| Ítem | Estado | Observación |
+|---|---|---|
+| README / carátula completa | ✅ | Todos los campos (nombre, legajo, DNI, fecha, token, repo, Pages) completos y correctos. |
+| Personalización — Token en comentario (ambos archivos) | ❌ | No existe el comentario `<!-- TOKEN-ALUMNO: ... -->` (ni ninguna variante) al inicio del `<body>` en `index.html` ni en `acercade.html`. |
+| Personalización — `<h1>` exacto (ambos archivos) | ❌ | `index.html`: `<h1>` es "Laboratorio 2: Estructura y Semantica Web con HTML5" — ni nombre ni token, ni formato "Portal de...". `acercade.html`: `<h1>` es "Luciano Garcia Diaz - garciadiaz-9325-19" — le falta el prefijo "Portal de" y además difiere del de `index.html`. |
+| Tarea 1 — `index.html`: plantilla HTML5 + head | ⚠️ | `lang="es"` y charset UTF-8 correctos, pero el `<title>` repite el nombre del laboratorio en vez de identificar el portal del alumno. |
+| Tarea 1 — `index.html`: `<header>` | ❌ | Existe estructuralmente, pero el `<h1>` no identifica al alumno en absoluto (ver Personalización). |
+| Tarea 1 — `index.html`: `<nav>` con enlaces relativos | ⚠️ | Rutas relativas correctas ("Inicio"/"Acerca de"), pero el markup es inválido: cada enlace está envuelto en su propio `<ul><a>...</a></ul>` sin `<li>`, en vez de un único `<ul>` con dos `<li>`. |
+| Tarea 1 — `index.html`: `<main>` bienvenida | ✅ | `<h2>Bienvenidos a mi espacio</h2>` exacto, dos párrafos reales que explican el sitio. |
+| Tarea 1 — `index.html`: `<footer>` | ⚠️ | Copyright con corchete de plantilla sin remover (`[Luciano Garcia Diaz]`); dirección del nodo y token en texto simple correctos. |
+| Tarea 2 — `acercade.html`: header/nav/footer consistentes | ⚠️ | `<nav>` y `<footer>` son idénticos entre páginas; el `<h1>` no lo es (ver Personalización). |
+| Tarea 2 — `acercade.html`: biografía real en `<article>`/`<section>` | ⚠️ | Biografía real y personal, dos párrafos, menciona explícitamente la Tecnicatura en Desarrollo Web. Sin embargo todo el texto está en un único `<article>` sin dividir en dos `<section>`; la segunda `<section>` del documento es la lista de tecnologías, no continuación de la biografía. |
+| Tarea 2 — `acercade.html`: `<figure>`/`<figcaption>`/`alt` | ✅ | Imagen en `img/img-mifoto.jpg`, ruta relativa correcta, carga en producción. `alt="Foto de Luciano Garcia Diaz"` personalizado con nombre real (podría describir mejor la foto en sí, pero cumple). |
+| Tarea 2 — `acercade.html`: lista de tecnologías | ✅ | `<ul>` con 4 tecnologías, en su propia `<section>`. |
+| Tarea 3 — `styles.css` presente y vinculado en ambas páginas | ✅ | En la raíz, con regla de `body` (font-family y background-color), vinculado en el `<head>` de ambos archivos. |
+| Tarea 3 — Commit con mensaje exacto | ✅ | `TP2: Estructuras HTML y vinculacion de estilos` aparece tres veces en el historial, coincide letra por letra e incluye los archivos del TP2. |
+| Estructura de archivos correcta | ❌ | El árbol interno del repo es correcto, pero el repositorio en sí no sigue la convención `peylw-2026-practicos-<token>` exigida (ver hallazgo arriba): es un repo nuevo con otro nombre, no una continuación del repo de Lab 1. |
+| GitHub Pages desplegado y respondiendo 200 | ✅ | `index.html`, `acercade.html`, `styles.css` e `img/img-mifoto.jpg` responden 200 en producción; la navegación entre páginas funciona en ambos sentidos. |
+| Reflexión — 3 preguntas respondidas | ✅ | Las tres respuestas son correctas: el nombre de imagen y el `alt` declarados coinciden con lo real, la justificación de semántica es sólida (accesibilidad, lectores de pantalla, SEO), y describe una verificación concreta en local y luego en GitHub Pages. |
+
+## Observaciones puntuales
+
+- **Repositorio con nombre no convencional (crítico):** ver hallazgo al inicio. Debe unificarse con el repo `peylw-2026-practicos-garciadiaz-9325-19` usado en Lab 1, o al menos declarar el cambio explícitamente en la entrega.
+- **Comentario de token ausente por completo** en ambos archivos HTML, no solo con formato incorrecto: no hay ningún comentario de token.
+- **`<h1>` no personalizado en `index.html`** (repite el título del enunciado) y **distinto entre páginas**: es el punto de mayor pérdida de puntaje.
+- `<nav>` con markup inválido: `<a>` como hijo directo de `<ul>` sin `<li>`.
+- Corchete de plantilla sin remover en el copyright del footer (`[Luciano Garcia Diaz]`).
+- Biografía real y bien orientada a la Tecnicatura, pero no dividida en dos secciones como pide la consigna.
+- CSS, commit, lista de tecnologías, imagen, GitHub Pages y reflexión están bien resueltos.
+
+## Nota final
+
+| Ítem | Pts posibles | Pts obtenidos |
+|---|---|---|
+| README / carátula | 5 | 5 |
+| Personalización (token + `<h1>`) | 10 | 0 |
+| Tarea 1 — `index.html` | 25 | 17 |
+| Tarea 2 — `acercade.html` | 30 | 23 |
+| Tarea 3 — `styles.css` y commit | 10 | 10 |
+| Estructura de archivos | 5 | 1 |
+| GitHub Pages | 5 | 5 |
+| Reflexión | 10 | 10 |
+| **TOTAL** | **100** | **71** |
+
+---
+
+# Devolución Lab 2 — Fernanda Camandulle
+
+## Datos identificatorios
+
+- **Nombre:** Fernanda Camandulle
+- **Legajo:** 10093
+- **Token:** camandulle-5746-93
+- **Repositorio:** https://github.com/Camandulle/peylw-2026-practicos-camandulle-5746-93/tree/laboratorio-2
+- **GitHub Pages:** https://camandulle.github.io/peylw-2026-practicos-camandulle-5746-93/
+
+## Nota metodológica
+
+El trabajo está en la rama `laboratorio-2`, declarada explícitamente en el enlace
+entregado (no se considera ocultamiento); se descuenta levemente en "Estructura de
+archivos" por no estar mergeado a `main`.
+
+## Checklist por ítem
+
+| Ítem | Estado | Observación |
+|---|---|---|
+| README / carátula completa | ✅ | Los seis campos requeridos están completos y correctos. |
+| Personalización — Token en comentario (ambos archivos) | ✅ | `<!-- TOKEN-ALUMNO: camandulle-5746-93 -->` exacto e idéntico en ambos archivos. |
+| Personalización — `<h1>` exacto (ambos archivos) | ✅ | `Portal de Fernanda Camandulle - camandulle-5746-93` idéntico en ambas páginas. |
+| Tarea 1 — `index.html`: plantilla HTML5 + head | ✅ | `lang="es"`, charset UTF-8 y `<title>` descriptivo correctos. |
+| Tarea 1 — `index.html`: `<header>` | ✅ | Correcto. |
+| Tarea 1 — `index.html`: `<nav>` con enlaces relativos | ✅ | `<ul>` con "Inicio" y "Acerca de", rutas relativas exactas. |
+| Tarea 1 — `index.html`: `<main>` bienvenida | ✅ | `<h2>Bienvenidos a mi espacio</h2>` exacto, dos párrafos reales que explican el sitio y mencionan la Tecnicatura. |
+| Tarea 1 — `index.html`: `<footer>` | ✅ | Copyright, dirección del nodo y token en texto simple, los tres presentes. |
+| Tarea 2 — `acercade.html`: header/nav/footer consistentes | ✅ | Idénticos a `index.html`. |
+| Tarea 2 — `acercade.html`: biografía real en `<article>`/`<section>` | ✅ | Real, personal y bien escrita, dividida en dos `<section>` ("Sobre mí" y "Mi interés por el Desarrollo Web"), con mención explícita a la Tecnicatura en Desarrollo Web. |
+| Tarea 2 — `acercade.html`: `<figure>`/`<figcaption>`/`alt` | ✅ | `img/pic.jpeg`, ruta relativa correcta, `alt` personalizado y específico. `<figcaption>` es solo el nombre, podría ser más descriptivo pero no es genérico. |
+| Tarea 2 — `acercade.html`: lista de tecnologías | ✅ | `<ul>` con 3 tecnologías, en su propia `<section>`. |
+| Tarea 3 — `styles.css` presente y vinculado en ambas páginas | ✅ | En la raíz, con la regla básica de `body` (font-family y background-color), vinculado correctamente en ambos `<head>`. |
+| Tarea 3 — Commit con mensaje exacto | ✅ | `TP2: Estructuras HTML y vinculacion de estilos` — coincide letra por letra e incluye `acercade.html`, `index.html`, `styles.css` e `img/pic.jpeg`. |
+| Estructura de archivos correcta | ⚠️ | El árbol coincide (con un `.DS_Store` y una carpeta `capturas/` residuales, sin afectar la evaluación), pero el trabajo no está mergeado a `main`. |
+| GitHub Pages desplegado y respondiendo 200 | ✅ | `index.html`, `acercade.html`, `styles.css` e `img/pic.jpeg` responden 200 en producción. |
+| Reflexión — 3 preguntas respondidas | ✅ | Las tres respuestas coinciden con el repo real (nombre de imagen y `alt` exactos) y están bien justificadas, incluyendo mención a accesibilidad, SEO y legibilidad del código en la pregunta 2. |
+
+## Observaciones puntuales
+
+- Único señalamiento real: el trabajo vive en la rama `laboratorio-2`, no en `main`.
+- Quedan un `.DS_Store` y la carpeta `capturas/` (residual del Lab 1) en la raíz; no forman parte de lo pedido pero no rompen nada.
+- Resto de la entrega resuelto de forma completa y prolija, sin errores de markup ni desvíos de la consigna.
+
+## Nota final
+
+| Ítem | Pts posibles | Pts obtenidos |
+|---|---|---|
+| README / carátula | 5 | 5 |
+| Personalización (token + `<h1>`) | 10 | 10 |
+| Tarea 1 — `index.html` | 25 | 25 |
+| Tarea 2 — `acercade.html` | 30 | 30 |
+| Tarea 3 — `styles.css` y commit | 10 | 10 |
+| Estructura de archivos | 5 | 3.5 |
+| GitHub Pages | 5 | 5 |
+| Reflexión | 10 | 10 |
+| **TOTAL** | **100** | **98.5** |
+
+---
+
+# Devolución Lab 2 — Carla Tirado Moreira
+
+## Datos identificatorios
+
+- **Nombre:** Carla Tirado Moreira
+- **Legajo:** CURZA-10319
+- **Token:** tiradomoreira-5676-19
+- **Repositorio:** https://github.com/carlatmoreira98/peylw-2026-practicos-tiradomoreira-5676-19
+- **GitHub Pages:** https://carlatmoreira98.github.io/peylw-2026-practicos-tiradomoreira-5676-19/
+
+## ⚠️ Entrega tardía
+
+El cierre del laboratorio fue el 07/09/2026 23:55. El commit con el mensaje exacto del
+TP2 (`TP2: Estructuras HTML y vinculacion de estilos`) es del **13/09/2026 15:36**, y hay
+dos commits posteriores el mismo día. La entrega es real y completa, pero llegó casi seis
+días después del cierre. Se deja constancia; la penalización por atraso queda a criterio
+general del curso (no definida en `AGENTS-Lab02.md`).
+
+## Checklist por ítem
+
+| Ítem | Estado | Observación |
+|---|---|---|
+| README / carátula completa | ✅ | Los seis campos requeridos están completos y correctos. |
+| Personalización — Token en comentario (ambos archivos) | ✅ | `<!-- TOKEN-ALUMNO: tiradomoreira-5676-19 -->` exacto e idéntico en ambos archivos. |
+| Personalización — `<h1>` exacto (ambos archivos) | ✅ | `Portal de Carla Tirado Moreira - tiradomoreira-5676-19` idéntico en ambas páginas. |
+| Tarea 1 — `index.html`: plantilla HTML5 + head | ✅ | `lang="es"`, charset UTF-8 correctos. `<title>` descriptivo ("Portal de Carla Tirado Moreira"). |
+| Tarea 1 — `index.html`: `<header>` | ✅ | Correcto. |
+| Tarea 1 — `index.html`: `<nav>` con enlaces relativos | ✅ | `<ul>` con "Inicio" y "Acerca de", rutas relativas exactas. |
+| Tarea 1 — `index.html`: `<main>` bienvenida | ✅ | `<h2>Bienvenidos a mi espacio</h2>` exacto, dos párrafos reales que explican el sitio. |
+| Tarea 1 — `index.html`: `<footer>` | ✅ | Copyright, dirección del nodo exacta y token en texto simple. |
+| Tarea 2 — `acercade.html`: header/nav/footer consistentes | ✅ | Idénticos a `index.html`. |
+| Tarea 2 — `acercade.html`: biografía real en `<article>`/`<section>` | ✅ | Real y personal, dividida en dos `<section>` ("Sobre mí" y "Mi interés por el desarrollo web"), menciona explícitamente la Tecnicatura en Desarrollo Web. |
+| Tarea 2 — `acercade.html`: `<figure>`/`<figcaption>`/`alt` | ✅ | Ruta relativa `img/diseno_web_ux.png` válida, `alt` descriptivo y específico, `figcaption` coherente. |
+| Tarea 2 — `acercade.html`: lista de tecnologías | ⚠️ | `<ul>` presente y bien ubicado en su propia `<section>`, pero solo tiene 2 ítems (HTML5, CSS); es escueta comparada con el resto de la entrega. |
+| Tarea 3 — `styles.css` presente y vinculado en ambas páginas | ✅ | En la raíz, con `font-family` y `background-color` en `body`, vinculado correctamente en ambos `<head>`. |
+| Tarea 3 — Commit con mensaje exacto | ✅ | `TP2: Estructuras HTML y vinculacion de estilos` — coincide letra por letra e incluye `index.html`, `acercade.html`, `styles.css` e imagen. |
+| Estructura de archivos correcta | ✅ | Coincide con el árbol pedido; `capturas/` es residuo del Lab 1, no penalizado. |
+| GitHub Pages desplegado y respondiendo 200 | ✅ | `index.html`, `acercade.html`, `styles.css` e imagen responden 200 en producción; navegación funciona en ambos sentidos. |
+| Reflexión — 3 preguntas respondidas | ✅ | Las tres respuestas son correctas, coinciden con el repo real y están bien justificadas (pregunta 3 describe una verificación concreta en local y en Pages). |
+
+## Observaciones puntuales
+
+- **Entrega tardía (ver arriba):** commit de TP2 seis días después del cierre.
+- La lista de tecnologías de interés en `acercade.html` tiene solo 2 elementos; podría ser más completa.
+- Todo lo demás (estructura semántica, personalización, CSS, commit, Pages, reflexión) está resuelto correctamente y sin errores técnicos.
+
+## Nota final
+
+| Ítem | Pts posibles | Pts obtenidos |
+|---|---|---|
+| README / carátula | 5 | 5 |
+| Personalización (token + `<h1>`) | 10 | 10 |
+| Tarea 1 — `index.html` | 25 | 25 |
+| Tarea 2 — `acercade.html` | 30 | 28 |
+| Tarea 3 — `styles.css` y commit | 10 | 10 |
+| Estructura de archivos | 5 | 5 |
+| GitHub Pages | 5 | 5 |
+| Reflexión | 10 | 10 |
+| **TOTAL** | **100** | **98** *(entrega tardía, ver nota arriba — penalización a criterio del docente)* |
+
+---
+
+# Devolución Lab 2 — Matías Cambarieri Gentile
+
+## Datos identificatorios
+
+- **Nombre:** Matías Cambarieri Gentile
+- **Legajo:** CURZA-10178
+- **Token:** cambarieri-8763-78
+- **Repositorio:** https://github.com/zaitamu/peylw-2026-practicos-cambarieri-8763-78 (rama por defecto `Laboratorio-2`)
+- **GitHub Pages:** https://zaitamu.github.io/peylw-2026-practicos-cambarieri-8763-78/
+
+## Checklist por ítem
+
+| Ítem | Estado | Observación |
+|---|---|---|
+| README / carátula completa | ✅ | Los seis campos requeridos están completos y correctos. |
+| Personalización — Token en comentario (ambos archivos) | ⚠️ | `index.html`: `<!--TOKEN ALUMNO: cambarieri-8763-78-->` (sin guion entre "TOKEN" y "ALUMNO", formato distinto al pedido). `acercade.html`: `<!--TOKEN-ALUMNO: cambarieri-8763-78-->` correcto. No son idénticos entre ambos archivos. |
+| Personalización — `<h1>` exacto (ambos archivos) | ✅ | `Portal de Matías Cambarieri Gentile - cambarieri-8763-78` idéntico en ambas páginas. |
+| Tarea 1 — `index.html`: plantilla HTML5 + head | ❌ | Bug grave de markup: `<html lang="es"></html>` se cierra en la línea 2, dejando todo el `<head>` y el `<body>` fuera de las etiquetas `<html>`. Además el `<meta viewport>` tiene el atributo mal escrito: `width=device width` (falta el guion, debería ser `device-width`). |
+| Tarea 1 — `index.html`: `<header>` | ✅ | `<h1>` correcto. |
+| Tarea 1 — `index.html`: `<nav>` con enlaces relativos | ✅ | `<ul>` con "Inicio" y "Acerca de", rutas relativas correctas. |
+| Tarea 1 — `index.html`: `<main>` bienvenida | ⚠️ | `<h2>` dice "¡Bienvenidos a mi Espacio!" (con signos de exclamación y "Espacio" en mayúscula) en vez del texto exacto "Bienvenidos a mi espacio". Dos párrafos reales y explicativos del sitio. |
+| Tarea 1 — `index.html`: `<footer>` | ⚠️ | El copyright dice "© 2026 Zaitam Records S.A" en vez del nombre del alumno. Dirección "CURZAS- UNCo, Viedma, Río negro" (falta espacio antes del guion). Token presente en texto simple. |
+| Tarea 2 — `acercade.html`: header/nav/footer consistentes | ❌ | `<nav>`: el segundo enlace dice "Biografia" en `acercade.html` contra "Acerca de" en `index.html` — no es idéntico. `<footer>`: en `acercade.html` la dirección es "CURZAS, Viedma, Río negro", omitiendo "UNCo" que sí aparece en `index.html`. El `<h1>` sí es idéntico. |
+| Tarea 2 — `acercade.html`: biografía real en `<article>`/`<section>` | ✅ | Real y personal, dividida en dos `<section>`, menciona explícitamente el interés por la Tecnicatura en Desarrollo Web. |
+| Tarea 2 — `acercade.html`: `<figure>`/`<figcaption>`/`alt` | ⚠️ | Imagen en `img/foto_matias.jpg`, ruta relativa correcta, `<figcaption>` con contexto ("Foto en un rodaje."). El `alt="Foto de Matías"` es escueto, poco descriptivo de la imagen en sí. |
+| Tarea 2 — `acercade.html`: lista de tecnologías | ❌ | No existe ningún `<ul>` con lenguajes o tecnologías. Se mencionan "Python, Git y otras herramientas" dentro de un párrafo de prosa, no como lista, incumpliendo el ítem explícito del enunciado. |
+| Tarea 3 — `styles.css` presente y vinculado en ambas páginas | ✅ | En la raíz, con la regla básica de `body` (font-family y background-color), vinculado correctamente en ambos `<head>`. |
+| Tarea 3 — Commit con mensaje exacto | ✅ | `TP2: Estructuras HTML y vinculacion de estilos` — coincide letra por letra e incluye `acercade.html`, `index.html`, `styles.css` e `img/foto_matias.jpg`. |
+| Estructura de archivos correcta | ⚠️ | Coincide con lo pedido, pero queda una carpeta `capturas/` residual del Lab 1 (`config_git.png`) sin limpiar. |
+| GitHub Pages desplegado y respondiendo 200 | ✅ | `index.html`, `acercade.html`, `styles.css` e `img/foto_matias.jpg` responden 200 en producción. |
+| Reflexión — 3 preguntas respondidas | ✅ | Las tres respuestas son correctas, coinciden con el repo real (nombre de imagen y `alt` verificados) y están bien justificadas. |
+
+## Observaciones puntuales
+
+- **Bug de markup grave:** `<html lang="es"></html>` se cierra inmediatamente después de abrirse en `index.html` (línea 2) y en `acercade.html` (línea 2), dejando `<head>` y `<body>` completos fuera del elemento `<html>`. Los navegadores lo corrigen al renderizar, pero es HTML inválido en ambos archivos.
+- Falta por completo la lista `<ul>` de tecnologías/lenguajes en `acercade.html`, un ítem explícito del enunciado (5 pts).
+- El comentario de token no tiene el mismo formato en los dos archivos: `TOKEN ALUMNO` (sin guion) en `index.html` vs. `TOKEN-ALUMNO` (correcto) en `acercade.html`.
+- El `<nav>` y el `<footer>` de `acercade.html` no son idénticos a los de `index.html` (texto del enlace "Biografia" vs. "Acerca de"; dirección del nodo sin "UNCo").
+- El copyright del `<footer>` usa un nombre de fantasía ("Zaitam Records S.A") en vez del nombre del alumno.
+- El `<h2>` de bienvenida no coincide textualmente con "Bienvenidos a mi espacio" (agrega signos de exclamación y mayúscula).
+- Carpeta `capturas/` residual del Lab 1 sin eliminar.
+- Todo lo demás (CSS, commit, biografía, reflexión, GitHub Pages) está bien resuelto.
+
+## Nota final
+
+| Ítem | Pts posibles | Pts obtenidos |
+|---|---|---|
+| README / carátula | 5 | 5 |
+| Personalización (token + `<h1>`) | 10 | 7.5 |
+| Tarea 1 — `index.html` | 25 | 16 |
+| Tarea 2 — `acercade.html` | 30 | 18 |
+| Tarea 3 — `styles.css` y commit | 10 | 10 |
+| Estructura de archivos | 5 | 4 |
+| GitHub Pages | 5 | 5 |
+| Reflexión | 10 | 10 |
+| **TOTAL** | **100** | **75.5** |

@@ -51,5 +51,35 @@ https://github.com/officialsantos/peylw-2026-practicos-apelahnz-2743-10
 https://github.com/aletemp52-cmd/peylw-2026-practicos-hidalgo-4589-59
 
 https://aletemp52-cmd.github.io/peylw-2026-practicos-hidalgo-4589-59/
-
+/*******************************************************************************************************/
+https://javi-jav.github.io/peylw-2026-practicos-chavarria-7037-55/acercade.html
+https://github.com/javi-jav/peylw-2026-practicos-chavarria-7037-55?utm_source
+/*******************************************************************************************************/
+Enlace al repositorio: SaraBoisselier/peylw-2026-practicos-boisselier-8339-91
+GitHub Pages: https://saraboisselier.github.io/peylw-2026-practicos-boisselier-8339-91/
+/*******************************************************************************************************/
+https://isaiasreyesbjj16-ux.github.io/peylw-2026-practicos-reyes-6775-42/index.html
+https://github.com/isaiasreyesbjj16-ux/peylw-2026-practicos-reyes-6775-42
+/*******************************************************************************************************/
+https://ramireybas.github.io/peylw-2026-practicos-reynoso-4260-07/index.html
+https://github.com/Ramireybas/peylw-2026-practicos-reynoso-4260-07
+/*******************************************************************************************************/
+Enlace al Repositorio de GitHub:
+https://github.com/cRolandoJr/peylw-2026-practicos-cobis-5580-89
+Enlace a la Página en GitHub Pages:
+https://crolandojr.github.io/peylw-2026-practicos-cobis-5580-89/
+/*******************************************************************************************************/
+Enlace GitHub: https://github.com/Lucho-GD/TP2-Estructuras-HTML-y-vinculacion-de-estilos
+Enlace GitHub Pages: https://lucho-gd.github.io/TP2-Estructuras-HTML-y-vinculacion-de-estilos/
+/*******************************************************************************************************/
+Repositorio de GitHub (rama laboratorio-2):
+https://github.com/Camandulle/peylw-2026-practicos-camandulle-5746-93/tree/laboratorio-2
+Sitio publicado (GitHub Pages):
+https://camandulle.github.io/peylw-2026-practicos-camandulle-5746-93/
+/*******************************************************************************************************/
+Enlace al Repositorio de GitHub: https://github.com/carlatmoreira98/peylw-2026-practicos-tiradomoreira-5676-19
+Enlace a la Página en GitHub Pages: ( https://carlatmoreira98.github.io/peylw-2026-practicos-tiradomoreira-5676-19/ )
+/*******************************************************************************************************/
+Repositorio: https://github.com/zaitamu/peylw-2026-practicos-cambarieri-8763-78
+Página: https://zaitamu.github.io/peylw-2026-practicos-cambarieri-8763-78/
 /*******************************************************************************************************/
