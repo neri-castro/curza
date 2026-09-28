@@ -5,9 +5,9 @@ Laboratorio 4. Las reglas de fondo (tono, escala, penalizaciones) están en
 `AGENTS-Lab04.md` — leer ambos antes de empezar.
 
 Enunciado oficial: `Trabajo Práctico: CSS, Fuentes Web y Posicionamiento`.
-Apertura 21/09/2026 00:00, cierre 23/10/2026 23:00. **Formato avanzado**:
-la entrega es la URL de GitHub Pages ya finalizada (no carátula ni
-reflexión — ver nota en `AGENTS-Lab04.md`).
+Apertura 21/09/2026 00:00, cierre 10/10/2026 23:00. **Formato avanzado**:
+la entrega es la URL de GitHub Pages ya finalizada (sin carátula README,
+pero con `REFLEXION.md` — ver nota en `AGENTS-Lab04.md`).
 
 ## Estructura de carpetas esperada
 
@@ -37,6 +37,9 @@ de CSS de este TP.
 Releer la consigna del Laboratorio 4 antes de corregir cualquier entrega.
 Puntos clave a tener frescos:
 
+- Paleta de color exclusiva en HSL (sin colores puros sin modular) y
+  comentario en la cabecera de `styles.css` con los códigos HSL y el
+  identificador del alumno (punto 3.1, "Personalización por Alumno").
 - Formatear correctamente tabla y formulario de `contacto.html`.
 - Incluir al menos una fuente web.
 - Animar el título principal con el logo del CURZA a la derecha: giro
@@ -49,6 +52,11 @@ Puntos clave a tener frescos:
   alto.
 - Flecha hacia arriba dentro de un círculo, al final de cada página y
   alineada a la derecha, que vuelve al inicio al hacer clic.
+- Responsive: meta viewport en las tres páginas, flexbox/grid para nav y
+  formulario/tabla, y `@media (max-width: 768px)` que apila el menú y evita
+  que la tabla rompa el ancho del dispositivo.
+- `REFLEXION.md` con las 3 preguntas de la sección "Prevención de Copias"
+  respondidas.
 
 ---
 
@@ -115,6 +123,10 @@ Ejecutar sobre el clon (nunca modificar nada):
 
 ### 4.1 Revisión de `styles.css` (o CSS adicional)
 
+- Confirmar que la cabecera de `styles.css` tiene un comentario con los
+  códigos HSL elegidos y el identificador del alumno, y que el color
+  primario usado no es un color puro sin modular (`#ff0000`, `#0000ff`,
+  `hsl(0,100%,50%)`, etc.).
 - Confirmar la existencia de reglas de estilo para `table`, `th`, `td` y
   para los controles del formulario (`input`, `label`, `fieldset`, etc.)
   en `contacto.html`.
@@ -139,6 +151,11 @@ Ejecutar sobre el clon (nunca modificar nada):
   posicionado con `position: fixed`/`sticky` + `right`/`bottom`, y su
   mecanismo de scroll-to-top (`href="#top"` con ancla, `onclick`, JS
   `scrollTo`, o `scroll-behavior: smooth` en combinación con un ancla).
+- Buscar el uso de Flexbox o CSS Grid en la barra de navegación y/o en la
+  maquetación del formulario/tabla.
+- Buscar al menos una regla `@media (max-width: 768px)` (u otro breakpoint
+  equivalente) que apile verticalmente los enlaces del menú de navegación
+  y adapte la tabla para que no rompa el ancho del dispositivo.
 
 ### 4.2 Revisión de los tres archivos HTML
 
@@ -146,11 +163,22 @@ Ejecutar sobre el clon (nunca modificar nada):
   elemento) a la derecha del `<h1>` en el encabezado de cada página.
 - Confirmar que el botón/flecha de volver arriba está presente al final
   del `<body>` (o del `<main>`) en las tres páginas.
+- Confirmar la metaetiqueta `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
+  en el `<head>` de las tres páginas.
 - Confirmar que la estructura semántica de labs anteriores (`header`,
   `nav`, `main`, `footer`) sigue intacta; este TP es de estilos, no debería
   haber roto la semántica previa.
 
-### 4.3 Historial de commits (referencia, no obligatorio)
+### 4.3 Revisión de `REFLEXION.md`
+
+- Confirmar que el archivo existe en la raíz del repositorio.
+- Confirmar que responde las 3 preguntas de la sección "Reflexión Aplicada
+  (Prevención de Copias)" del enunciado.
+- Contrastar el fragmento de CSS citado en la primera respuesta contra el
+  `@keyframes`/`animation` real de `styles.css`: debe coincidir, no ser un
+  fragmento genérico o de otra fuente.
+
+### 4.4 Historial de commits (referencia, no obligatorio)
 
 ```bash
 git log --oneline --all --stat
@@ -183,6 +211,9 @@ Sobre el sitio ya desplegado (no alcanza con leer el código):
   vuelve efectivamente al inicio.
 - Revisar que la tabla y el formulario de `contacto.html` se vean
   formateados (no con el estilo por defecto del navegador).
+- Angostar el viewport (o usar el emulador de dispositivo) a menos de
+  768px y confirmar que el menú de navegación se apila verticalmente y que
+  la tabla de `contacto.html` no rompe el ancho de la pantalla.
 
 ---
 
@@ -204,6 +235,8 @@ formato:
 
 | Ítem | Estado | Observación |
 |---|---|---|
+| Personalización — paleta HSL sin colores puros | ✅ / ⚠️ / ❌ | ... |
+| Personalización — comentario en `styles.css` con HSL + identificador | ✅ / ⚠️ / ❌ | ... |
 | Tabla de `contacto.html` formateada | ✅ / ⚠️ / ❌ | ... |
 | Formulario de `contacto.html` formateado | ✅ / ⚠️ / ❌ | ... |
 | Fuente web importada y aplicada | ✅ / ⚠️ / ❌ | ... |
@@ -215,6 +248,10 @@ formato:
 | Botón volver arriba — presente en todas las páginas | ✅ / ⚠️ / ❌ | ... |
 | Botón volver arriba — estilo círculo + flecha, alineado a la derecha | ✅ / ⚠️ / ❌ | ... |
 | Botón volver arriba — funcional | ✅ / ⚠️ / ❌ | ... |
+| Responsive — meta viewport en las tres páginas | ✅ / ⚠️ / ❌ | ... |
+| Responsive — flexbox/grid en nav y/o formulario/tabla | ✅ / ⚠️ / ❌ | ... |
+| Responsive — `@media 768px` apila el menú y adapta la tabla | ✅ / ⚠️ / ❌ | ... |
+| `REFLEXION.md` presente y con las 3 preguntas respondidas | ✅ / ⚠️ / ❌ | ... |
 
 ## Observaciones puntuales
 
@@ -225,13 +262,16 @@ sección cuando corresponda.]
 
 | Ítem | Pts posibles | Pts obtenidos |
 |---|---|---|
-| Tabla `contacto.html` | 15 | ... |
-| Formulario `contacto.html` | 15 | ... |
-| Fuente web | 10 | ... |
-| Animación título + logo | 15 | ... |
-| Header fijo | 15 | ... |
-| "Acerca de" sticky + scroll | 15 | ... |
-| Botón volver arriba | 15 | ... |
+| Personalización (paleta HSL + comentario) | 5 | ... |
+| Tabla `contacto.html` | 12 | ... |
+| Formulario `contacto.html` | 12 | ... |
+| Fuente web | 8 | ... |
+| Animación título + logo | 12 | ... |
+| Header fijo | 12 | ... |
+| "Acerca de" sticky + scroll | 12 | ... |
+| Botón volver arriba | 12 | ... |
+| Responsive Web Design | 10 | ... |
+| `REFLEXION.md` | 5 | ... |
 | **TOTAL** | **100** | **...** |
 ```
 
