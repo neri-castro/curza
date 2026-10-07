@@ -83,3 +83,15 @@ Enlace a la Página en GitHub Pages: ( https://carlatmoreira98.github.io/peylw-2
 Repositorio: https://github.com/zaitamu/peylw-2026-practicos-cambarieri-8763-78
 Página: https://zaitamu.github.io/peylw-2026-practicos-cambarieri-8763-78/
 /*******************************************************************************************************/
+Información del Alumno
+●​●​●​●​●​●​●​Nombre y Apellido: Elizabeth Priscila Duarte Nuñez
+Legajo/Matrícula: CURZA-9986
+Últimos 4 dígitos del DNI: 6881
+Fecha de Entrega: 17/9/2026
+Enlace al Repositorio de GitHub:
+https://github.com/Elzzzzo-oss/peylw-2026-practicos-duarte-6881-34/settings
+Enlace a la Página en GitHub Pages:
+https://elzzzzo-oss.github.io/peylw-2026-practicos-duarte-6881-34/
+/*******************************************************************************************************/
+https://github.com/tati99-web/manquenao-2747-93
+https://tati99-web.github.io/manquenao-2747-93/
