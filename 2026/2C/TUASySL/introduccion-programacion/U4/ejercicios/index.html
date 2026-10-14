@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejercicios de Funciones en Python</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --border: #2d3250;
+    --accent: #7c6af7;
+    --accent2: #4ecdc4;
+    --accent3: #f7c26a;
+    --text: #e2e4f0;
+    --text-muted: #8890b0;
+    --green: #5af78e;
+    --red: #f97583;
+    --easy: #5af78e;
+    --medium: #f7c26a;
+    --hard: #f97583;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #1a1d27 0%, #16192a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+  }
+
+  header .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    background: rgba(124,106,247,0.12);
+    border: 1px solid rgba(124,106,247,0.3);
+    border-radius: 4px;
+    padding: 3px 10px;
+    margin-bottom: 1rem;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  header p {
+    color: var(--text-muted);
+    font-size: 14px;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .difficulty-bar {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .diff-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .diff-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  /* Page nav */
+  .page-nav {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 1.75rem;
+    flex-wrap: wrap;
+  }
+
+  .page-nav-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .page-nav-btn:hover { color: var(--text); border-color: var(--text-muted); }
+  .page-nav-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .page-section { display: none; }
+  .page-section.active { display: block; }
+
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* Practica section */
+  .practica-intro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .practica-intro h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .practica-intro p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .pautas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 1rem;
+  }
+
+  .pauta-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .pauta-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+  .practica-ex {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  .practica-ex-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .practica-ex-header:hover { background: rgba(255,255,255,0.02); }
+  .practica-ex-header.open { border-bottom-color: var(--border); }
+
+  .practica-ex-body {
+    display: none;
+    padding: 1.5rem;
+  }
+
+  .practica-ex-body.open { display: block; }
+
+  /* Progress bar */
+  .progress-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px;
+  }
+
+  .progress-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  /* Exercise card */
+  .exercise {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .exercise:hover {
+    border-color: rgba(124,106,247,0.4);
+  }
+
+  .ex-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .ex-header:hover {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .ex-header.open {
+    border-bottom-color: var(--border);
+  }
+
+  .ex-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .ex-meta {
+    flex: 1;
+  }
+
+  .ex-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .diff-tag {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+
+  .ex-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .ex-toggle {
+    font-size: 18px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: transform 0.25s;
+    margin-top: 3px;
+  }
+
+  .ex-toggle.open { transform: rotate(180deg); }
+
+  .ex-body {
+    display: none;
+    padding: 1.5rem;
+  }
+
+  .ex-body.open { display: block; }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+
+  .tab-btn {
+    padding: 7px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s, border-color 0.15s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Polya sections */
+  .polya {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .polya-phase {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .phase-title {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .phase-num {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .phase-content {
+    padding: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .phase-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 6px;
+    font-size: 12px;
+  }
+
+  .phase-content th {
+    text-align: left;
+    color: var(--text-muted);
+    font-weight: 600;
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+  }
+
+  .phase-content td {
+    padding: 4px 8px;
+    color: var(--text);
+    border-bottom: 1px solid rgba(45,50,80,0.5);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .phase-content tr:last-child td { border-bottom: none; }
+
+  .kv {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3px 12px;
+  }
+
+  .kv-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+    white-space: nowrap;
+  }
+
+  .kv-val {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  /* Code blocks */
+  .code-block {
+    background: #0d0f18;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .code-lang {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .copy-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .copy-btn:hover { color: var(--text); border-color: var(--text-muted); }
+  .copy-btn.copied { color: var(--green); border-color: var(--green); }
+
+  pre {
+    padding: 1.25rem;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #cdd6f4;
+  }
+
+  /* Syntax highlighting */
+  .kw { color: #cba6f7; }
+  .fn { color: #89b4fa; }
+  .str { color: #a6e3a1; }
+  .num { color: #fab387; }
+  .cm { color: #6c7086; font-style: italic; }
+  .cn { color: #f38ba8; }
+  .op { color: #89dceb; }
+  .bi { color: #f9e2af; }
+
+  /* Traza table */
+  .traza-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 0.5rem;
+  }
+
+  .traza-table th {
+    background: var(--surface2);
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .traza-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(45,50,80,0.5);
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  .traza-table tr:last-child td { border-bottom: none; }
+
+  .result-true { color: var(--green); }
+  .result-false { color: var(--red); }
+  .result-str { color: var(--accent3); }
+  .result-num { color: #fab387; }
+
+  /* Enunciado */
+  .enunciado {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .concept-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0.75rem;
+  }
+
+  .pill {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: rgba(124,106,247,0.1);
+    border: 1px solid rgba(124,106,247,0.25);
+    color: var(--accent);
+  }
+
+  .separator {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin: 1.25rem 0 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .separator::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.4rem; }
+    pre { font-size: 11.5px; }
+    .ex-header { padding: 1rem; }
+    .ex-body { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">CURZAS · Python · Funciones</div>
+  <h1>Funciones en Python</h1>
+  <p>6 ejercicios progresivos con Método de Polya y solución completa</p>
+  <div class="difficulty-bar">
+    <div class="diff-badge"><span class="diff-dot" style="background:#5af78e"></span> Básico (1–2)</div>
+    <div class="diff-badge"><span class="diff-dot" style="background:#f7c26a"></span> Intermedio (3–4)</div>
+    <div class="diff-badge"><span class="diff-dot" style="background:#f97583"></span> Avanzado (5–6)</div>
+  </div>
+  <div class="page-nav">
+    <button class="page-nav-btn active" onclick="switchPage('alternativos')">🧪 Ejercicios Alternativos</button>
+    <button class="page-nav-btn" onclick="switchPage('practica')">📄 Práctico de Clase</button>
+  </div>
+</header>
+
+<div class="page-section active" id="section-alternativos">
+<div class="main">
+
+  <div class="progress-header">
+    <span class="progress-label">PROGRESIÓN</span>
+    <div class="progress-track">
+      <div class="progress-fill" style="width:100%"></div>
+    </div>
+    <span class="progress-label">6 ejercicios</span>
+  </div>
+
+  <!-- ===== EJERCICIO 1 ===== -->
+  <div class="exercise" id="ex1">
+    <div class="ex-header" onclick="toggle(1)">
+      <div class="ex-num" style="background:rgba(90,247,142,0.15);color:#5af78e;">01</div>
+      <div class="ex-meta">
+        <div class="ex-title">
+          Saludo Personalizado
+          <span class="diff-tag" style="background:rgba(90,247,142,0.12);color:#5af78e;">BÁSICO</span>
+        </div>
+        <div class="ex-subtitle">Función con parámetro str · return · print</div>
+      </div>
+      <div class="ex-toggle" id="toggle1">▾</div>
+    </div>
+    <div class="ex-body" id="body1">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(1,'enunciado')">📋 Enunciado</button>
+        <button class="tab-btn" onclick="switchTab(1,'polya')">🔍 Análisis (Polya)</button>
+        <button class="tab-btn" onclick="switchTab(1,'codigo')">💻 Solución</button>
+        <button class="tab-btn" onclick="switchTab(1,'traza')">🧪 Traza</button>
+      </div>
+
+      <div class="tab-panel active" id="tab1-enunciado">
+        <div class="enunciado">
+          Una aplicación de gestión escolar necesita mostrar un mensaje de bienvenida a cada usuario que inicia sesión. El sistema corre en Ubuntu Server 22.04, tiene 16 GB de RAM y atiende 200 usuarios concurrentes.<br><br>
+          Diseñar la función <strong>saludar_usuario(nombre_usuario)</strong> que reciba el nombre del usuario (str) y retorne el mensaje <code>"Bienvenido/a, {nombre}!"</code>.<br><br>
+          En el programa principal, solicitar el nombre por teclado e imprimir el resultado de la función.
+        </div>
+        <div class="concept-pills">
+          <span class="pill">def</span>
+          <span class="pill">parámetro str</span>
+          <span class="pill">return</span>
+          <span class="pill">f-string</span>
+          <span class="pill">input()</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab1-polya">
+        <div class="polya">
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">1</div> COMPRENDER EL PROBLEMA</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Objetivo:</span><span class="kv-val">Generar un saludo personalizado con el nombre del usuario.</span>
+                <span class="kv-key">Entrada:</span><span class="kv-val">nombre_usuario : str</span>
+                <span class="kv-key">Ruido:</span><span class="kv-val">Ubuntu Server, 16 GB RAM, 200 usuarios concurrentes → irrelevante.</span>
+                <span class="kv-key">Constantes:</span><span class="kv-val">ninguna</span>
+                <span class="kv-key">Retorno:</span><span class="kv-val">str — "Bienvenido/a, {nombre}!"</span>
+              </div>
+            </div>
+          </div>
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">2</div> CONCEBIR UN PLAN</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Firma:</span><span class="kv-val">def saludar_usuario(nombre_usuario):</span>
+                <span class="kv-key">Estrategia:</span><span class="kv-val">Construir el mensaje con f-string y retornarlo. Sin condicionales.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab1-codigo">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">python</span>
+            <button class="copy-btn" onclick="copyCode(this)">copiar</button>
+          </div>
+          <pre id="code1"><span class="cm"># ============================================================
+# PROBLEMA 1: Saludo Personalizado
+# ============================================================</span>
+
+<span class="kw">def</span> <span class="fn">saludar_usuario</span>(nombre_usuario):
+    <span class="cm">"""Retorna un saludo personalizado para el usuario."""</span>
+    <span class="cm"># nombre_usuario : str</span>
+    mensaje: <span class="bi">str</span> = <span class="str">f"Bienvenido/a, {nombre_usuario}!"</span>
+    <span class="kw">return</span> mensaje
+
+
+<span class="cm"># --- Programa Principal ---</span>
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    nombre: <span class="bi">str</span> = <span class="bi">input</span>(<span class="str">"Ingrese su nombre: "</span>)
+    resultado: <span class="bi">str</span> = <span class="fn">saludar_usuario</span>(nombre)
+    <span class="bi">print</span>(resultado)</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab1-traza">
+        <table class="traza-table">
+          <tr><th>Caso</th><th>Entrada</th><th>Expresión evaluada</th><th>Retorno</th></tr>
+          <tr><td>1</td><td>nombre_usuario = "Ana"</td><td>f"Bienvenido/a, Ana!"</td><td class="result-str">"Bienvenido/a, Ana!"</td></tr>
+          <tr><td>2</td><td>nombre_usuario = "Carlos"</td><td>f"Bienvenido/a, Carlos!"</td><td class="result-str">"Bienvenido/a, Carlos!"</td></tr>
+          <tr><td>3</td><td>nombre_usuario = ""</td><td>f"Bienvenido/a, !"</td><td class="result-str">"Bienvenido/a, !"</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EJERCICIO 2 ===== -->
+  <div class="exercise" id="ex2">
+    <div class="ex-header" onclick="toggle(2)">
+      <div class="ex-num" style="background:rgba(90,247,142,0.15);color:#5af78e;">02</div>
+      <div class="ex-meta">
+        <div class="ex-title">
+          Conversor de Temperatura
+          <span class="diff-tag" style="background:rgba(90,247,142,0.12);color:#5af78e;">BÁSICO</span>
+        </div>
+        <div class="ex-subtitle">Función con parámetro float · cálculo aritmético · return float</div>
+      </div>
+      <div class="ex-toggle" id="toggle2">▾</div>
+    </div>
+    <div class="ex-body" id="body2">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(2,'enunciado')">📋 Enunciado</button>
+        <button class="tab-btn" onclick="switchTab(2,'polya')">🔍 Análisis (Polya)</button>
+        <button class="tab-btn" onclick="switchTab(2,'codigo')">💻 Solución</button>
+        <button class="tab-btn" onclick="switchTab(2,'traza')">🧪 Traza</button>
+      </div>
+
+      <div class="tab-panel active" id="tab2-enunciado">
+        <div class="enunciado">
+          El equipo técnico del CURZAS necesita convertir temperaturas de sensores IoT que llegan en grados Fahrenheit a Celsius para comparar con los umbrales internos de los servidores. Los sensores son marca Siemens, tienen un cable de 2 metros y un margen de error de ±0.1°F.<br><br>
+          Diseñar la función <strong>fahrenheit_a_celsius(temp_fahrenheit)</strong> que reciba una temperatura en Fahrenheit (float) y la convierta a Celsius usando la fórmula <code>(F - 32) × 5 / 9</code>. Retornar el resultado como float.<br><br>
+          En el programa principal, solicitar la temperatura y mostrar el resultado con 2 decimales.
+        </div>
+        <div class="concept-pills">
+          <span class="pill">def</span>
+          <span class="pill">parámetro float</span>
+          <span class="pill">constante</span>
+          <span class="pill">return float</span>
+          <span class="pill">round()</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab2-polya">
+        <div class="polya">
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">1</div> COMPRENDER EL PROBLEMA</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Objetivo:</span><span class="kv-val">Convertir Fahrenheit → Celsius.</span>
+                <span class="kv-key">Entrada:</span><span class="kv-val">temp_fahrenheit : float</span>
+                <span class="kv-key">Ruido:</span><span class="kv-val">Marca Siemens, cable 2m, margen ±0.1°F → irrelevante.</span>
+                <span class="kv-key">Constantes:</span><span class="kv-val">FACTOR = 5/9 · OFFSET = 32</span>
+                <span class="kv-key">Retorno:</span><span class="kv-val">float — temperatura en Celsius</span>
+              </div>
+            </div>
+          </div>
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">2</div> CONCEBIR UN PLAN</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Firma:</span><span class="kv-val">def fahrenheit_a_celsius(temp_fahrenheit):</span>
+                <span class="kv-key">Estrategia:</span><span class="kv-val">Aplicar fórmula: (temp_fahrenheit - OFFSET) * FACTOR. Sin condicionales.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab2-codigo">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">python</span>
+            <button class="copy-btn" onclick="copyCode(this)">copiar</button>
+          </div>
+          <pre id="code2"><span class="cm"># ============================================================
+# PROBLEMA 2: Conversor de Temperatura F → C
+# ============================================================</span>
+
+<span class="cn">OFFSET</span> = <span class="num">32</span>
+<span class="cn">FACTOR</span> = <span class="num">5</span> / <span class="num">9</span>
+
+
+<span class="kw">def</span> <span class="fn">fahrenheit_a_celsius</span>(temp_fahrenheit):
+    <span class="cm">"""Convierte una temperatura de Fahrenheit a Celsius."""</span>
+    <span class="cm"># temp_fahrenheit : float</span>
+    temp_celsius: <span class="bi">float</span> = (temp_fahrenheit - <span class="cn">OFFSET</span>) * <span class="cn">FACTOR</span>
+    <span class="kw">return</span> temp_celsius
+
+
+<span class="cm"># --- Programa Principal ---</span>
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    temp_f: <span class="bi">float</span> = <span class="bi">float</span>(<span class="bi">input</span>(<span class="str">"Ingrese temperatura en Fahrenheit: "</span>))
+    temp_c: <span class="bi">float</span> = <span class="fn">fahrenheit_a_celsius</span>(temp_f)
+    <span class="bi">print</span>(<span class="str">f"Resultado: {round(temp_c, 2)} °C"</span>)</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab2-traza">
+        <table class="traza-table">
+          <tr><th>Caso</th><th>Entrada (F)</th><th>Expresión evaluada</th><th>Retorno (C)</th></tr>
+          <tr><td>1</td><td>212.0</td><td>(212 - 32) × 5/9 = 180 × 0.555…</td><td class="result-num">100.0</td></tr>
+          <tr><td>2</td><td>32.0</td><td>(32 - 32) × 5/9 = 0 × 0.555…</td><td class="result-num">0.0</td></tr>
+          <tr><td>3</td><td>98.6</td><td>(98.6 - 32) × 5/9 = 66.6 × 0.555…</td><td class="result-num">37.0</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EJERCICIO 3 ===== -->
+  <div class="exercise" id="ex3">
+    <div class="ex-header" onclick="toggle(3)">
+      <div class="ex-num" style="background:rgba(247,194,106,0.15);color:#f7c26a;">03</div>
+      <div class="ex-meta">
+        <div class="ex-title">
+          Clasificador de Velocidad de Red
+          <span class="diff-tag" style="background:rgba(247,194,106,0.12);color:#f7c26a;">INTERMEDIO</span>
+        </div>
+        <div class="ex-subtitle">if-elif-else · constantes · return str</div>
+      </div>
+      <div class="ex-toggle" id="toggle3">▾</div>
+    </div>
+    <div class="ex-body" id="body3">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(3,'enunciado')">📋 Enunciado</button>
+        <button class="tab-btn" onclick="switchTab(3,'polya')">🔍 Análisis (Polya)</button>
+        <button class="tab-btn" onclick="switchTab(3,'codigo')">💻 Solución</button>
+        <button class="tab-btn" onclick="switchTab(3,'traza')">🧪 Traza</button>
+      </div>
+
+      <div class="tab-panel active" id="tab3-enunciado">
+        <div class="enunciado">
+          El área de infraestructura del CURZAS realiza pruebas de velocidad de red periódicas en todos los laboratorios. Los switches son de marca Cisco y los cables son categoría 6A con conectores RJ45. El edificio tiene 3 pisos y 12 aulas con acceso a internet.<br><br>
+          Diseñar la función <strong>clasificar_velocidad_red(velocidad_mbps)</strong> que reciba la velocidad medida en Mbps (float) y retorne una cadena con la clasificación:<br>
+          • <code>VELOCIDAD_BAJA = 10.0</code> → si la velocidad es menor: retorna <code>"Lenta"</code><br>
+          • <code>VELOCIDAD_MEDIA = 100.0</code> → si está entre BAJA y MEDIA: retorna <code>"Normal"</code><br>
+          • Si es mayor o igual a MEDIA: retorna <code>"Rápida"</code><br><br>
+          En el programa principal, ingresar la velocidad y mostrar la clasificación obtenida.
+        </div>
+        <div class="concept-pills">
+          <span class="pill">if-elif-else</span>
+          <span class="pill">constantes float</span>
+          <span class="pill">return str</span>
+          <span class="pill">rangos numéricos</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab3-polya">
+        <div class="polya">
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">1</div> COMPRENDER EL PROBLEMA</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Objetivo:</span><span class="kv-val">Clasificar velocidad de red en 3 categorías.</span>
+                <span class="kv-key">Entrada:</span><span class="kv-val">velocidad_mbps : float</span>
+                <span class="kv-key">Ruido:</span><span class="kv-val">Cisco, cat 6A, RJ45, 3 pisos, 12 aulas → irrelevante.</span>
+                <span class="kv-key">Constante 1:</span><span class="kv-val">VELOCIDAD_BAJA = 10.0 (float)</span>
+                <span class="kv-key">Constante 2:</span><span class="kv-val">VELOCIDAD_MEDIA = 100.0 (float)</span>
+                <span class="kv-key">Retorno:</span><span class="kv-val">str — "Lenta" | "Normal" | "Rápida"</span>
+              </div>
+            </div>
+          </div>
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">2</div> CONCEBIR UN PLAN</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Firma:</span><span class="kv-val">def clasificar_velocidad_red(velocidad_mbps):</span>
+                <span class="kv-key">Cond. 1:</span><span class="kv-val">velocidad_mbps &lt; VELOCIDAD_BAJA → "Lenta"</span>
+                <span class="kv-key">Cond. 2:</span><span class="kv-val">velocidad_mbps &lt; VELOCIDAD_MEDIA → "Normal"</span>
+                <span class="kv-key">Cond. 3:</span><span class="kv-val">else → "Rápida"</span>
+                <span class="kv-key">Estructura:</span><span class="kv-val">if-elif-else</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab3-codigo">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">python</span>
+            <button class="copy-btn" onclick="copyCode(this)">copiar</button>
+          </div>
+          <pre id="code3"><span class="cm"># ============================================================
+# PROBLEMA 3: Clasificador de Velocidad de Red
+# ============================================================</span>
+
+<span class="cn">VELOCIDAD_BAJA</span> = <span class="num">10.0</span>
+<span class="cn">VELOCIDAD_MEDIA</span> = <span class="num">100.0</span>
+
+
+<span class="kw">def</span> <span class="fn">clasificar_velocidad_red</span>(velocidad_mbps):
+    <span class="cm">"""Clasifica la velocidad de red en Lenta, Normal o Rápida."""</span>
+    <span class="cm"># velocidad_mbps : float</span>
+    clasificacion: <span class="bi">str</span>
+
+    <span class="kw">if</span> velocidad_mbps <span class="op">&lt;</span> <span class="cn">VELOCIDAD_BAJA</span>:
+        clasificacion = <span class="str">"Lenta"</span>
+    <span class="kw">elif</span> velocidad_mbps <span class="op">&lt;</span> <span class="cn">VELOCIDAD_MEDIA</span>:
+        clasificacion = <span class="str">"Normal"</span>
+    <span class="kw">else</span>:
+        clasificacion = <span class="str">"Rápida"</span>
+
+    <span class="kw">return</span> clasificacion
+
+
+<span class="cm"># --- Programa Principal ---</span>
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    velocidad: <span class="bi">float</span> = <span class="bi">float</span>(<span class="bi">input</span>(<span class="str">"Ingrese velocidad medida (Mbps): "</span>))
+    resultado: <span class="bi">str</span> = <span class="fn">clasificar_velocidad_red</span>(velocidad)
+    <span class="bi">print</span>(<span class="str">f"Clasificación: {resultado}"</span>)</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab3-traza">
+        <table class="traza-table">
+          <tr><th>Caso</th><th>Entrada (Mbps)</th><th>Condición evaluada</th><th>Retorno</th></tr>
+          <tr><td>1</td><td>5.0</td><td>5.0 &lt; 10.0 → True</td><td class="result-str">"Lenta"</td></tr>
+          <tr><td>2</td><td>50.0</td><td>50.0 &lt; 10.0 → False · 50.0 &lt; 100.0 → True</td><td class="result-str">"Normal"</td></tr>
+          <tr><td>3</td><td>100.0</td><td>100.0 &lt; 10.0 → False · 100.0 &lt; 100.0 → False → else</td><td class="result-str">"Rápida"</td></tr>
+          <tr><td>4</td><td>9.9</td><td>9.9 &lt; 10.0 → True</td><td class="result-str">"Lenta"</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EJERCICIO 4 ===== -->
+  <div class="exercise" id="ex4">
+    <div class="ex-header" onclick="toggle(4)">
+      <div class="ex-num" style="background:rgba(247,194,106,0.15);color:#f7c26a;">04</div>
+      <div class="ex-meta">
+        <div class="ex-title">
+          Validador de Contraseña Segura
+          <span class="diff-tag" style="background:rgba(247,194,106,0.12);color:#f7c26a;">INTERMEDIO</span>
+        </div>
+        <div class="ex-subtitle">Función booleana · len() · operadores lógicos and/or</div>
+      </div>
+      <div class="ex-toggle" id="toggle4">▾</div>
+    </div>
+    <div class="ex-body" id="body4">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(4,'enunciado')">📋 Enunciado</button>
+        <button class="tab-btn" onclick="switchTab(4,'polya')">🔍 Análisis (Polya)</button>
+        <button class="tab-btn" onclick="switchTab(4,'codigo')">💻 Solución</button>
+        <button class="tab-btn" onclick="switchTab(4,'traza')">🧪 Traza</button>
+      </div>
+
+      <div class="tab-panel active" id="tab4-enunciado">
+        <div class="enunciado">
+          El sistema de gestión de usuarios del laboratorio de informática del CURZAS requiere validar contraseñas antes de registrarlas. El servidor de autenticación usa protocolo LDAP sobre TLS, está alojado en una Raspberry Pi 4 con Debian y tiene un uptime del 99.7%.<br><br>
+          Diseñar la función booleana <strong>es_contrasenia_segura(contrasenia)</strong> que reciba una contraseña (str) y retorne <code>True</code> si cumple <strong>todas</strong> estas condiciones:<br>
+          • Tiene al menos <code>LONGITUD_MINIMA = 8</code> caracteres.<br>
+          • Contiene al menos un dígito numérico.<br>
+          • Contiene al menos una letra mayúscula.<br>
+          De lo contrario, retorna <code>False</code>.<br><br>
+          En el programa principal, ingresar una contraseña y mostrar <code>"Contraseña aceptada"</code> o <code>"Contraseña rechazada"</code>.
+        </div>
+        <div class="concept-pills">
+          <span class="pill">función booleana</span>
+          <span class="pill">len()</span>
+          <span class="pill">any()</span>
+          <span class="pill">operador and</span>
+          <span class="pill">constante int</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab4-polya">
+        <div class="polya">
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">1</div> COMPRENDER EL PROBLEMA</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Objetivo:</span><span class="kv-val">Verificar si una contraseña cumple 3 criterios de seguridad.</span>
+                <span class="kv-key">Entrada:</span><span class="kv-val">contrasenia : str</span>
+                <span class="kv-key">Ruido:</span><span class="kv-val">LDAP, TLS, Raspberry Pi, Debian, uptime → irrelevante.</span>
+                <span class="kv-key">Constante:</span><span class="kv-val">LONGITUD_MINIMA = 8 (int)</span>
+                <span class="kv-key">Retorno:</span><span class="kv-val">bool — True si segura, False si no</span>
+              </div>
+            </div>
+          </div>
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">2</div> CONCEBIR UN PLAN</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Firma:</span><span class="kv-val">def es_contrasenia_segura(contrasenia):</span>
+                <span class="kv-key">Cond. 1:</span><span class="kv-val">len(contrasenia) &gt;= LONGITUD_MINIMA</span>
+                <span class="kv-key">Cond. 2:</span><span class="kv-val">any(c.isdigit() for c in contrasenia)</span>
+                <span class="kv-key">Cond. 3:</span><span class="kv-val">any(c.isupper() for c in contrasenia)</span>
+                <span class="kv-key">Estructura:</span><span class="kv-val">return cond1 and cond2 and cond3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab4-codigo">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">python</span>
+            <button class="copy-btn" onclick="copyCode(this)">copiar</button>
+          </div>
+          <pre id="code4"><span class="cm"># ============================================================
+# PROBLEMA 4: Validador de Contraseña Segura
+# ============================================================</span>
+
+<span class="cn">LONGITUD_MINIMA</span> = <span class="num">8</span>
+
+
+<span class="kw">def</span> <span class="fn">es_contrasenia_segura</span>(contrasenia):
+    <span class="cm">"""Retorna True si la contraseña cumple los criterios de seguridad."""</span>
+    <span class="cm"># contrasenia : str</span>
+    tiene_longitud: <span class="bi">bool</span> = <span class="bi">len</span>(contrasenia) <span class="op">&gt;=</span> <span class="cn">LONGITUD_MINIMA</span>
+    tiene_digito: <span class="bi">bool</span> = <span class="bi">any</span>(c.isdigit() <span class="kw">for</span> c <span class="kw">in</span> contrasenia)
+    tiene_mayuscula: <span class="bi">bool</span> = <span class="bi">any</span>(c.isupper() <span class="kw">for</span> c <span class="kw">in</span> contrasenia)
+
+    <span class="kw">return</span> tiene_longitud <span class="kw">and</span> tiene_digito <span class="kw">and</span> tiene_mayuscula
+
+
+<span class="cm"># --- Programa Principal ---</span>
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    clave: <span class="bi">str</span> = <span class="bi">input</span>(<span class="str">"Ingrese la contraseña: "</span>)
+    <span class="kw">if</span> <span class="fn">es_contrasenia_segura</span>(clave):
+        <span class="bi">print</span>(<span class="str">"Contraseña aceptada"</span>)
+    <span class="kw">else</span>:
+        <span class="bi">print</span>(<span class="str">"Contraseña rechazada"</span>)</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab4-traza">
+        <table class="traza-table">
+          <tr><th>Caso</th><th>Entrada</th><th>len≥8 | dígito | mayúsc.</th><th>Retorno</th></tr>
+          <tr><td>1</td><td>"Abc12345"</td><td>True | True | True</td><td class="result-true">True</td></tr>
+          <tr><td>2</td><td>"abc12345"</td><td>True | True | False</td><td class="result-false">False</td></tr>
+          <tr><td>3</td><td>"Abcdefgh"</td><td>True | False | True</td><td class="result-false">False</td></tr>
+          <tr><td>4</td><td>"Ab1"</td><td>False | True | True</td><td class="result-false">False</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EJERCICIO 5 ===== -->
+  <div class="exercise" id="ex5">
+    <div class="ex-header" onclick="toggle(5)">
+      <div class="ex-num" style="background:rgba(249,117,131,0.15);color:#f97583;">05</div>
+      <div class="ex-meta">
+        <div class="ex-title">
+          Calculadora de Costo de Backup
+          <span class="diff-tag" style="background:rgba(249,117,131,0.12);color:#f97583;">AVANZADO</span>
+        </div>
+        <div class="ex-subtitle">Dos funciones · validación + cálculo · interacción entre funciones</div>
+      </div>
+      <div class="ex-toggle" id="toggle5">▾</div>
+    </div>
+    <div class="ex-body" id="body5">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(5,'enunciado')">📋 Enunciado</button>
+        <button class="tab-btn" onclick="switchTab(5,'polya')">🔍 Análisis (Polya)</button>
+        <button class="tab-btn" onclick="switchTab(5,'codigo')">💻 Solución</button>
+        <button class="tab-btn" onclick="switchTab(5,'traza')">🧪 Traza</button>
+      </div>
+
+      <div class="tab-panel active" id="tab5-enunciado">
+        <div class="enunciado">
+          El proveedor de almacenamiento en nube del CURZAS cobra el servicio de backup según la frecuencia contratada. El data center está en Buenos Aires, funciona 24/7 y tiene certificación ISO 27001 con auditoría anual.<br><br>
+          Escribir un script con <strong>dos funciones</strong>:<br><br>
+          <strong>1. Función booleana de validación:</strong> <code>es_frecuencia_valida(frecuencia_dias)</code> que reciba un entero y retorne <code>True</code> si está entre 1 y 30 (inclusive), <code>False</code> en caso contrario.<br><br>
+          <strong>2. Función de cálculo:</strong> <code>calcular_costo_backup(frecuencia_dias, gigabytes)</code> que reciba la frecuencia en días (int) y el tamaño en GB (float). Usar las constantes:<br>
+          • <code>COSTO_POR_GB = 12.50</code><br>
+          • <code>DESCUENTO_DIARIO = 0.15</code> (15% si frecuencia es 1 día)<br>
+          • <code>DESCUENTO_SEMANAL = 0.08</code> (8% si frecuencia es ≤ 7 días)<br>
+          • Sin descuento para frecuencias mayores a 7 días.<br><br>
+          En el programa principal, validar primero la frecuencia. Si es válida, calcular y mostrar el costo. Si no, mostrar <code>"Error: frecuencia fuera de rango (1-30 días)"</code>.
+        </div>
+        <div class="concept-pills">
+          <span class="pill">dos funciones</span>
+          <span class="pill">función booleana</span>
+          <span class="pill">if-elif-else</span>
+          <span class="pill">interacción entre funciones</span>
+          <span class="pill">4 constantes</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab5-polya">
+        <div class="polya">
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">1</div> COMPRENDER EL PROBLEMA</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Objetivo:</span><span class="kv-val">Validar frecuencia y calcular costo de backup con descuentos por frecuencia.</span>
+                <span class="kv-key">Entrada 1:</span><span class="kv-val">frecuencia_dias : int</span>
+                <span class="kv-key">Entrada 2:</span><span class="kv-val">gigabytes : float</span>
+                <span class="kv-key">Ruido:</span><span class="kv-val">Buenos Aires, 24/7, ISO 27001 → irrelevante.</span>
+                <span class="kv-key">Constantes:</span><span class="kv-val">COSTO_POR_GB=12.50 · DESCUENTO_DIARIO=0.15 · DESCUENTO_SEMANAL=0.08</span>
+                <span class="kv-key">Retorno f1:</span><span class="kv-val">bool (validación)</span>
+                <span class="kv-key">Retorno f2:</span><span class="kv-val">float (costo final)</span>
+              </div>
+            </div>
+          </div>
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">2</div> CONCEBIR UN PLAN</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Firma 1:</span><span class="kv-val">def es_frecuencia_valida(frecuencia_dias):</span>
+                <span class="kv-key">Lógica 1:</span><span class="kv-val">return 1 &lt;= frecuencia_dias &lt;= 30</span>
+                <span class="kv-key">Firma 2:</span><span class="kv-val">def calcular_costo_backup(frecuencia_dias, gigabytes):</span>
+                <span class="kv-key">Cond. A:</span><span class="kv-val">frecuencia == 1 → descuento 15%</span>
+                <span class="kv-key">Cond. B:</span><span class="kv-val">frecuencia &lt;= 7 → descuento 8%</span>
+                <span class="kv-key">Cond. C:</span><span class="kv-val">else → sin descuento</span>
+                <span class="kv-key">Estructura:</span><span class="kv-val">if-elif-else</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab5-codigo">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">python</span>
+            <button class="copy-btn" onclick="copyCode(this)">copiar</button>
+          </div>
+          <pre id="code5"><span class="cm"># ============================================================
+# PROBLEMA 5: Calculadora de Costo de Backup
+# ============================================================</span>
+
+<span class="cn">COSTO_POR_GB</span> = <span class="num">12.50</span>
+<span class="cn">DESCUENTO_DIARIO</span> = <span class="num">0.15</span>
+<span class="cn">DESCUENTO_SEMANAL</span> = <span class="num">0.08</span>
+<span class="cn">FRECUENCIA_MAX</span> = <span class="num">30</span>
+
+
+<span class="kw">def</span> <span class="fn">es_frecuencia_valida</span>(frecuencia_dias):
+    <span class="cm">"""Retorna True si la frecuencia está entre 1 y 30 días inclusive."""</span>
+    <span class="cm"># frecuencia_dias : int</span>
+    <span class="kw">return</span> <span class="num">1</span> <span class="op">&lt;=</span> frecuencia_dias <span class="op">&lt;=</span> <span class="cn">FRECUENCIA_MAX</span>
+
+
+<span class="kw">def</span> <span class="fn">calcular_costo_backup</span>(frecuencia_dias, gigabytes):
+    <span class="cm">"""Calcula el costo mensual del backup según frecuencia y tamaño."""</span>
+    <span class="cm"># frecuencia_dias : int</span>
+    <span class="cm"># gigabytes       : float</span>
+    costo_base: <span class="bi">float</span> = gigabytes * <span class="cn">COSTO_POR_GB</span>
+    descuento: <span class="bi">float</span>
+    costo_final: <span class="bi">float</span>
+
+    <span class="kw">if</span> frecuencia_dias == <span class="num">1</span>:
+        descuento = <span class="cn">DESCUENTO_DIARIO</span>
+    <span class="kw">elif</span> frecuencia_dias <span class="op">&lt;=</span> <span class="num">7</span>:
+        descuento = <span class="cn">DESCUENTO_SEMANAL</span>
+    <span class="kw">else</span>:
+        descuento = <span class="num">0.0</span>
+
+    costo_final = costo_base * (<span class="num">1</span> - descuento)
+    <span class="kw">return</span> costo_final
+
+
+<span class="cm"># --- Programa Principal ---</span>
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    frecuencia: <span class="bi">int</span> = <span class="bi">int</span>(<span class="bi">input</span>(<span class="str">"Frecuencia de backup (días): "</span>))
+    <span class="kw">if</span> <span class="fn">es_frecuencia_valida</span>(frecuencia):
+        gigas: <span class="bi">float</span> = <span class="bi">float</span>(<span class="bi">input</span>(<span class="str">"Tamaño en GB: "</span>))
+        costo: <span class="bi">float</span> = <span class="fn">calcular_costo_backup</span>(frecuencia, gigas)
+        <span class="bi">print</span>(<span class="str">f"Costo mensual: ${costo:.2f}"</span>)
+    <span class="kw">else</span>:
+        <span class="bi">print</span>(<span class="str">"Error: frecuencia fuera de rango (1-30 días)"</span>)</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab5-traza">
+        <table class="traza-table">
+          <tr><th>Caso</th><th>freq / GB</th><th>Validación</th><th>Descuento</th><th>Costo</th></tr>
+          <tr><td>1</td><td>1 / 100</td><td class="result-true">True</td><td>15%</td><td class="result-num">$1062.50</td></tr>
+          <tr><td>2</td><td>7 / 100</td><td class="result-true">True</td><td>8%</td><td class="result-num">$1150.00</td></tr>
+          <tr><td>3</td><td>15 / 100</td><td class="result-true">True</td><td>0%</td><td class="result-num">$1250.00</td></tr>
+          <tr><td>4</td><td>31 / 100</td><td class="result-false">False</td><td>—</td><td>Error</td></tr>
+          <tr><td>5</td><td>0 / 50</td><td class="result-false">False</td><td>—</td><td>Error</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EJERCICIO 6 ===== -->
+  <div class="exercise" id="ex6">
+    <div class="ex-header" onclick="toggle(6)">
+      <div class="ex-num" style="background:rgba(249,117,131,0.15);color:#f97583;">06</div>
+      <div class="ex-meta">
+        <div class="ex-title">
+          Sistema de Diagnóstico de Servidor
+          <span class="diff-tag" style="background:rgba(249,117,131,0.12);color:#f97583;">AVANZADO</span>
+        </div>
+        <div class="ex-subtitle">3 funciones · validación + booleana + diagnóstico · conectores lógicos complejos</div>
+      </div>
+      <div class="ex-toggle" id="toggle6">▾</div>
+    </div>
+    <div class="ex-body" id="body6">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(6,'enunciado')">📋 Enunciado</button>
+        <button class="tab-btn" onclick="switchTab(6,'polya')">🔍 Análisis (Polya)</button>
+        <button class="tab-btn" onclick="switchTab(6,'codigo')">💻 Solución</button>
+        <button class="tab-btn" onclick="switchTab(6,'traza')">🧪 Traza</button>
+      </div>
+
+      <div class="tab-panel active" id="tab6-enunciado">
+        <div class="enunciado">
+          El área de sistemas del CURZAS monitorea tres métricas clave de sus servidores en tiempo real: temperatura de CPU (°C), uso de CPU (%) y uso de RAM (%). Los servidores están conectados por fibra de 10 Gbps y corren Proxmox VE 8.0 sobre hardware Dell PowerEdge R750 con procesadores Xeon Gold.<br><br>
+          Escribir un script modularizado con <strong>tres funciones</strong>:<br><br>
+          <strong>1. Función booleana:</strong> <code>es_temperatura_normal(temp_cpu)</code> — True si temp_cpu &lt; <code>TEMP_MAX_CPU = 80.0</code>.<br><br>
+          <strong>2. Función booleana:</strong> <code>es_carga_aceptable(uso_cpu, uso_ram)</code> — True si uso_cpu &lt; <code>USO_MAX_CPU = 90.0</code> <strong>y</strong> uso_ram &lt; <code>USO_MAX_RAM = 85.0</code>.<br><br>
+          <strong>3. Función de diagnóstico:</strong> <code>diagnosticar_servidor(temp_cpu, uso_cpu, uso_ram)</code> que llame a las dos anteriores y retorne:<br>
+          • <code>"CRÍTICO"</code>: si la temperatura NO es normal Y la carga NO es aceptable.<br>
+          • <code>"ALERTA"</code>: si solo uno de los dos falla.<br>
+          • <code>"ÓPTIMO"</code>: si ambos son normales/aceptables.<br><br>
+          En el programa principal, ingresar las 3 métricas y mostrar el diagnóstico del servidor.
+        </div>
+        <div class="concept-pills">
+          <span class="pill">3 funciones</span>
+          <span class="pill">composición de funciones</span>
+          <span class="pill">operadores and/or/not</span>
+          <span class="pill">5 constantes</span>
+          <span class="pill">if-elif-else</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab6-polya">
+        <div class="polya">
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">1</div> COMPRENDER EL PROBLEMA</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Objetivo:</span><span class="kv-val">Diagnosticar estado de un servidor según 3 métricas usando 3 funciones especializadas.</span>
+                <span class="kv-key">Entrada:</span><span class="kv-val">temp_cpu : float · uso_cpu : float · uso_ram : float</span>
+                <span class="kv-key">Ruido:</span><span class="kv-val">Fibra 10Gbps, Proxmox VE, Dell PowerEdge, Xeon Gold → irrelevante.</span>
+                <span class="kv-key">TEMP_MAX_CPU:</span><span class="kv-val">80.0 (float)</span>
+                <span class="kv-key">USO_MAX_CPU:</span><span class="kv-val">90.0 (float)</span>
+                <span class="kv-key">USO_MAX_RAM:</span><span class="kv-val">85.0 (float)</span>
+                <span class="kv-key">Retorno f3:</span><span class="kv-val">str — "CRÍTICO" | "ALERTA" | "ÓPTIMO"</span>
+              </div>
+            </div>
+          </div>
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">2</div> CONCEBIR UN PLAN</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">f1 firma:</span><span class="kv-val">def es_temperatura_normal(temp_cpu):</span>
+                <span class="kv-key">f1 lógica:</span><span class="kv-val">return temp_cpu &lt; TEMP_MAX_CPU</span>
+                <span class="kv-key">f2 firma:</span><span class="kv-val">def es_carga_aceptable(uso_cpu, uso_ram):</span>
+                <span class="kv-key">f2 lógica:</span><span class="kv-val">return uso_cpu &lt; USO_MAX_CPU and uso_ram &lt; USO_MAX_RAM</span>
+                <span class="kv-key">f3 firma:</span><span class="kv-val">def diagnosticar_servidor(temp_cpu, uso_cpu, uso_ram):</span>
+                <span class="kv-key">f3 lógica:</span><span class="kv-val">CRÍTICO: not temp_ok and not carga_ok · ALERTA: uno falla · ÓPTIMO: ambos ok</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab6-codigo">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">python</span>
+            <button class="copy-btn" onclick="copyCode(this)">copiar</button>
+          </div>
+          <pre id="code6"><span class="cm"># ============================================================
+# PROBLEMA 6: Sistema de Diagnóstico de Servidor
+# ============================================================</span>
+
+<span class="cn">TEMP_MAX_CPU</span> = <span class="num">80.0</span>
+<span class="cn">USO_MAX_CPU</span>  = <span class="num">90.0</span>
+<span class="cn">USO_MAX_RAM</span>  = <span class="num">85.0</span>
+
+
+<span class="kw">def</span> <span class="fn">es_temperatura_normal</span>(temp_cpu):
+    <span class="cm">"""Retorna True si la temperatura de CPU está dentro del rango seguro."""</span>
+    <span class="cm"># temp_cpu : float</span>
+    <span class="kw">return</span> temp_cpu <span class="op">&lt;</span> <span class="cn">TEMP_MAX_CPU</span>
+
+
+<span class="kw">def</span> <span class="fn">es_carga_aceptable</span>(uso_cpu, uso_ram):
+    <span class="cm">"""Retorna True si ambos usos de CPU y RAM están dentro del límite."""</span>
+    <span class="cm"># uso_cpu : float</span>
+    <span class="cm"># uso_ram : float</span>
+    <span class="kw">return</span> uso_cpu <span class="op">&lt;</span> <span class="cn">USO_MAX_CPU</span> <span class="kw">and</span> uso_ram <span class="op">&lt;</span> <span class="cn">USO_MAX_RAM</span>
+
+
+<span class="kw">def</span> <span class="fn">diagnosticar_servidor</span>(temp_cpu, uso_cpu, uso_ram):
+    <span class="cm">"""Retorna el diagnóstico del servidor: CRÍTICO, ALERTA u ÓPTIMO."""</span>
+    <span class="cm"># temp_cpu : float</span>
+    <span class="cm"># uso_cpu  : float</span>
+    <span class="cm"># uso_ram  : float</span>
+    temp_normal: <span class="bi">bool</span> = <span class="fn">es_temperatura_normal</span>(temp_cpu)
+    carga_ok: <span class="bi">bool</span>    = <span class="fn">es_carga_aceptable</span>(uso_cpu, uso_ram)
+    estado: <span class="bi">str</span>
+
+    <span class="kw">if not</span> temp_normal <span class="kw">and not</span> carga_ok:
+        estado = <span class="str">"CRÍTICO"</span>
+    <span class="kw">elif not</span> temp_normal <span class="kw">or not</span> carga_ok:
+        estado = <span class="str">"ALERTA"</span>
+    <span class="kw">else</span>:
+        estado = <span class="str">"ÓPTIMO"</span>
+
+    <span class="kw">return</span> estado
+
+
+<span class="cm"># --- Programa Principal ---</span>
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    temp: <span class="bi">float</span>    = <span class="bi">float</span>(<span class="bi">input</span>(<span class="str">"Temperatura CPU (°C): "</span>))
+    cpu: <span class="bi">float</span>     = <span class="bi">float</span>(<span class="bi">input</span>(<span class="str">"Uso de CPU (%): "</span>))
+    ram: <span class="bi">float</span>     = <span class="bi">float</span>(<span class="bi">input</span>(<span class="str">"Uso de RAM (%): "</span>))
+    diagnostico: <span class="bi">str</span> = <span class="fn">diagnosticar_servidor</span>(temp, cpu, ram)
+    <span class="bi">print</span>(<span class="str">f"Estado del servidor: {diagnostico}"</span>)</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab6-traza">
+        <table class="traza-table">
+          <tr><th>Caso</th><th>temp / cpu% / ram%</th><th>temp_normal</th><th>carga_ok</th><th>Diagnóstico</th></tr>
+          <tr><td>1</td><td>70 / 80 / 75</td><td class="result-true">True</td><td class="result-true">True</td><td class="result-str">"ÓPTIMO"</td></tr>
+          <tr><td>2</td><td>85 / 80 / 75</td><td class="result-false">False</td><td class="result-true">True</td><td class="result-str">"ALERTA"</td></tr>
+          <tr><td>3</td><td>70 / 95 / 75</td><td class="result-true">True</td><td class="result-false">False</td><td class="result-str">"ALERTA"</td></tr>
+          <tr><td>4</td><td>85 / 95 / 90</td><td class="result-false">False</td><td class="result-false">False</td><td class="result-str">"CRÍTICO"</td></tr>
+          <tr><td>5</td><td>79.9 / 89.9 / 84.9</td><td class="result-true">True</td><td class="result-true">True</td><td class="result-str">"ÓPTIMO"</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+</div><!-- /section-alternativos -->
+
+<!-- ===== SECCIÓN PRÁCTICO DE CLASE ===== -->
+<div class="page-section" id="section-practica">
+<div class="main">
+
+  <div class="practica-intro">
+    <h2>Trabajo Práctico Grupal de Clase — CURZAS</h2>
+    <p>Diseño de Funciones y Control de Selección · Universidad Nacional del Comahue · Tecnicatura en Administración de Sistemas y Software Libre</p>
+    <div class="pautas-grid">
+      <div class="pauta-item"><span class="pauta-icon">🐍</span><span>Variables y funciones en <strong>snake_case</strong></span></div>
+      <div class="pauta-item"><span class="pauta-icon">📢</span><span>Constantes en <strong>SCREAMING_SNAKE_CASE</strong></span></div>
+      <div class="pauta-item"><span class="pauta-icon">📝</span><span>Documentar tipos de variables locales al inicio</span></div>
+      <div class="pauta-item"><span class="pauta-icon">⬜</span><span>Indentación obligatoria de <strong>4 espacios</strong></span></div>
+      <div class="pauta-item"><span class="pauta-icon">🔍</span><span>Completar Ficha de Polya antes de codificar</span></div>
+    </div>
+  </div>
+
+  <!-- PROBLEMA 1 -->
+  <div class="practica-ex" id="pex1">
+    <div class="practica-ex-header" onclick="ptoggle(1)">
+      <div class="ex-num" style="background:rgba(90,247,142,0.15);color:#5af78e;">P1</div>
+      <div class="ex-meta">
+        <div class="ex-title">Sensor de Temperatura del Servidor "Limay" <span class="diff-tag" style="background:rgba(90,247,142,0.12);color:#5af78e;">FUNCIÓN BOOLEANA</span></div>
+        <div class="ex-subtitle">es_temperatura_critica(temperatura_actual) · constante · if-else</div>
+      </div>
+      <div class="ex-toggle" id="ptoggle1">▾</div>
+    </div>
+    <div class="practica-ex-body" id="pbody1">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchPTab(1,'enunciado')">📋 Enunciado</button>
+        <button class="tab-btn" onclick="switchPTab(1,'polya')">🔍 Análisis (Polya)</button>
+        <button class="tab-btn" onclick="switchPTab(1,'codigo')">💻 Solución</button>
+        <button class="tab-btn" onclick="switchPTab(1,'traza')">🧪 Traza</button>
+      </div>
+
+      <div class="tab-panel active" id="ptab1-enunciado">
+        <div class="enunciado">
+          El centro de cómputos de la Sede Atlántica del CURZAS en Viedma alberga el servidor de archivos "Limay", montado sobre un rack marca Dell en el primer piso del edificio de la orilla del río Negro. El sistema opera con una conexión de fibra óptica de 1 Gbps y un ventilador secundario que gira a 1200 RPM. Durante las jornadas de verano, la humedad ambiental suele alcanzar el 65%, afectando la temperatura del rack.<br><br>
+          Diseñar una <strong>función booleana</strong> llamada <code>es_temperatura_critica(temperatura_actual)</code> que reciba la temperatura del servidor en grados Celsius (float). La función debe comparar el parámetro contra la constante <code>UMBRAL_CRITICO = 45.0</code>. Si la temperatura es mayor o igual al umbral, retorna <code>True</code>; de lo contrario, <code>False</code>.<br><br>
+          En el programa principal, solicitar la temperatura por teclado, invocar la función directamente en un <code>if</code> (PEP 8) e imprimir <code>"ALERTA: Activar refrigeración"</code> o <code>"Estado normal"</code>.
+        </div>
+        <div class="concept-pills">
+          <span class="pill">función booleana</span>
+          <span class="pill">UMBRAL_CRITICO = 45.0</span>
+          <span class="pill">if directo (PEP 8)</span>
+          <span class="pill">float</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab1-polya">
+        <div class="polya">
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">1</div> COMPRENDER EL PROBLEMA</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Objetivo:</span><span class="kv-val">Detectar si la temperatura del servidor supera un umbral crítico.</span>
+                <span class="kv-key">Entrada:</span><span class="kv-val">temperatura_actual : float</span>
+                <span class="kv-key">Ruido:</span><span class="kv-val">Rack Dell, fibra 1 Gbps, ventilador 1200 RPM, humedad 65% → irrelevante.</span>
+                <span class="kv-key">Constante:</span><span class="kv-val">UMBRAL_CRITICO = 45.0 (float)</span>
+                <span class="kv-key">Retorno:</span><span class="kv-val">bool — True si ≥ 45.0 · False si &lt; 45.0</span>
+              </div>
+            </div>
+          </div>
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">2</div> CONCEBIR UN PLAN</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Firma:</span><span class="kv-val">def es_temperatura_critica(temperatura_actual):</span>
+                <span class="kv-key">Condición:</span><span class="kv-val">temperatura_actual >= UMBRAL_CRITICO</span>
+                <span class="kv-key">Estructura:</span><span class="kv-val">return directo (expresión booleana)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab1-codigo">
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copiar</button></div>
+          <pre id="pcode1"><span class="cm"># ============================================================
+# PROBLEMA 1: Sensor de Temperatura del Servidor "Limay"
+# ============================================================</span>
+
+<span class="cn">UMBRAL_CRITICO</span> = <span class="num">45.0</span>
+
+
+<span class="kw">def</span> <span class="fn">es_temperatura_critica</span>(temperatura_actual):
+    <span class="cm">"""Retorna True si la temperatura supera o iguala el umbral crítico."""</span>
+    <span class="cm"># temperatura_actual : float</span>
+    <span class="kw">return</span> temperatura_actual <span class="op">&gt;=</span> <span class="cn">UMBRAL_CRITICO</span>
+
+
+<span class="cm"># --- Programa Principal ---</span>
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    temp: <span class="bi">float</span> = <span class="bi">float</span>(<span class="bi">input</span>(<span class="str">"Ingrese temperatura actual del servidor (°C): "</span>))
+    <span class="kw">if</span> <span class="fn">es_temperatura_critica</span>(temp):
+        <span class="bi">print</span>(<span class="str">"ALERTA: Activar refrigeración"</span>)
+    <span class="kw">else</span>:
+        <span class="bi">print</span>(<span class="str">"Estado normal"</span>)</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab1-traza">
+        <table class="traza-table">
+          <tr><th>Caso</th><th>temperatura_actual</th><th>temp >= 45.0</th><th>Retorno</th><th>Salida</th></tr>
+          <tr><td>1</td><td>44.9</td><td>False</td><td class="result-false">False</td><td>"Estado normal"</td></tr>
+          <tr><td>2</td><td>45.0</td><td>True</td><td class="result-true">True</td><td>"ALERTA: Activar refrigeración"</td></tr>
+          <tr><td>3</td><td>52.3</td><td>True</td><td class="result-true">True</td><td>"ALERTA: Activar refrigeración"</td></tr>
+          <tr><td>4</td><td>30.0</td><td>False</td><td class="result-false">False</td><td>"Estado normal"</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMA 2 -->
+  <div class="practica-ex" id="pex2">
+    <div class="practica-ex-header" onclick="ptoggle(2)">
+      <div class="ex-num" style="background:rgba(90,247,142,0.15);color:#5af78e;">P2</div>
+      <div class="ex-meta">
+        <div class="ex-title">Facturación de Almacenamiento con Descuento por Software Libre <span class="diff-tag" style="background:rgba(247,194,106,0.12);color:#f7c26a;">IF-ELIF-ELSE</span></div>
+        <div class="ex-subtitle">calcular_cuota_mensual(tipo_licencia, gigas_almacenados) · 3 constantes · return float</div>
+      </div>
+      <div class="ex-toggle" id="ptoggle2">▾</div>
+    </div>
+    <div class="practica-ex-body" id="pbody2">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchPTab(2,'enunciado')">📋 Enunciado</button>
+        <button class="tab-btn" onclick="switchPTab(2,'polya')">🔍 Análisis (Polya)</button>
+        <button class="tab-btn" onclick="switchPTab(2,'codigo')">💻 Solución</button>
+        <button class="tab-btn" onclick="switchPTab(2,'traza')">🧪 Traza</button>
+      </div>
+
+      <div class="tab-panel active" id="ptab2-enunciado">
+        <div class="enunciado">
+          La cooperativa de desarrollo tecnológico de Viedma brinda servicios de almacenamiento en la nube sobre servidores Ubuntu Linux. La oficina está sobre la calle Monseñor Esandi y cuenta con 120 clientes activos. El consejo aprobó una política de incentivos para promover el uso de licencias abiertas en la región patagónica.<br><br>
+          Programar la función <code>calcular_cuota_mensual(tipo_licencia, gigas_almacenados)</code> que reciba el tipo de licencia (<code>str</code>: <code>'libre'</code>, <code>'educativa'</code> u <code>'otra'</code>) y la cantidad de GB contratados (<code>int</code>).<br><br>
+          Constantes internas: <code>PRECIO_BASE_GB = 150.0</code> · <code>DESCUENTO_LIBRE = 0.20</code> · <code>DESCUENTO_EDUCATIVO = 0.10</code><br><br>
+          Usar <code>if-elif-else</code>: <strong>'libre'</strong> → 20% desc. · <strong>'educativa'</strong> → 10% desc. · otro → sin descuento. Retornar el monto final (float).
+        </div>
+        <div class="concept-pills">
+          <span class="pill">if-elif-else</span>
+          <span class="pill">3 constantes</span>
+          <span class="pill">parámetro str</span>
+          <span class="pill">parámetro int</span>
+          <span class="pill">return float</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab2-polya">
+        <div class="polya">
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">1</div> COMPRENDER EL PROBLEMA</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Objetivo:</span><span class="kv-val">Calcular cuota mensual de almacenamiento aplicando descuento según tipo de licencia.</span>
+                <span class="kv-key">Entrada 1:</span><span class="kv-val">tipo_licencia : str ('libre' | 'educativa' | 'otra')</span>
+                <span class="kv-key">Entrada 2:</span><span class="kv-val">gigas_almacenados : int</span>
+                <span class="kv-key">Ruido:</span><span class="kv-val">Ubuntu Linux, calle Monseñor Esandi, 120 clientes, región patagónica → irrelevante.</span>
+                <span class="kv-key">PRECIO_BASE_GB:</span><span class="kv-val">150.0 (float)</span>
+                <span class="kv-key">DESCUENTO_LIBRE:</span><span class="kv-val">0.20 (float)</span>
+                <span class="kv-key">DESCUENTO_EDUCATIVO:</span><span class="kv-val">0.10 (float)</span>
+                <span class="kv-key">Retorno:</span><span class="kv-val">float — monto final</span>
+              </div>
+            </div>
+          </div>
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">2</div> CONCEBIR UN PLAN</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Firma:</span><span class="kv-val">def calcular_cuota_mensual(tipo_licencia, gigas_almacenados):</span>
+                <span class="kv-key">Cond. 1:</span><span class="kv-val">tipo_licencia == 'libre' → costo_base * (1 - DESCUENTO_LIBRE)</span>
+                <span class="kv-key">Cond. 2:</span><span class="kv-val">tipo_licencia == 'educativa' → costo_base * (1 - DESCUENTO_EDUCATIVO)</span>
+                <span class="kv-key">Cond. 3:</span><span class="kv-val">else → costo_base (sin descuento)</span>
+                <span class="kv-key">Estructura:</span><span class="kv-val">if-elif-else</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab2-codigo">
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copiar</button></div>
+          <pre id="pcode2"><span class="cm"># ============================================================
+# PROBLEMA 2: Facturación de Almacenamiento con Descuento
+# ============================================================</span>
+
+<span class="cn">PRECIO_BASE_GB</span>      = <span class="num">150.0</span>
+<span class="cn">DESCUENTO_LIBRE</span>     = <span class="num">0.20</span>
+<span class="cn">DESCUENTO_EDUCATIVO</span> = <span class="num">0.10</span>
+
+
+<span class="kw">def</span> <span class="fn">calcular_cuota_mensual</span>(tipo_licencia, gigas_almacenados):
+    <span class="cm">"""Calcula la cuota mensual aplicando descuento según tipo de licencia."""</span>
+    <span class="cm"># tipo_licencia      : str</span>
+    <span class="cm"># gigas_almacenados  : int</span>
+    costo_base: <span class="bi">float</span> = gigas_almacenados * <span class="cn">PRECIO_BASE_GB</span>
+    cuota_final: <span class="bi">float</span>
+
+    <span class="kw">if</span> tipo_licencia == <span class="str">'libre'</span>:
+        cuota_final = costo_base * (<span class="num">1</span> - <span class="cn">DESCUENTO_LIBRE</span>)
+    <span class="kw">elif</span> tipo_licencia == <span class="str">'educativa'</span>:
+        cuota_final = costo_base * (<span class="num">1</span> - <span class="cn">DESCUENTO_EDUCATIVO</span>)
+    <span class="kw">else</span>:
+        cuota_final = costo_base
+
+    <span class="kw">return</span> cuota_final
+
+
+<span class="cm"># --- Programa Principal ---</span>
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    licencia: <span class="bi">str</span> = <span class="bi">input</span>(<span class="str">"Tipo de licencia (libre/educativa/otra): "</span>)
+    gigas: <span class="bi">int</span>    = <span class="bi">int</span>(<span class="bi">input</span>(<span class="str">"Gigabytes contratados: "</span>))
+    costo: <span class="bi">float</span>  = <span class="fn">calcular_cuota_mensual</span>(licencia, gigas)
+    <span class="bi">print</span>(<span class="str">f"Costo mensual: ${costo:.2f}"</span>)</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab2-traza">
+        <table class="traza-table">
+          <tr><th>Caso</th><th>tipo / gigas</th><th>costo_base</th><th>Descuento</th><th>Retorno</th></tr>
+          <tr><td>1</td><td>'libre' / 10</td><td>$1500.0</td><td>20%</td><td class="result-num">$1200.00</td></tr>
+          <tr><td>2</td><td>'educativa' / 10</td><td>$1500.0</td><td>10%</td><td class="result-num">$1350.00</td></tr>
+          <tr><td>3</td><td>'otra' / 10</td><td>$1500.0</td><td>0%</td><td class="result-num">$1500.00</td></tr>
+          <tr><td>4</td><td>'comercial' / 5</td><td>$750.0</td><td>0% (else)</td><td class="result-num">$750.00</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMA 3 -->
+  <div class="practica-ex" id="pex3">
+    <div class="practica-ex-header" onclick="ptoggle(3)">
+      <div class="ex-num" style="background:rgba(247,194,106,0.15);color:#f7c26a;">P3</div>
+      <div class="ex-meta">
+        <div class="ex-title">Validación y Condición Académica de Estudiantes <span class="diff-tag" style="background:rgba(247,194,106,0.12);color:#f7c26a;">2 FUNCIONES</span></div>
+        <div class="ex-subtitle">es_nota_valida() + determinar_condicion_alumno() · selección anidada</div>
+      </div>
+      <div class="ex-toggle" id="ptoggle3">▾</div>
+    </div>
+    <div class="practica-ex-body" id="pbody3">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchPTab(3,'enunciado')">📋 Enunciado</button>
+        <button class="tab-btn" onclick="switchPTab(3,'polya')">🔍 Análisis (Polya)</button>
+        <button class="tab-btn" onclick="switchPTab(3,'codigo')">💻 Solución</button>
+        <button class="tab-btn" onclick="switchPTab(3,'traza')">🧪 Traza</button>
+      </div>
+
+      <div class="tab-panel active" id="ptab3-enunciado">
+        <div class="enunciado">
+          En la comisión de primer año de la TUASySL en el CURZAS se inscribieron 45 estudiantes para Introducción a la Programación. Las clases se dictan los martes y jueves en el aula 3 de informática. El equipo docente utiliza un proyector de 3500 lúmenes y toma asistencia en planilla impresa en papel reciclado.<br><br>
+          Escribir un script con <strong>dos funciones</strong>:<br><br>
+          <strong>1. Función Booleana:</strong> <code>es_nota_valida(nota_evaluacion)</code> — recibe un <code>int</code> y retorna <code>True</code> si está en el rango 0–10 inclusive, <code>False</code> caso contrario.<br><br>
+          <strong>2. Función de Selección:</strong> <code>determinar_condicion_alumno(nota_uno, nota_dos)</code> — recibe dos notas (<code>int</code>) y retorna:<br>
+          • <code>'Promociona'</code> si ambas ≥ 7<br>
+          • <code>'Aprueba'</code> si ambas ≥ 4<br>
+          • <code>'Recupera'</code> si al menos una &lt; 4<br><br>
+          El programa principal valida ambas notas primero; si alguna es inválida, muestra un mensaje de error.
+        </div>
+        <div class="concept-pills">
+          <span class="pill">2 funciones</span>
+          <span class="pill">función booleana</span>
+          <span class="pill">if-elif-else</span>
+          <span class="pill">operador and</span>
+          <span class="pill">validación previa</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab3-polya">
+        <div class="polya">
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">1</div> COMPRENDER EL PROBLEMA</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Objetivo:</span><span class="kv-val">Validar notas y determinar condición académica del alumno.</span>
+                <span class="kv-key">Entrada f1:</span><span class="kv-val">nota_evaluacion : int</span>
+                <span class="kv-key">Entrada f2:</span><span class="kv-val">nota_uno : int · nota_dos : int</span>
+                <span class="kv-key">Ruido:</span><span class="kv-val">45 estudiantes, martes/jueves, aula 3, proyector 3500 lúmenes, papel reciclado → irrelevante.</span>
+                <span class="kv-key">Constantes:</span><span class="kv-val">ninguna (los umbrales 7 y 4 son valores de la lógica del dominio)</span>
+                <span class="kv-key">Retorno f1:</span><span class="kv-val">bool</span>
+                <span class="kv-key">Retorno f2:</span><span class="kv-val">str — 'Promociona' | 'Aprueba' | 'Recupera'</span>
+              </div>
+            </div>
+          </div>
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">2</div> CONCEBIR UN PLAN</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Firma f1:</span><span class="kv-val">def es_nota_valida(nota_evaluacion):</span>
+                <span class="kv-key">Lógica f1:</span><span class="kv-val">return 0 &lt;= nota_evaluacion &lt;= 10</span>
+                <span class="kv-key">Firma f2:</span><span class="kv-val">def determinar_condicion_alumno(nota_uno, nota_dos):</span>
+                <span class="kv-key">Cond. A:</span><span class="kv-val">nota_uno >= 7 and nota_dos >= 7 → 'Promociona'</span>
+                <span class="kv-key">Cond. B:</span><span class="kv-val">nota_uno >= 4 and nota_dos >= 4 → 'Aprueba'</span>
+                <span class="kv-key">Cond. C:</span><span class="kv-val">else → 'Recupera'</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab3-codigo">
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copiar</button></div>
+          <pre id="pcode3"><span class="cm"># ============================================================
+# PROBLEMA 3: Validación y Condición Académica de Estudiantes
+# ============================================================</span>
+
+<span class="kw">def</span> <span class="fn">es_nota_valida</span>(nota_evaluacion):
+    <span class="cm">"""Retorna True si la nota está en el rango válido 0-10."""</span>
+    <span class="cm"># nota_evaluacion : int</span>
+    <span class="kw">return</span> <span class="num">0</span> <span class="op">&lt;=</span> nota_evaluacion <span class="op">&lt;=</span> <span class="num">10</span>
+
+
+<span class="kw">def</span> <span class="fn">determinar_condicion_alumno</span>(nota_uno, nota_dos):
+    <span class="cm">"""Determina la condición académica del alumno según sus dos notas."""</span>
+    <span class="cm"># nota_uno : int</span>
+    <span class="cm"># nota_dos : int</span>
+    condicion: <span class="bi">str</span>
+
+    <span class="kw">if</span> nota_uno <span class="op">&gt;=</span> <span class="num">7</span> <span class="kw">and</span> nota_dos <span class="op">&gt;=</span> <span class="num">7</span>:
+        condicion = <span class="str">'Promociona'</span>
+    <span class="kw">elif</span> nota_uno <span class="op">&gt;=</span> <span class="num">4</span> <span class="kw">and</span> nota_dos <span class="op">&gt;=</span> <span class="num">4</span>:
+        condicion = <span class="str">'Aprueba'</span>
+    <span class="kw">else</span>:
+        condicion = <span class="str">'Recupera'</span>
+
+    <span class="kw">return</span> condicion
+
+
+<span class="cm"># --- Programa Principal ---</span>
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    n1: <span class="bi">int</span> = <span class="bi">int</span>(<span class="bi">input</span>(<span class="str">"Nota del primer parcial (0-10): "</span>))
+    n2: <span class="bi">int</span> = <span class="bi">int</span>(<span class="bi">input</span>(<span class="str">"Nota del segundo parcial (0-10): "</span>))
+
+    <span class="kw">if</span> <span class="fn">es_nota_valida</span>(n1) <span class="kw">and</span> <span class="fn">es_nota_valida</span>(n2):
+        resultado: <span class="bi">str</span> = <span class="fn">determinar_condicion_alumno</span>(n1, n2)
+        <span class="bi">print</span>(<span class="str">f"Condición académica: {resultado}"</span>)
+    <span class="kw">else</span>:
+        <span class="bi">print</span>(<span class="str">"Error: alguna nota está fuera del rango válido (0-10)"</span>)</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab3-traza">
+        <table class="traza-table">
+          <tr><th>Caso</th><th>n1 / n2</th><th>Válidas</th><th>Condición evaluada</th><th>Retorno</th></tr>
+          <tr><td>1</td><td>8 / 9</td><td class="result-true">True</td><td>8≥7 and 9≥7 → True</td><td class="result-str">'Promociona'</td></tr>
+          <tr><td>2</td><td>7 / 6</td><td class="result-true">True</td><td>7≥7 and 6≥7 → False · 7≥4 and 6≥4 → True</td><td class="result-str">'Aprueba'</td></tr>
+          <tr><td>3</td><td>5 / 3</td><td class="result-true">True</td><td>→ False · → False · else</td><td class="result-str">'Recupera'</td></tr>
+          <tr><td>4</td><td>11 / 5</td><td class="result-false">False</td><td>es_nota_valida(11) → False</td><td>Error</td></tr>
+          <tr><td>5</td><td>4 / 4</td><td class="result-true">True</td><td>4≥7 and 4≥7 → False · 4≥4 and 4≥4 → True</td><td class="result-str">'Aprueba'</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMA 4 -->
+  <div class="practica-ex" id="pex4">
+    <div class="practica-ex-header" onclick="ptoggle(4)">
+      <div class="ex-num" style="background:rgba(249,117,131,0.15);color:#f97583;">P4</div>
+      <div class="ex-meta">
+        <div class="ex-title">Control de Acceso al Centro de Cómputos <span class="diff-tag" style="background:rgba(249,117,131,0.12);color:#f97583;">OPERADOR OR</span></div>
+        <div class="ex-subtitle">permitir_acceso(es_administrador, hora_ingreso) · bool + int · operador lógico or</div>
+      </div>
+      <div class="ex-toggle" id="ptoggle4">▾</div>
+    </div>
+    <div class="practica-ex-body" id="pbody4">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchPTab(4,'enunciado')">📋 Enunciado</button>
+        <button class="tab-btn" onclick="switchPTab(4,'polya')">🔍 Análisis (Polya)</button>
+        <button class="tab-btn" onclick="switchPTab(4,'codigo')">💻 Solución</button>
+        <button class="tab-btn" onclick="switchPTab(4,'traza')">🧪 Traza</button>
+      </div>
+
+      <div class="tab-panel active" id="ptab4-enunciado">
+        <div class="enunciado">
+          El laboratorio central de la UNCo en Viedma cuenta con un control de acceso electrónico en la puerta principal. El edificio fue construido en 1998 y posee climatización de 9000 BTU. La cerradura electromagnética funciona a 12 Volts y está conectada a un panel LED verde/rojo.<br><br>
+          Diseñar la función booleana <code>permitir_acceso(es_administrador, hora_ingreso)</code> que reciba:<br>
+          • <code>es_administrador</code> : bool (True/False)<br>
+          • <code>hora_ingreso</code> : int (0 a 23, formato 24 hs)<br><br>
+          Constantes: <code>HORA_INICIO_TURNO = 8</code> · <code>HORA_FIN_TURNO = 20</code><br><br>
+          <strong>Regla de Negocio:</strong> Se permite el acceso (<code>True</code>) si la persona ES administradora <strong>O</strong> si la hora está dentro del turno hábil (<code>HORA_INICIO_TURNO &lt;= hora_ingreso &lt;= HORA_FIN_TURNO</code>). De lo contrario, retorna <code>False</code>.<br><br>
+          El programa principal muestra <code>"Acceso Concedido al Centro de Cómputos"</code> o <code>"Acceso Denegado: Horario o Rol No Autorizado"</code>.
+        </div>
+        <div class="concept-pills">
+          <span class="pill">función booleana</span>
+          <span class="pill">parámetro bool</span>
+          <span class="pill">parámetro int</span>
+          <span class="pill">operador or</span>
+          <span class="pill">rango encadenado</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab4-polya">
+        <div class="polya">
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">1</div> COMPRENDER EL PROBLEMA</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Objetivo:</span><span class="kv-val">Determinar si se autoriza el acceso basándose en el rol o el horario.</span>
+                <span class="kv-key">Entrada 1:</span><span class="kv-val">es_administrador : bool</span>
+                <span class="kv-key">Entrada 2:</span><span class="kv-val">hora_ingreso : int (0–23)</span>
+                <span class="kv-key">Ruido:</span><span class="kv-val">Año 1998, 9000 BTU, 12 Volts, LED verde/rojo → irrelevante.</span>
+                <span class="kv-key">HORA_INICIO_TURNO:</span><span class="kv-val">8 (int)</span>
+                <span class="kv-key">HORA_FIN_TURNO:</span><span class="kv-val">20 (int)</span>
+                <span class="kv-key">Retorno:</span><span class="kv-val">bool — True (acceso permitido) | False (denegado)</span>
+              </div>
+            </div>
+          </div>
+          <div class="polya-phase">
+            <div class="phase-title"><div class="phase-num">2</div> CONCEBIR UN PLAN</div>
+            <div class="phase-content">
+              <div class="kv">
+                <span class="kv-key">Firma:</span><span class="kv-val">def permitir_acceso(es_administrador, hora_ingreso):</span>
+                <span class="kv-key">Condición:</span><span class="kv-val">es_administrador or (HORA_INICIO_TURNO &lt;= hora_ingreso &lt;= HORA_FIN_TURNO)</span>
+                <span class="kv-key">Estructura:</span><span class="kv-val">return directo con operador or</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab4-codigo">
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copiar</button></div>
+          <pre id="pcode4"><span class="cm"># ============================================================
+# PROBLEMA 4: Control de Acceso al Centro de Cómputos
+# ============================================================</span>
+
+<span class="cn">HORA_INICIO_TURNO</span> = <span class="num">8</span>
+<span class="cn">HORA_FIN_TURNO</span>    = <span class="num">20</span>
+
+
+<span class="kw">def</span> <span class="fn">permitir_acceso</span>(es_administrador, hora_ingreso):
+    <span class="cm">"""Retorna True si se autoriza el acceso al centro de cómputos."""</span>
+    <span class="cm"># es_administrador : bool</span>
+    <span class="cm"># hora_ingreso     : int  (0-23)</span>
+    en_horario_habil: <span class="bi">bool</span> = <span class="cn">HORA_INICIO_TURNO</span> <span class="op">&lt;=</span> hora_ingreso <span class="op">&lt;=</span> <span class="cn">HORA_FIN_TURNO</span>
+    <span class="kw">return</span> es_administrador <span class="kw">or</span> en_horario_habil
+
+
+<span class="cm"># --- Programa Principal ---</span>
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    es_admin: <span class="bi">bool</span> = <span class="bi">input</span>(<span class="str">"¿Es administrador/a? (s/n): "</span>).lower() == <span class="str">'s'</span>
+    hora: <span class="bi">int</span>     = <span class="bi">int</span>(<span class="bi">input</span>(<span class="str">"Hora de ingreso (0-23): "</span>))
+
+    <span class="kw">if</span> <span class="fn">permitir_acceso</span>(es_admin, hora):
+        <span class="bi">print</span>(<span class="str">"Acceso Concedido al Centro de Cómputos"</span>)
+    <span class="kw">else</span>:
+        <span class="bi">print</span>(<span class="str">"Acceso Denegado: Horario o Rol No Autorizado"</span>)</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="ptab4-traza">
+        <table class="traza-table">
+          <tr><th>Caso</th><th>es_admin / hora</th><th>en_horario_habil</th><th>admin OR horario</th><th>Salida</th></tr>
+          <tr><td>1</td><td>True / 5</td><td class="result-false">False (5&lt;8)</td><td class="result-true">True</td><td>"Acceso Concedido"</td></tr>
+          <tr><td>2</td><td>False / 10</td><td class="result-true">True (8≤10≤20)</td><td class="result-true">True</td><td>"Acceso Concedido"</td></tr>
+          <tr><td>3</td><td>False / 21</td><td class="result-false">False (21&gt;20)</td><td class="result-false">False</td><td>"Acceso Denegado"</td></tr>
+          <tr><td>4</td><td>True / 23</td><td class="result-false">False (23&gt;20)</td><td class="result-true">True</td><td>"Acceso Concedido"</td></tr>
+          <tr><td>5</td><td>False / 8</td><td class="result-true">True (8≤8≤20)</td><td class="result-true">True</td><td>"Acceso Concedido"</td></tr>
+          <tr><td>6</td><td>False / 7</td><td class="result-false">False (7&lt;8)</td><td class="result-false">False</td><td>"Acceso Denegado"</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main practica -->
+</div><!-- /section-practica -->
+
+<script>
+  function switchPage(name) {
+    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.page-nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('section-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function ptoggle(n) {
+    const body = document.getElementById('pbody' + n);
+    const tog = document.getElementById('ptoggle' + n);
+    const header = body.previousElementSibling;
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    tog.classList.toggle('open', !isOpen);
+    header.classList.toggle('open', !isOpen);
+  }
+
+  function switchPTab(ex, tab) {
+    const panel = document.getElementById('ptab' + ex + '-' + tab);
+    const body = document.getElementById('pbody' + ex);
+    body.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    body.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    panel.classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+
+<script>
+  function toggle(n) {
+    const body = document.getElementById('body' + n);
+    const tog = document.getElementById('toggle' + n);
+    const header = body.previousElementSibling;
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    tog.classList.toggle('open', !isOpen);
+    header.classList.toggle('open', !isOpen);
+  }
+
+  function switchTab(ex, tab) {
+    const panel = document.getElementById('tab' + ex + '-' + tab);
+    const body = document.getElementById('body' + ex);
+    body.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    body.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    panel.classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function copyCode(btn) {
+    const pre = btn.closest('.code-block').querySelector('pre');
+    const text = pre.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✓ copiado';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'copiar'; btn.classList.remove('copied'); }, 1800);
+    });
+  }
+
+  // Open first exercise by default
+  toggle(1);
+</script>
+</body>
+</html>
