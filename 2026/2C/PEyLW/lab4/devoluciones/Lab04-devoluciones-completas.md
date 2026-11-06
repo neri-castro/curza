@@ -9,6 +9,7 @@
 | boisselier-8339-91 | Sara Celeste Boisselier | 96 |
 | camandulle-5746-93 | Fernanda Camandulle | 100 |
 | chavarria-7037-55 | Javier Chavarria | 94 |
+| duarte-6881-34 | Elizabeth Priscila Duarte Nuñez | 85 |
 | klug-3903-68 | Robertino Klug | 75 |
 | manquenao-2747-93 | Tatiana Manquenao | 8 |
 | pereyra-1554-84 | Sofia Pereyra | 100 |
@@ -295,6 +296,67 @@
 | Responsive Web Design | 10 | 10 |
 | `REFLEXION.md` | 5 | 5 |
 | **TOTAL** | **100** | **94** |
+
+---
+
+# Devolución Lab 4 — Elizabeth Priscila Duarte Nuñez
+
+## Datos identificatorios
+
+- **Token:** duarte-6881-34
+- **GitHub Pages:** https://elzzzzo-oss.github.io/peylw-2026-practicos-duarte-6881-34/
+- **Repositorio:** https://github.com/Elzzzzo-oss/peylw-2026-practicos-duarte-6881-34 (rama `master`; la rama por defecto `main` no tiene el Lab 4)
+- **Entrega:** 02/11/2026 — **tardía** (cierre 10/10/2026 23:00). En el documento de entrega los campos "Repositorio" y "GitHub Pages" están intercambiados (el de Pages tiene la URL del repo y viceversa).
+
+## Checklist por ítem
+
+| Ítem | Estado | Observación |
+|---|---|---|
+| Personalización — paleta HSL sin colores puros | ✅ | `styles.css` líneas 9-14: `--primary-color: hsl(210, 80%, 50%)` y derivados, todos modulados. |
+| Personalización — comentario en `styles.css` con HSL + identificador | ⚠️ | Líneas 1-5: nombre de la alumna y solo el HSL primario; faltan los demás códigos de la paleta y el token/legajo. |
+| Tabla de `contacto.html` formateada | ✅ | `th, td` con padding y borde, `th` con fondo `--primary-color` y texto blanco, filas pares diferenciadas. |
+| Formulario de `contacto.html` formateado | ⚠️ | Inputs con padding y borde consistentes, `label` sobre su campo (flex en columna). No hay radios ni checkboxes: ver observaciones. |
+| Fuente web importada y aplicada | ✅ | `@import` de Google Fonts "Outfit" (línea 7), aplicada en `body` con fallback `sans-serif`. |
+| Logo CURZA a la derecha del título | ❌ | `src="logo-curza.jpeg/img"` en las 3 páginas; el archivo real es `img/logo-curza.jpeg`. En Pages esa ruta devuelve 404: el logo no se ve. Además, con `justify-content: space-between` el logo queda entre el título y el menú, no junto al título. |
+| Animación de giro completo (360°) del logo | ⚠️ | `transition` + `.logo-curza:hover { transform: rotateY(360deg) }` (variante admitida, termina en 0°/360°). Con la imagen rota, el efecto no es reproducible en el sitio desplegado. Solo se dispara con hover. |
+| Header fijo en todas las páginas | ✅ | `header { position: fixed; top: 0 }` en la hoja compartida; `main { padding-top: 100px }` (140px en mobile). |
+| "Acerca de" — primera línea sticky | ✅ | `.biografia-container h2 { position: sticky; top: 0; background-color }`. |
+| "Acerca de" — `max-height: 300px` + scroll | ✅ | `.biografia-container { max-height: 300px; overflow-y: auto }`. |
+| Botón volver arriba — presente en todas las páginas | ✅ | `<a href="#top" class="btn-top">▲</a>` en las 3 páginas. |
+| Botón volver arriba — estilo círculo + flecha, alineado a la derecha | ✅ | `border-radius: 50%`, `position: fixed; right: 20px; bottom: 20px`, flecha `▲`. |
+| Botón volver arriba — funcional | ✅ | Ancla `#top` hacia `<div id="top">` presente en cada página (salto sin `scroll-behavior: smooth`, funcional). |
+| Responsive — meta viewport en las tres páginas | ✅ | Presente en las 3. |
+| Responsive — flexbox/grid en nav y/o formulario/tabla | ✅ | `header`, `nav ul` y `form` con `display: flex`. |
+| Responsive — `@media 768px` apila el menú y adapta la tabla | ✅ | `nav ul { flex-direction: column }` y `table { display: block; overflow-x: auto }`. |
+| `REFLEXION.md` presente y con las 3 preguntas respondidas | ⚠️ | Solo responde la pregunta 1 (fragmento CSS, que coincide con el código real). Faltan las preguntas 2 (`background-color` en sticky) y 3 (cambio visual < 768px). El bloque de código queda sin cerrar (falta el ``` final). |
+
+## Observaciones puntuales
+
+- **Ruta del logo** (`index.html`, `acercade.html`, `contacto.html`, línea del `<header>`): `src="logo-curza.jpeg/img"` debe ser `src="img/logo-curza.jpeg"`. Es el error de mayor impacto: deja sin efecto el ítem del logo y la verificación de la animación.
+- **Rama de entrega:** el Lab 4 está en `master` y `main` conserva el Lab 3. Pages sirve `master` (se verificó que `styles.css` publicado coincide con esa rama), así que no se penaliza, pero conviene unificar ramas.
+- **Regresión respecto del Lab 3** (commit `cb7672b` "Laboratorio 4 Completado"): se reescribió `contacto.html` y se perdieron el formulario completo (fieldsets con radios y checkboxes, validaciones), el comentario con el Token Único, el `README.md` y la foto `img/imagen/yo.pnj.jpeg` de `acercade.html`. El Lab 4 pedía estilar lo existente, no reducirlo; sin radios/checkboxes no hay nada que evaluar en el tercer sub-ítem del formulario.
+- `contacto.html`: el botón "Enviar" usa `style` en línea en lugar de una regla en `styles.css`.
+- `acercade.html`: el texto de la biografía son 3 párrafos cortos; en pantallas anchas probablemente no superen los 300px y la barra de desplazamiento no aparece. La regla es correcta, pero conviene agregar contenido para que el comportamiento se pueda comprobar.
+- `styles.css`: el botón y la `box-shadow` usan `rgba(...)` fuera de la paleta HSL; menor.
+- Verificación en vivo: Pages responde 200 en las 3 páginas, en `styles.css` y en `img/logo-curza.jpeg`; la ruta que usa el HTML (`/logo-curza.jpeg/img`) responde 404. No se usó automatización de navegador; hover, scroll y clic se evaluaron por lectura del código.
+
+## Nota final
+
+| Ítem | Pts posibles | Pts obtenidos |
+|---|---|---|
+| Personalización (paleta HSL + comentario) | 5 | 4 |
+| Tabla `contacto.html` | 12 | 12 |
+| Formulario `contacto.html` | 12 | 8 |
+| Fuente web | 8 | 8 |
+| Animación título + logo | 12 | 4 |
+| Header fijo | 12 | 12 |
+| "Acerca de" sticky + scroll | 12 | 12 |
+| Botón volver arriba | 12 | 12 |
+| Responsive Web Design | 10 | 10 |
+| `REFLEXION.md` | 5 | 3 |
+| **TOTAL** | **100** | **85** |
+
+Entrega tardía: la penalización por atraso la define el criterio general del curso; no está aplicada en esta nota.
 
 ---
 

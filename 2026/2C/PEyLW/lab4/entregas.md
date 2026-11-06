@@ -97,7 +97,12 @@ Nota: Pages responde 200 pero sirve el contenido de la rama lab2-lab3, no el de 
 https://shalom198424.github.io/peylw-2026-practicos-vela-9972-35/
 https://github.com/Shalom198424/peylw-2026-practicos-vela-9972-35/tree/laboratorio4
 -----------------------------------------------------------------------------
-
+Nombre y Apellido: Elizabeth Priscila Duarte Nuñez
+Legajo/Matrícula: CURZAZ-9986
+Últimos 4 dígitos del DNI: 6881
+Fecha de Entrega: 2/11/2026
+Enlace al Repositorio de GitHub: https://elzzzzo-oss.github.io/peylw-2026-practicos-duarte-6881-34/
+Enlace a la Página en GitHub Pages: https://github.com/Elzzzzo-oss/peylw-2026-practicos-duarte-6881-34
 -----------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
