@@ -92,3 +92,12 @@ https://github.com/Robertino512/peylw-2026-practicos-klug-3903-68/tree/lab5
 https://shalom198424.github.io/peylw-2026-practicos-vela-9972-35/index.html
 https://github.com/Shalom198424/peylw-2026-practicos-vela-9972-35/tree/laboratorio5
 //////////////////////////////////////////////////////////////////////
+https://github.com/officialsantos/peylw-2026-practicos-apelahnz-2743-10
+
+https://officialsantos.github.io/peylw-2026-practicos-apelahnz-2743-10/
+
+
+
+Acá está el commit del TP5.
+
+https://github.com/officialsantos/peylw-2026-practicos-apelahnz-2743-10/commit/b2fa833cf5ffe6ff4067b029fed70b0b60590622
